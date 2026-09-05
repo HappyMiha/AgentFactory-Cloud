@@ -44,7 +44,8 @@ AI spend or a charge by itself.
 ## Independent reviewer decision
 
 - Authenticated reviewer identity and tenant role: Pending.
-- Reviewer model identity, if AI-assisted: Pending or explicitly human-only.
+- Explicit review mode (human_only or ai_assisted): Pending.
+- Qualified reviewer model identity for ai_assisted mode; human actor for human_only: Pending.
 - Producer identities/models and independence check: Pending.
 - Scenarios actually executed and observed results: Pending.
 - Failures, limitations and untested targets: Pending.

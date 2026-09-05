@@ -98,6 +98,14 @@ a different agent using the same canonical producer model is also not independen
 Canonical model identity must come from Core's qualified routing evidence; this
 reference policy does not implement model discovery or alias resolution.
 
+The trusted reviewer record declares `review_mode`: `human_only` requires a human
+actor and no model identity; `ai_assisted` requires an explicitly qualified model
+identity such as `local:example-model-v1`, including when a human used AI assistance.
+An absent mode or unknown service/model identity denies review eligibility.
+Deterministic checks belong to their named check levels; they cannot stand in for
+the independent release reviewer. The synthetic positive example explicitly uses
+a human-only reviewer, separate from its authorized human owner.
+
 Owner acceptance must come from the explicitly authorized human owner. A service,
 model answer or unrelated owner with a similar role cannot replace that decision.
 Keep the review and owner-acceptance records separate. The

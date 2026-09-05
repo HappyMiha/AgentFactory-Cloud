@@ -52,6 +52,7 @@
     "untrusted_issuer": "Ask an authorized verifier to check this version",
     "wrong_use": "Resolve rights for this requested use",
     "review_conflict": "Choose an independent reviewer",
+    "review_identity_missing": "Record the reviewer's explicit mode and qualified identity",
     "human_required": "Ask the authorized product owner to review",
     "wrong_decision_context": "Review the current release or offer again"
   }

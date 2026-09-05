@@ -120,8 +120,9 @@
         "roles": [
           "release-reviewer"
         ],
-        "kind": "service",
-        "model_identity": null
+        "kind": "human",
+        "model_identity": null,
+        "review_mode": "human_only"
       },
       "fixture-product-owner": {
         "tenant_id": "tenant_a",
@@ -156,7 +157,7 @@
       "fixture-creator"
     ],
     "producer_model_identities": [
-      "fixture-provider/producer-model-v1"
+      "fixture:producer-model-v1"
     ],
     "evidence": [
       {

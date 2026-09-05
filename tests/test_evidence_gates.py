@@ -99,8 +99,30 @@ class EvidenceGateTests(unittest.TestCase):
 
     def test_different_agent_with_same_producer_model_is_not_independent(self):
         issuer = self.bundle['trusted_issuers'][self.record('reviewer_approval')['issuer_id']]
+        issuer['review_mode'] = 'ai_assisted'
         issuer['model_identity'] = self.bundle['producer_model_identities'][0]
         self.assertEqual(self.evaluate()['Publishable']['blockers'][0]['reason'], 'review_conflict')
+
+    def test_unknown_reviewer_mode_does_not_imply_human_or_deterministic_review(self):
+        issuer = self.bundle['trusted_issuers'][self.record('reviewer_approval')['issuer_id']]
+        del issuer['review_mode']
+        issuer['kind'] = 'service'
+        self.assertEqual(self.evaluate()['Publishable']['blockers'][0]['reason'], 'review_identity_missing')
+
+    def test_ai_review_requires_explicit_qualified_model_identity(self):
+        for model in (None, '', 'unknown', 'unqualified model'):
+            with self.subTest(model=model):
+                self.setUp()
+                issuer = self.bundle['trusted_issuers'][self.record('reviewer_approval')['issuer_id']]
+                issuer.update(review_mode='ai_assisted', model_identity=model)
+                self.assertEqual(self.evaluate()['Publishable']['blockers'][0]['reason'], 'review_identity_missing')
+        issuer.update(model_identity='fixture:independent-review-model')
+        self.assertTrue(self.evaluate()['Publishable']['allowed'])
+
+    def test_service_cannot_claim_human_only_review(self):
+        issuer = self.bundle['trusted_issuers'][self.record('reviewer_approval')['issuer_id']]
+        issuer['kind'] = 'service'
+        self.assertEqual(self.evaluate()['Publishable']['blockers'][0]['reason'], 'review_identity_missing')
 
     def test_owner_acceptance_is_human_and_owned_by_authorized_actor(self):
         self.bundle['trusted_issuers'][self.record('owner_acceptance')['issuer_id']]['kind'] = 'service'

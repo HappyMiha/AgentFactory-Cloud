@@ -75,7 +75,7 @@ def problem(record, kind, bundle, policy, now):
     except (KeyError, ValueError, TypeError, AttributeError):
         return 'stale'
     issuer = bundle['trusted_issuers'].get(record.get('issuer_id'))
-    if (not issuer or not issuer.get('active')
+    if (not issuer or issuer.get('active') is not True
             or issuer.get('tenant_id') != bundle['subject']['tenant_id']
             or spec['issuer_role'] not in issuer.get('roles', [])
             or not isinstance(record.get('evidence_ref'), str) or not record['evidence_ref'].strip()):
@@ -83,8 +83,19 @@ def problem(record, kind, bundle, policy, now):
     if spec.get('use') and record.get('use') != spec['use']:
         return 'wrong_use'
     if spec.get('independent'):
+        mode = issuer.get('review_mode')
+        model = issuer.get('model_identity')
+        if mode == 'human_only':
+            if issuer.get('kind') != 'human' or model is not None:
+                return 'review_identity_missing'
+        elif mode == 'ai_assisted':
+            if (issuer.get('kind') not in ('human', 'service') or not isinstance(model, str)
+                    or not re.fullmatch(r'[a-z][a-z0-9_-]*:[A-Za-z0-9][A-Za-z0-9._:/-]{0,127}', model)):
+                return 'review_identity_missing'
+        else:
+            return 'review_identity_missing'
         if (record['issuer_id'] in bundle['producer_issuer_ids']
-                or issuer.get('model_identity') in bundle['producer_model_identities']):
+                or model in bundle['producer_model_identities']):
             return 'review_conflict'
     if spec.get('human'):
         if issuer.get('kind') != 'human':
