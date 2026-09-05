@@ -2,6 +2,8 @@
 
 **Planning only. No Cloud application or deployment has been built as part of this work.**
 
+**Three-computer development:** [team workflow](docs/team-workflow.md) · [live shared task register](https://github.com/HappyMiha/AgentFactory/blob/team-state/team-state.json). Each worker claims a task and uses an owned branch with checks before push and a pull request into `main`.
+
 AgentFactory Cloud is a planned game creation platform powered by [AgentFactory Core](https://github.com/HappyMiha/AgentFactory).
 
 A creator will describe a game, agree on a small first version, let an AI team build and test it, play the result and ask for changes. The creator should receive the source project and supported builds to use outside AgentFactory.
@@ -34,4 +36,4 @@ Start with a small reliable Godot game. Add hosted multi-tenancy next, then publ
 
 The owner reports that a server is available. This plan does not claim a verified deployed game pipeline, customers, revenue or funding. The candidate domain `agentfactory.ai`, CHF 15/39/99 subscription examples and 10–30% marketplace fee remain hypotheses.
 
-Cloud is planned as a separate private commercial repository. Its license and any future public components require an owner decision; this package does not change Core's license.
+Cloud is a separate public repository for a planned commercial product, made public at the owner's request. Public visibility does not select a software license. Cloud license terms remain an owner decision; Core keeps Apache-2.0.
