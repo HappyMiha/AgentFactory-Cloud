@@ -1,0 +1,853 @@
+{
+  "schema_version": 1,
+  "policy_version": "1.0.0",
+  "now": "2026-09-05T12:00:00Z",
+  "notice": "All identities, versions, passed/live labels and proof references are synthetic; no real game was tested.",
+  "bundle": {
+    "subject": {
+      "tenant_id": "tenant_a",
+      "project_id": "project_a",
+      "run_id": "run_a",
+      "run_attempt": 1,
+      "source_version_id": "source_a",
+      "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "build_id": "build_a",
+      "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "engine_adapter_id": "fixture-engine-adapter-id-v1",
+      "engine_adapter_version": "1.0.0",
+      "engine_version": "1.0.0",
+      "toolchain_id": "fixture-toolchain-id-v1",
+      "toolchain_version": "1.0.0",
+      "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "target_id": "fixture-target-id-v1",
+      "target_profile_version": "1.0.0",
+      "pack_id": "fixture-pack-id-v1",
+      "pack_version": "1.0.0",
+      "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+    },
+    "release_context": {
+      "release_id": "release_a",
+      "release_revision": 1,
+      "audience": "12-plus-proposed",
+      "visibility": "private",
+      "rights_revision": 1,
+      "moderation_policy_version": "fixture-policy-v1"
+    },
+    "sale_context": {
+      "listing_id": "listing_a",
+      "listing_revision": 1,
+      "price_minor": 490,
+      "currency": "CHF",
+      "license_version": "fixture-license-v1",
+      "seller_eligibility_revision": 1
+    },
+    "trusted_issuers": {
+      "fixture-environment-verifier": {
+        "tenant_id": "tenant_a",
+        "active": true,
+        "roles": [
+          "environment-verifier"
+        ],
+        "kind": "service",
+        "model_identity": null
+      },
+      "fixture-code-verifier": {
+        "tenant_id": "tenant_a",
+        "active": true,
+        "roles": [
+          "code-verifier"
+        ],
+        "kind": "service",
+        "model_identity": null
+      },
+      "fixture-build-verifier": {
+        "tenant_id": "tenant_a",
+        "active": true,
+        "roles": [
+          "build-verifier"
+        ],
+        "kind": "service",
+        "model_identity": null
+      },
+      "fixture-runtime-verifier": {
+        "tenant_id": "tenant_a",
+        "active": true,
+        "roles": [
+          "runtime-verifier"
+        ],
+        "kind": "service",
+        "model_identity": null
+      },
+      "fixture-playtest-verifier": {
+        "tenant_id": "tenant_a",
+        "active": true,
+        "roles": [
+          "playtest-verifier"
+        ],
+        "kind": "service",
+        "model_identity": null
+      },
+      "fixture-export-verifier": {
+        "tenant_id": "tenant_a",
+        "active": true,
+        "roles": [
+          "export-verifier"
+        ],
+        "kind": "service",
+        "model_identity": null
+      },
+      "fixture-rights-verifier": {
+        "tenant_id": "tenant_a",
+        "active": true,
+        "roles": [
+          "rights-verifier"
+        ],
+        "kind": "service",
+        "model_identity": null
+      },
+      "fixture-moderation-verifier": {
+        "tenant_id": "tenant_a",
+        "active": true,
+        "roles": [
+          "moderation-verifier"
+        ],
+        "kind": "service",
+        "model_identity": null
+      },
+      "fixture-release-reviewer": {
+        "tenant_id": "tenant_a",
+        "active": true,
+        "roles": [
+          "release-reviewer"
+        ],
+        "kind": "human",
+        "model_identity": null,
+        "review_mode": "human_only"
+      },
+      "fixture-product-owner": {
+        "tenant_id": "tenant_a",
+        "active": true,
+        "roles": [
+          "product-owner"
+        ],
+        "kind": "human",
+        "model_identity": null
+      },
+      "fixture-seller-verifier": {
+        "tenant_id": "tenant_a",
+        "active": true,
+        "roles": [
+          "seller-verifier"
+        ],
+        "kind": "service",
+        "model_identity": null
+      },
+      "fixture-commerce-verifier": {
+        "tenant_id": "tenant_a",
+        "active": true,
+        "roles": [
+          "commerce-verifier"
+        ],
+        "kind": "service",
+        "model_identity": null
+      }
+    },
+    "authorized_owner_id": "fixture-product-owner",
+    "producer_issuer_ids": [
+      "fixture-creator"
+    ],
+    "producer_model_identities": [
+      "fixture:producer-model-v1"
+    ],
+    "evidence": [
+      {
+        "check": "environment",
+        "status": "passed",
+        "mode": "live",
+        "level": "environment_probe",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-environment-verifier",
+        "evidence_ref": "fixture:environment"
+      },
+      {
+        "check": "code",
+        "status": "passed",
+        "mode": "live",
+        "level": "code_check",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "build_id": "build_a",
+          "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-code-verifier",
+        "evidence_ref": "fixture:code"
+      },
+      {
+        "check": "engine_build",
+        "status": "passed",
+        "mode": "live",
+        "level": "engine_build",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "build_id": "build_a",
+          "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-build-verifier",
+        "evidence_ref": "fixture:engine_build"
+      },
+      {
+        "check": "smoke",
+        "status": "passed",
+        "mode": "live",
+        "level": "runtime_test",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "build_id": "build_a",
+          "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-runtime-verifier",
+        "evidence_ref": "fixture:smoke"
+      },
+      {
+        "check": "playtest",
+        "status": "passed",
+        "mode": "live",
+        "level": "runtime_test",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "build_id": "build_a",
+          "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-playtest-verifier",
+        "evidence_ref": "fixture:playtest"
+      },
+      {
+        "check": "portable_package",
+        "status": "passed",
+        "mode": "live",
+        "level": "export_check",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "build_id": "build_a",
+          "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-export-verifier",
+        "evidence_ref": "fixture:portable_package"
+      },
+      {
+        "check": "notices",
+        "status": "passed",
+        "mode": "live",
+        "level": "policy_review",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "build_id": "build_a",
+          "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-rights-verifier",
+        "evidence_ref": "fixture:notices"
+      },
+      {
+        "check": "export_rights",
+        "status": "passed",
+        "mode": "live",
+        "level": "policy_review",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "build_id": "build_a",
+          "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-rights-verifier",
+        "evidence_ref": "fixture:export_rights",
+        "use": "export"
+      },
+      {
+        "check": "publish_rights",
+        "status": "passed",
+        "mode": "live",
+        "level": "policy_review",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "build_id": "build_a",
+          "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-rights-verifier",
+        "evidence_ref": "fixture:publish_rights",
+        "use": "publish",
+        "decision_context": {
+          "release_id": "release_a",
+          "release_revision": 1,
+          "audience": "12-plus-proposed",
+          "visibility": "private",
+          "rights_revision": 1,
+          "moderation_policy_version": "fixture-policy-v1"
+        }
+      },
+      {
+        "check": "sell_rights",
+        "status": "passed",
+        "mode": "live",
+        "level": "policy_review",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "build_id": "build_a",
+          "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-rights-verifier",
+        "evidence_ref": "fixture:sell_rights",
+        "use": "sell",
+        "decision_context": {
+          "release_id": "release_a",
+          "release_revision": 1,
+          "audience": "12-plus-proposed",
+          "visibility": "private",
+          "rights_revision": 1,
+          "moderation_policy_version": "fixture-policy-v1",
+          "listing_id": "listing_a",
+          "listing_revision": 1,
+          "price_minor": 490,
+          "currency": "CHF",
+          "license_version": "fixture-license-v1",
+          "seller_eligibility_revision": 1
+        }
+      },
+      {
+        "check": "moderation",
+        "status": "passed",
+        "mode": "live",
+        "level": "policy_review",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "build_id": "build_a",
+          "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-moderation-verifier",
+        "evidence_ref": "fixture:moderation",
+        "decision_context": {
+          "release_id": "release_a",
+          "release_revision": 1,
+          "audience": "12-plus-proposed",
+          "visibility": "private",
+          "rights_revision": 1,
+          "moderation_policy_version": "fixture-policy-v1"
+        }
+      },
+      {
+        "check": "reviewer_approval",
+        "status": "passed",
+        "mode": "live",
+        "level": "independent_review",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "build_id": "build_a",
+          "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-release-reviewer",
+        "evidence_ref": "fixture:reviewer_approval",
+        "decision_context": {
+          "release_id": "release_a",
+          "release_revision": 1,
+          "audience": "12-plus-proposed",
+          "visibility": "private",
+          "rights_revision": 1,
+          "moderation_policy_version": "fixture-policy-v1"
+        }
+      },
+      {
+        "check": "owner_acceptance",
+        "status": "passed",
+        "mode": "live",
+        "level": "owner_acceptance",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "build_id": "build_a",
+          "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-product-owner",
+        "evidence_ref": "fixture:owner_acceptance",
+        "decision_context": {
+          "release_id": "release_a",
+          "release_revision": 1,
+          "audience": "12-plus-proposed",
+          "visibility": "private",
+          "rights_revision": 1,
+          "moderation_policy_version": "fixture-policy-v1"
+        }
+      },
+      {
+        "check": "seller_eligibility",
+        "status": "passed",
+        "mode": "live",
+        "level": "policy_review",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "build_id": "build_a",
+          "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-seller-verifier",
+        "evidence_ref": "fixture:seller_eligibility",
+        "decision_context": {
+          "release_id": "release_a",
+          "release_revision": 1,
+          "audience": "12-plus-proposed",
+          "visibility": "private",
+          "rights_revision": 1,
+          "moderation_policy_version": "fixture-policy-v1",
+          "listing_id": "listing_a",
+          "listing_revision": 1,
+          "price_minor": 490,
+          "currency": "CHF",
+          "license_version": "fixture-license-v1",
+          "seller_eligibility_revision": 1
+        }
+      },
+      {
+        "check": "sale_terms",
+        "status": "passed",
+        "mode": "live",
+        "level": "policy_review",
+        "binding": {
+          "tenant_id": "tenant_a",
+          "project_id": "project_a",
+          "run_id": "run_a",
+          "run_attempt": 1,
+          "source_version_id": "source_a",
+          "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "build_id": "build_a",
+          "artifact_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "engine_adapter_id": "fixture-engine-adapter-id-v1",
+          "engine_adapter_version": "1.0.0",
+          "engine_version": "1.0.0",
+          "toolchain_id": "fixture-toolchain-id-v1",
+          "toolchain_version": "1.0.0",
+          "toolchain_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "target_id": "fixture-target-id-v1",
+          "target_profile_version": "1.0.0",
+          "pack_id": "fixture-pack-id-v1",
+          "pack_version": "1.0.0",
+          "pack_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z",
+        "issuer_id": "fixture-commerce-verifier",
+        "evidence_ref": "fixture:sale_terms",
+        "decision_context": {
+          "release_id": "release_a",
+          "release_revision": 1,
+          "audience": "12-plus-proposed",
+          "visibility": "private",
+          "rights_revision": 1,
+          "moderation_policy_version": "fixture-policy-v1",
+          "listing_id": "listing_a",
+          "listing_revision": 1,
+          "price_minor": 490,
+          "currency": "CHF",
+          "license_version": "fixture-license-v1",
+          "seller_eligibility_revision": 1
+        }
+      }
+    ]
+  },
+  "scenarios": [
+    {
+      "name": "all required evidence supplied",
+      "allowed_gates": [
+        "Ready",
+        "Playable",
+        "Exportable",
+        "Publishable",
+        "Sellable"
+      ]
+    },
+    {
+      "name": "ready before a build exists",
+      "subject_patch": {
+        "build_id": null,
+        "artifact_sha256": null
+      },
+      "allowed_gates": [
+        "Ready"
+      ]
+    },
+    {
+      "name": "failed engine build",
+      "evidence_patches": [
+        {
+          "check": "engine_build",
+          "status": "failed"
+        }
+      ],
+      "allowed_gates": [
+        "Ready"
+      ]
+    },
+    {
+      "name": "changed source invalidates every gate",
+      "subject_patch": {
+        "source_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+      },
+      "allowed_gates": []
+    },
+    {
+      "name": "skipped playtest",
+      "evidence_patches": [
+        {
+          "check": "playtest",
+          "status": "skipped"
+        }
+      ],
+      "allowed_gates": [
+        "Ready"
+      ]
+    },
+    {
+      "name": "missing playtest",
+      "remove_checks": [
+        "playtest"
+      ],
+      "allowed_gates": [
+        "Ready"
+      ]
+    },
+    {
+      "name": "simulation is not play evidence",
+      "evidence_patches": [
+        {
+          "check": "playtest",
+          "mode": "simulation"
+        }
+      ],
+      "allowed_gates": [
+        "Ready"
+      ]
+    },
+    {
+      "name": "unit checks are not a playtest",
+      "evidence_patches": [
+        {
+          "check": "playtest",
+          "level": "code_check"
+        }
+      ],
+      "allowed_gates": [
+        "Ready"
+      ]
+    },
+    {
+      "name": "missing owner acceptance still allows private play and export",
+      "remove_checks": [
+        "owner_acceptance"
+      ],
+      "allowed_gates": [
+        "Ready",
+        "Playable",
+        "Exportable"
+      ]
+    },
+    {
+      "name": "no export rights does not revoke independently allowed publication",
+      "remove_checks": [
+        "export_rights"
+      ],
+      "allowed_gates": [
+        "Ready",
+        "Playable",
+        "Publishable",
+        "Sellable"
+      ]
+    },
+    {
+      "name": "no sale decision keeps free publication separate",
+      "remove_checks": [
+        "sale_terms"
+      ],
+      "allowed_gates": [
+        "Ready",
+        "Playable",
+        "Exportable",
+        "Publishable"
+      ]
+    },
+    {
+      "name": "expired play evidence",
+      "evidence_patches": [
+        {
+          "check": "playtest",
+          "expires_at": "2026-09-05T12:00:00Z"
+        }
+      ],
+      "allowed_gates": [
+        "Ready"
+      ]
+    },
+    {
+      "name": "environment outage does not invalidate already checked artifact",
+      "evidence_patches": [
+        {
+          "check": "environment",
+          "status": "failed"
+        }
+      ],
+      "allowed_gates": [
+        "Playable",
+        "Exportable",
+        "Publishable",
+        "Sellable"
+      ]
+    }
+  ]
+}
