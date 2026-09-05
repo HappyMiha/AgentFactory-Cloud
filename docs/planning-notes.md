@@ -21,7 +21,7 @@ The owner's direct request controls this revision: use simple English, prepare d
 | Decision | Reason |
 | --- | --- |
 | Keep the existing public `HappyMiha/AgentFactory` repository as Core | Preserve history, Apache-2.0, working foundations, and existing stable requirements |
-| Use `HappyMiha/AgentFactory-Cloud` as a separate private planning repository | Keep the commercial product separate; no additional public license is selected here |
+| Use `HappyMiha/AgentFactory-Cloud` as a separate public repository | The owner explicitly requested public visibility after the initial private setup; keep the product separate, with license terms still undecided |
 | Use Games and Marketplace as logical modules, not extra repositories | Two repositories are enough for the agreed ownership boundary |
 | Keep neutral runtime code and optional OSS engine/game packs upstream | Cloud should integrate tested packs rather than duplicate the scheduler or engine adapters |
 | Start with Godot 2D and GDScript | Prove one complete portable game journey before adding engines and stores |
