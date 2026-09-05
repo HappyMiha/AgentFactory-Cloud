@@ -1,0 +1,599 @@
+{
+  "contract_version": "1.0.0",
+  "status": "design-contract-not-a-running-service",
+  "base_path": "/api/v1/tenants/{tenant_id}",
+  "common_fields": {
+    "id": {
+      "type": "string",
+      "required": true
+    },
+    "tenant_id": {
+      "type": "string",
+      "required": true
+    },
+    "revision": {
+      "type": "positive_integer",
+      "required": true
+    },
+    "state": {
+      "type": "string",
+      "required": true
+    },
+    "created_at": {
+      "type": "timestamp",
+      "required": true
+    },
+    "updated_at": {
+      "type": "timestamp",
+      "required": true
+    },
+    "deleted": {
+      "type": "boolean",
+      "required": true
+    }
+  },
+  "entities": {
+    "Tenant": {
+      "states": [
+        "active",
+        "suspended",
+        "deleted"
+      ],
+      "fields": {
+        "name": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "immutable_fields": []
+    },
+    "User": {
+      "states": [
+        "active",
+        "revoked"
+      ],
+      "fields": {
+        "subject_id": {
+          "type": "string",
+          "required": true
+        },
+        "roles": {
+          "type": "string_list",
+          "required": true
+        }
+      },
+      "immutable_fields": []
+    },
+    "Project": {
+      "states": [
+        "draft",
+        "active",
+        "archived",
+        "deleted"
+      ],
+      "fields": {
+        "name": {
+          "type": "string",
+          "required": true
+        },
+        "owner_user_id": {
+          "type": "string",
+          "required": true,
+          "reference": "User",
+          "nullable": false
+        },
+        "remix_parent_source_id": {
+          "type": "string",
+          "required": true,
+          "reference": "SourceVersion",
+          "nullable": true
+        }
+      },
+      "immutable_fields": []
+    },
+    "GameBrief": {
+      "states": [
+        "draft",
+        "approved",
+        "superseded"
+      ],
+      "fields": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "reference": "Project",
+          "nullable": false
+        },
+        "original_text": {
+          "type": "string",
+          "required": true
+        },
+        "requirements": {
+          "type": "string_list",
+          "required": true
+        },
+        "analysis_kind": {
+          "type": "string",
+          "required": true,
+          "enum": [
+            "deterministic",
+            "ai_proposal",
+            "human_edited"
+          ]
+        },
+        "content_sha256": {
+          "type": "sha256",
+          "required": true
+        }
+      },
+      "immutable_fields": [
+        "project_id"
+      ]
+    },
+    "FactoryBlueprint": {
+      "states": [
+        "draft",
+        "approved",
+        "retired"
+      ],
+      "fields": {
+        "brief_id": {
+          "type": "string",
+          "required": true,
+          "reference": "GameBrief",
+          "nullable": false
+        },
+        "content_sha256": {
+          "type": "sha256",
+          "required": true
+        },
+        "pack_versions": {
+          "type": "string_list",
+          "required": true
+        },
+        "target_profile": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "immutable_fields": [
+        "brief_id",
+        "content_sha256",
+        "pack_versions",
+        "target_profile"
+      ]
+    },
+    "AgentTeam": {
+      "states": [
+        "active",
+        "paused",
+        "retired"
+      ],
+      "fields": {
+        "blueprint_id": {
+          "type": "string",
+          "required": true,
+          "reference": "FactoryBlueprint",
+          "nullable": false
+        },
+        "role_bindings": {
+          "type": "object_list",
+          "required": true
+        }
+      },
+      "immutable_fields": [
+        "blueprint_id"
+      ]
+    },
+    "Run": {
+      "states": [
+        "draft",
+        "ready",
+        "running",
+        "blocked",
+        "failed",
+        "cancelled",
+        "succeeded"
+      ],
+      "fields": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "reference": "Project",
+          "nullable": false
+        },
+        "blueprint_id": {
+          "type": "string",
+          "required": true,
+          "reference": "FactoryBlueprint",
+          "nullable": false
+        },
+        "team_id": {
+          "type": "string",
+          "required": true,
+          "reference": "AgentTeam",
+          "nullable": false
+        },
+        "source_version_id": {
+          "type": "string",
+          "required": true,
+          "reference": "SourceVersion",
+          "nullable": false
+        },
+        "workspace_ref": {
+          "type": "string",
+          "required": true
+        },
+        "model_profile": {
+          "type": "string",
+          "required": true
+        },
+        "attempt": {
+          "type": "positive_integer",
+          "required": true
+        },
+        "checks": {
+          "type": "object_list",
+          "required": true
+        }
+      },
+      "immutable_fields": [
+        "project_id",
+        "blueprint_id",
+        "team_id",
+        "source_version_id",
+        "workspace_ref",
+        "model_profile"
+      ]
+    },
+    "SourceVersion": {
+      "states": [
+        "available",
+        "quarantined",
+        "deleted"
+      ],
+      "fields": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "reference": "Project",
+          "nullable": false
+        },
+        "parent_source_id": {
+          "type": "string",
+          "required": true,
+          "reference": "SourceVersion",
+          "nullable": true
+        },
+        "content_sha256": {
+          "type": "sha256",
+          "required": true
+        },
+        "provenance": {
+          "type": "provenance",
+          "required": true
+        },
+        "asset_provenance": {
+          "type": "provenance_list",
+          "required": true
+        }
+      },
+      "immutable_fields": [
+        "project_id",
+        "parent_source_id",
+        "content_sha256"
+      ]
+    },
+    "Build": {
+      "states": [
+        "pending",
+        "ready",
+        "blocked",
+        "failed",
+        "cancelled"
+      ],
+      "fields": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "reference": "Project",
+          "nullable": false
+        },
+        "run_id": {
+          "type": "string",
+          "required": true,
+          "reference": "Run",
+          "nullable": false
+        },
+        "source_version_id": {
+          "type": "string",
+          "required": true,
+          "reference": "SourceVersion",
+          "nullable": false
+        },
+        "artifact_sha256": {
+          "type": "sha256",
+          "required": true
+        },
+        "target_profile": {
+          "type": "string",
+          "required": true
+        },
+        "checks": {
+          "type": "object_list",
+          "required": true
+        },
+        "provenance": {
+          "type": "provenance",
+          "required": true
+        }
+      },
+      "immutable_fields": [
+        "project_id",
+        "run_id",
+        "source_version_id",
+        "artifact_sha256",
+        "target_profile"
+      ]
+    },
+    "PlaySession": {
+      "states": [
+        "created",
+        "active",
+        "completed",
+        "failed",
+        "cancelled"
+      ],
+      "fields": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "reference": "Project",
+          "nullable": false
+        },
+        "build_id": {
+          "type": "string",
+          "required": true,
+          "reference": "Build",
+          "nullable": false
+        },
+        "user_id": {
+          "type": "string",
+          "required": true,
+          "reference": "User",
+          "nullable": false
+        },
+        "mode": {
+          "type": "string",
+          "required": true,
+          "enum": [
+            "live",
+            "simulation"
+          ]
+        }
+      },
+      "immutable_fields": [
+        "project_id",
+        "build_id",
+        "user_id",
+        "mode"
+      ]
+    },
+    "Feedback": {
+      "states": [
+        "submitted",
+        "triaged",
+        "resolved",
+        "dismissed"
+      ],
+      "fields": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "reference": "Project",
+          "nullable": false
+        },
+        "play_session_id": {
+          "type": "string",
+          "required": true,
+          "reference": "PlaySession",
+          "nullable": false
+        },
+        "text": {
+          "type": "string",
+          "required": true
+        }
+      },
+      "immutable_fields": [
+        "project_id",
+        "play_session_id"
+      ]
+    },
+    "Release": {
+      "states": [
+        "candidate",
+        "approved",
+        "blocked",
+        "withdrawn"
+      ],
+      "fields": {
+        "project_id": {
+          "type": "string",
+          "required": true,
+          "reference": "Project",
+          "nullable": false
+        },
+        "source_version_id": {
+          "type": "string",
+          "required": true,
+          "reference": "SourceVersion",
+          "nullable": false
+        },
+        "build_id": {
+          "type": "string",
+          "required": true,
+          "reference": "Build",
+          "nullable": false
+        },
+        "approval": {
+          "type": "object",
+          "required": true,
+          "nullable": true
+        }
+      },
+      "immutable_fields": [
+        "project_id",
+        "source_version_id",
+        "build_id"
+      ]
+    },
+    "Listing": {
+      "states": [
+        "draft",
+        "published",
+        "blocked",
+        "withdrawn"
+      ],
+      "fields": {
+        "release_id": {
+          "type": "string",
+          "required": true,
+          "reference": "Release",
+          "nullable": false
+        },
+        "price_minor": {
+          "type": "nonnegative_integer",
+          "required": true
+        },
+        "currency": {
+          "type": "string",
+          "required": true
+        },
+        "provenance": {
+          "type": "provenance",
+          "required": true
+        },
+        "moderation": {
+          "type": "object",
+          "required": true,
+          "nullable": true
+        }
+      },
+      "immutable_fields": [
+        "release_id"
+      ]
+    },
+    "Purchase": {
+      "states": [
+        "pending",
+        "paid",
+        "failed",
+        "cancelled",
+        "refunded"
+      ],
+      "fields": {
+        "offer_snapshot": {
+          "type": "object",
+          "required": true
+        },
+        "buyer_user_id": {
+          "type": "string",
+          "required": true,
+          "reference": "User",
+          "nullable": false
+        },
+        "price_minor": {
+          "type": "nonnegative_integer",
+          "required": true
+        },
+        "currency": {
+          "type": "string",
+          "required": true
+        },
+        "payment_reference": {
+          "type": "string",
+          "required": true,
+          "nullable": true
+        }
+      },
+      "immutable_fields": [
+        "offer_snapshot",
+        "buyer_user_id",
+        "price_minor",
+        "currency"
+      ]
+    },
+    "Entitlement": {
+      "states": [
+        "pending",
+        "active",
+        "suspended",
+        "revoked",
+        "expired"
+      ],
+      "fields": {
+        "purchase_id": {
+          "type": "string",
+          "required": true,
+          "reference": "Purchase",
+          "nullable": false
+        },
+        "user_id": {
+          "type": "string",
+          "required": true,
+          "reference": "User",
+          "nullable": false
+        },
+        "release_public_ref": {
+          "type": "string",
+          "required": true
+        },
+        "license_version": {
+          "type": "string",
+          "required": true
+        },
+        "expires_at": {
+          "type": "timestamp",
+          "required": true,
+          "nullable": true
+        }
+      },
+      "immutable_fields": [
+        "purchase_id",
+        "user_id",
+        "release_public_ref",
+        "license_version"
+      ]
+    }
+  },
+  "provenance_fields": [
+    "asserted_owner",
+    "origin",
+    "license_version",
+    "attribution",
+    "rights_status",
+    "allowed_uses",
+    "evidence_refs"
+  ],
+  "rights_states": [
+    "unknown",
+    "pending",
+    "verified",
+    "disputed",
+    "denied"
+  ],
+  "mutation_rules": {
+    "etag": "strong revision ETag: \"r<revision>\"",
+    "idempotency_scope": [
+      "tenant_id",
+      "actor_id",
+      "operation",
+      "resource_id",
+      "key"
+    ],
+    "receipt_retention_hours": 24,
+    "expired_receipt": "409 idempotency_expired; never silently execute again",
+    "source_and_build_identity": "immutable; use a new ID for a new source or artifact",
+    "cross_tenant_reference": "404 resource_not_found"
+  }
+}

@@ -1,0 +1,1061 @@
+{
+  "contract_version": "1.0.0",
+  "now": "2026-09-05T12:00:00Z",
+  "actor": {
+    "id": "user_a",
+    "authenticated": true,
+    "expires_at": "2026-09-06T12:00:00Z",
+    "tenant_ids": [
+      "tenant_a"
+    ],
+    "scopes": [
+      "builds:qualify",
+      "builds:write",
+      "listings:publish",
+      "listings:write",
+      "projects:delete",
+      "releases:approve",
+      "releases:write",
+      "runs:cancel",
+      "runs:execute",
+      "runs:write"
+    ]
+  },
+  "records": [
+    {
+      "entity": "Tenant",
+      "id": "tenant_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "active",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "name": "Example team"
+    },
+    {
+      "entity": "User",
+      "id": "user_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "active",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "subject_id": "fixture-subject-a",
+      "roles": [
+        "creator"
+      ]
+    },
+    {
+      "entity": "Project",
+      "id": "project_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "active",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "name": "Mars robots",
+      "owner_user_id": "user_a",
+      "remix_parent_source_id": null
+    },
+    {
+      "entity": "GameBrief",
+      "id": "brief_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "approved",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "project_id": "project_a",
+      "original_text": "Make a small robot game.",
+      "requirements": [
+        "Move a robot to the exit."
+      ],
+      "analysis_kind": "human_edited",
+      "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "entity": "FactoryBlueprint",
+      "id": "blueprint_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "approved",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "brief_id": "brief_a",
+      "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "pack_versions": [
+        "godot-web:example-v1"
+      ],
+      "target_profile": "web-example-v1"
+    },
+    {
+      "entity": "AgentTeam",
+      "id": "team_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "active",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "blueprint_id": "blueprint_a",
+      "role_bindings": [
+        {
+          "role": "builder",
+          "profile_ref": "fixture-model"
+        }
+      ]
+    },
+    {
+      "entity": "Run",
+      "id": "run_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "ready",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "project_id": "project_a",
+      "blueprint_id": "blueprint_a",
+      "team_id": "team_a",
+      "source_version_id": "source_a",
+      "workspace_ref": "fixture-workspace",
+      "model_profile": "fixture-model",
+      "attempt": 1,
+      "checks": [
+        {
+          "status": "passed",
+          "mode": "live",
+          "binding": {
+            "source_version_id": "source_a",
+            "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "blueprint_id": "blueprint_a",
+            "blueprint_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "workspace_ref": "fixture-workspace",
+            "model_profile": "fixture-model",
+            "attempt": 1
+          },
+          "evidence_ref": "fixture:example-proof",
+          "checked_at": "2026-09-05T12:00:00Z",
+          "expires_at": "2026-09-05T13:00:00Z",
+          "name": "tools"
+        },
+        {
+          "status": "passed",
+          "mode": "live",
+          "binding": {
+            "source_version_id": "source_a",
+            "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "blueprint_id": "blueprint_a",
+            "blueprint_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "workspace_ref": "fixture-workspace",
+            "model_profile": "fixture-model",
+            "attempt": 1
+          },
+          "evidence_ref": "fixture:example-proof",
+          "checked_at": "2026-09-05T12:00:00Z",
+          "expires_at": "2026-09-05T13:00:00Z",
+          "name": "services"
+        },
+        {
+          "status": "passed",
+          "mode": "live",
+          "binding": {
+            "source_version_id": "source_a",
+            "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "blueprint_id": "blueprint_a",
+            "blueprint_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "workspace_ref": "fixture-workspace",
+            "model_profile": "fixture-model",
+            "attempt": 1
+          },
+          "evidence_ref": "fixture:example-proof",
+          "checked_at": "2026-09-05T12:00:00Z",
+          "expires_at": "2026-09-05T13:00:00Z",
+          "name": "model"
+        },
+        {
+          "status": "passed",
+          "mode": "live",
+          "binding": {
+            "source_version_id": "source_a",
+            "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "blueprint_id": "blueprint_a",
+            "blueprint_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "workspace_ref": "fixture-workspace",
+            "model_profile": "fixture-model",
+            "attempt": 1
+          },
+          "evidence_ref": "fixture:example-proof",
+          "checked_at": "2026-09-05T12:00:00Z",
+          "expires_at": "2026-09-05T13:00:00Z",
+          "name": "workspace"
+        },
+        {
+          "status": "passed",
+          "mode": "live",
+          "binding": {
+            "source_version_id": "source_a",
+            "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "blueprint_id": "blueprint_a",
+            "blueprint_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "workspace_ref": "fixture-workspace",
+            "model_profile": "fixture-model",
+            "attempt": 1
+          },
+          "evidence_ref": "fixture:example-proof",
+          "checked_at": "2026-09-05T12:00:00Z",
+          "expires_at": "2026-09-05T13:00:00Z",
+          "name": "execution"
+        }
+      ]
+    },
+    {
+      "entity": "SourceVersion",
+      "id": "source_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "available",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "project_id": "project_a",
+      "parent_source_id": null,
+      "content_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "provenance": {
+        "asserted_owner": "Example creator",
+        "origin": "original",
+        "license_version": "example-license-v1",
+        "attribution": "",
+        "rights_status": "verified",
+        "allowed_uses": [
+          "build",
+          "publish",
+          "sell",
+          "remix"
+        ],
+        "evidence_refs": [
+          "fixture:rights-review-1"
+        ]
+      },
+      "asset_provenance": [
+        {
+          "asserted_owner": "Example creator",
+          "origin": "original",
+          "license_version": "example-license-v1",
+          "attribution": "",
+          "rights_status": "verified",
+          "allowed_uses": [
+            "build",
+            "publish",
+            "sell",
+            "remix"
+          ],
+          "evidence_refs": [
+            "fixture:rights-review-1"
+          ]
+        }
+      ]
+    },
+    {
+      "entity": "Build",
+      "id": "build_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "pending",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "project_id": "project_a",
+      "run_id": "run_a",
+      "source_version_id": "source_a",
+      "artifact_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "target_profile": "web-example-v1",
+      "checks": [
+        {
+          "status": "passed",
+          "mode": "live",
+          "binding": {
+            "build_id": "build_a",
+            "source_version_id": "source_a",
+            "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "artifact_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "target_profile": "web-example-v1",
+            "run_id": "run_a",
+            "attempt": 1
+          },
+          "evidence_ref": "fixture:example-proof",
+          "checked_at": "2026-09-05T12:00:00Z",
+          "expires_at": "2026-09-05T13:00:00Z",
+          "name": "export"
+        },
+        {
+          "status": "passed",
+          "mode": "live",
+          "binding": {
+            "build_id": "build_a",
+            "source_version_id": "source_a",
+            "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "artifact_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "target_profile": "web-example-v1",
+            "run_id": "run_a",
+            "attempt": 1
+          },
+          "evidence_ref": "fixture:example-proof",
+          "checked_at": "2026-09-05T12:00:00Z",
+          "expires_at": "2026-09-05T13:00:00Z",
+          "name": "smoke"
+        },
+        {
+          "status": "passed",
+          "mode": "live",
+          "binding": {
+            "build_id": "build_a",
+            "source_version_id": "source_a",
+            "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "artifact_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "target_profile": "web-example-v1",
+            "run_id": "run_a",
+            "attempt": 1
+          },
+          "evidence_ref": "fixture:example-proof",
+          "checked_at": "2026-09-05T12:00:00Z",
+          "expires_at": "2026-09-05T13:00:00Z",
+          "name": "playable"
+        }
+      ],
+      "provenance": {
+        "asserted_owner": "Example creator",
+        "origin": "original",
+        "license_version": "example-license-v1",
+        "attribution": "",
+        "rights_status": "verified",
+        "allowed_uses": [
+          "build",
+          "publish",
+          "sell",
+          "remix"
+        ],
+        "evidence_refs": [
+          "fixture:rights-review-1"
+        ]
+      }
+    },
+    {
+      "entity": "PlaySession",
+      "id": "play_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "created",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "project_id": "project_a",
+      "build_id": "build_a",
+      "user_id": "user_a",
+      "mode": "live"
+    },
+    {
+      "entity": "Feedback",
+      "id": "feedback_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "submitted",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "project_id": "project_a",
+      "play_session_id": "play_a",
+      "text": "Example feedback."
+    },
+    {
+      "entity": "Release",
+      "id": "release_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "candidate",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "project_id": "project_a",
+      "source_version_id": "source_a",
+      "build_id": "build_a",
+      "approval": {
+        "status": "passed",
+        "mode": "live",
+        "binding": {
+          "build_id": "build_a",
+          "source_version_id": "source_a",
+          "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "artifact_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "target_profile": "web-example-v1",
+          "run_id": "run_a",
+          "attempt": 1,
+          "release_id": "release_a"
+        },
+        "evidence_ref": "fixture:example-proof",
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z"
+      }
+    },
+    {
+      "entity": "Listing",
+      "id": "listing_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "draft",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "release_id": "release_a",
+      "price_minor": 0,
+      "currency": "CHF",
+      "provenance": {
+        "asserted_owner": "Example creator",
+        "origin": "original",
+        "license_version": "example-license-v1",
+        "attribution": "",
+        "rights_status": "verified",
+        "allowed_uses": [
+          "build",
+          "publish",
+          "sell",
+          "remix"
+        ],
+        "evidence_refs": [
+          "fixture:rights-review-1"
+        ]
+      },
+      "moderation": {
+        "status": "passed",
+        "mode": "live",
+        "binding": {
+          "id": "listing_a",
+          "release_id": "release_a",
+          "price_minor": 0,
+          "currency": "CHF",
+          "license_version": "example-license-v1"
+        },
+        "evidence_ref": "fixture:example-proof",
+        "checked_at": "2026-09-05T12:00:00Z",
+        "expires_at": "2026-09-05T13:00:00Z"
+      }
+    },
+    {
+      "entity": "Purchase",
+      "id": "purchase_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "pending",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "offer_snapshot": {
+        "seller_tenant_id": "seller_example",
+        "listing_id": "public_listing_example",
+        "listing_revision": 1,
+        "release_public_ref": "public_release_example",
+        "license_version": "example-license-v1",
+        "offer_token": "fixture-signed-offer-not-a-real-token",
+        "price_minor": 490,
+        "currency": "CHF"
+      },
+      "buyer_user_id": "user_a",
+      "price_minor": 490,
+      "currency": "CHF",
+      "payment_reference": null
+    },
+    {
+      "entity": "Entitlement",
+      "id": "entitlement_a",
+      "tenant_id": "tenant_a",
+      "revision": 1,
+      "state": "pending",
+      "created_at": "2026-09-05T12:00:00Z",
+      "updated_at": "2026-09-05T12:00:00Z",
+      "deleted": false,
+      "purchase_id": "purchase_a",
+      "user_id": "user_a",
+      "release_public_ref": "public_release_example",
+      "license_version": "example-license-v1",
+      "expires_at": null
+    }
+  ],
+  "scenarios": [
+    {
+      "name": "start and exact replay",
+      "requests": [
+        {
+          "operation": "run.start",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 200,
+            "code": "ok"
+          }
+        },
+        {
+          "operation": "run.start",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 200,
+            "code": "ok"
+          }
+        }
+      ],
+      "record_patches": [],
+      "actor_patch": {}
+    },
+    {
+      "name": "stale update has no side effect",
+      "requests": [
+        {
+          "operation": "run.start",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 200,
+            "code": "ok"
+          }
+        },
+        {
+          "operation": "run.cancel",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "cancel-key",
+          "body": {},
+          "expected": {
+            "status": 412,
+            "code": "revision_conflict"
+          }
+        }
+      ],
+      "record_patches": [],
+      "actor_patch": {}
+    },
+    {
+      "name": "a key cannot change its payload",
+      "requests": [
+        {
+          "operation": "run.start",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 200,
+            "code": "ok"
+          }
+        },
+        {
+          "operation": "run.start",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {
+            "different": true
+          },
+          "expected": {
+            "status": 409,
+            "code": "idempotency_conflict"
+          }
+        }
+      ],
+      "record_patches": [],
+      "actor_patch": {}
+    },
+    {
+      "name": "cross-tenant target is hidden",
+      "requests": [
+        {
+          "operation": "run.start",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_b",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 404,
+            "code": "resource_not_found"
+          }
+        }
+      ],
+      "record_patches": [],
+      "actor_patch": {}
+    },
+    {
+      "name": "missing scope",
+      "requests": [
+        {
+          "operation": "run.start",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 403,
+            "code": "permission_denied"
+          }
+        }
+      ],
+      "record_patches": [],
+      "actor_patch": {
+        "scopes": []
+      }
+    },
+    {
+      "name": "missing authentication",
+      "requests": [
+        {
+          "operation": "run.start",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 401,
+            "code": "authentication_required"
+          }
+        }
+      ],
+      "record_patches": [],
+      "actor_patch": {
+        "authenticated": false
+      }
+    },
+    {
+      "name": "missing ETag",
+      "requests": [
+        {
+          "operation": "run.start",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": null,
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 428,
+            "code": "precondition_required"
+          }
+        }
+      ],
+      "record_patches": [],
+      "actor_patch": {}
+    },
+    {
+      "name": "missing evidence blocks readiness",
+      "requests": [
+        {
+          "operation": "run.start",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 409,
+            "code": "evidence_missing_or_duplicate"
+          }
+        }
+      ],
+      "record_patches": [
+        {
+          "entity": "Run",
+          "id": "run_a",
+          "checks": []
+        }
+      ],
+      "actor_patch": {}
+    },
+    {
+      "name": "failed evidence blocks readiness",
+      "requests": [
+        {
+          "operation": "run.start",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 409,
+            "code": "evidence_not_current"
+          }
+        }
+      ],
+      "record_patches": [
+        {
+          "entity": "Run",
+          "id": "run_a",
+          "checks": [
+            {
+              "status": "failed",
+              "mode": "live",
+              "binding": {
+                "source_version_id": "source_a",
+                "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                "blueprint_id": "blueprint_a",
+                "blueprint_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "workspace_ref": "fixture-workspace",
+                "model_profile": "fixture-model",
+                "attempt": 1
+              },
+              "evidence_ref": "fixture:example-proof",
+              "checked_at": "2026-09-05T12:00:00Z",
+              "expires_at": "2026-09-05T13:00:00Z",
+              "name": "tools"
+            },
+            {
+              "status": "passed",
+              "mode": "live",
+              "binding": {
+                "source_version_id": "source_a",
+                "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                "blueprint_id": "blueprint_a",
+                "blueprint_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "workspace_ref": "fixture-workspace",
+                "model_profile": "fixture-model",
+                "attempt": 1
+              },
+              "evidence_ref": "fixture:example-proof",
+              "checked_at": "2026-09-05T12:00:00Z",
+              "expires_at": "2026-09-05T13:00:00Z",
+              "name": "services"
+            },
+            {
+              "status": "passed",
+              "mode": "live",
+              "binding": {
+                "source_version_id": "source_a",
+                "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                "blueprint_id": "blueprint_a",
+                "blueprint_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "workspace_ref": "fixture-workspace",
+                "model_profile": "fixture-model",
+                "attempt": 1
+              },
+              "evidence_ref": "fixture:example-proof",
+              "checked_at": "2026-09-05T12:00:00Z",
+              "expires_at": "2026-09-05T13:00:00Z",
+              "name": "model"
+            },
+            {
+              "status": "passed",
+              "mode": "live",
+              "binding": {
+                "source_version_id": "source_a",
+                "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                "blueprint_id": "blueprint_a",
+                "blueprint_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "workspace_ref": "fixture-workspace",
+                "model_profile": "fixture-model",
+                "attempt": 1
+              },
+              "evidence_ref": "fixture:example-proof",
+              "checked_at": "2026-09-05T12:00:00Z",
+              "expires_at": "2026-09-05T13:00:00Z",
+              "name": "workspace"
+            },
+            {
+              "status": "passed",
+              "mode": "live",
+              "binding": {
+                "source_version_id": "source_a",
+                "source_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                "blueprint_id": "blueprint_a",
+                "blueprint_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "workspace_ref": "fixture-workspace",
+                "model_profile": "fixture-model",
+                "attempt": 1
+              },
+              "evidence_ref": "fixture:example-proof",
+              "checked_at": "2026-09-05T12:00:00Z",
+              "expires_at": "2026-09-05T13:00:00Z",
+              "name": "execution"
+            }
+          ]
+        }
+      ],
+      "actor_patch": {}
+    },
+    {
+      "name": "retry clears evidence and advances attempt",
+      "requests": [
+        {
+          "operation": "run.retry",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 200,
+            "code": "ok"
+          }
+        },
+        {
+          "operation": "run.qualify",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r2\"",
+          "idempotency_key": "qualify",
+          "body": {},
+          "expected": {
+            "status": 409,
+            "code": "evidence_missing_or_duplicate"
+          }
+        }
+      ],
+      "record_patches": [
+        {
+          "entity": "Run",
+          "id": "run_a",
+          "state": "failed"
+        }
+      ],
+      "actor_patch": {}
+    },
+    {
+      "name": "cancel does not resume in place",
+      "requests": [
+        {
+          "operation": "run.cancel",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 200,
+            "code": "ok"
+          }
+        },
+        {
+          "operation": "run.start",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r2\"",
+          "idempotency_key": "restart",
+          "body": {},
+          "expected": {
+            "status": 409,
+            "code": "invalid_transition"
+          }
+        }
+      ],
+      "record_patches": [],
+      "actor_patch": {}
+    },
+    {
+      "name": "build to release to listing",
+      "requests": [
+        {
+          "operation": "build.qualify",
+          "resource_id": "build_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "build",
+          "body": {},
+          "expected": {
+            "status": 200,
+            "code": "ok"
+          }
+        },
+        {
+          "operation": "release.approve",
+          "resource_id": "release_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "release",
+          "body": {},
+          "expected": {
+            "status": 200,
+            "code": "ok"
+          }
+        },
+        {
+          "operation": "listing.publish",
+          "resource_id": "listing_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "listing",
+          "body": {},
+          "expected": {
+            "status": 200,
+            "code": "ok"
+          }
+        }
+      ],
+      "record_patches": [
+        {
+          "entity": "Run",
+          "id": "run_a",
+          "state": "succeeded"
+        }
+      ],
+      "actor_patch": {}
+    },
+    {
+      "name": "unfinished run cannot make playable build",
+      "requests": [
+        {
+          "operation": "build.qualify",
+          "resource_id": "build_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 409,
+            "code": "inputs_not_ready"
+          }
+        }
+      ],
+      "record_patches": [],
+      "actor_patch": {}
+    },
+    {
+      "name": "release needs explicit approval",
+      "requests": [
+        {
+          "operation": "release.approve",
+          "resource_id": "release_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 409,
+            "code": "evidence_not_current"
+          }
+        }
+      ],
+      "record_patches": [
+        {
+          "entity": "Run",
+          "id": "run_a",
+          "state": "succeeded"
+        },
+        {
+          "entity": "Build",
+          "id": "build_a",
+          "state": "ready"
+        },
+        {
+          "entity": "Release",
+          "id": "release_a",
+          "approval": null
+        }
+      ],
+      "actor_patch": {}
+    },
+    {
+      "name": "publication prevents project deletion",
+      "requests": [
+        {
+          "operation": "project.delete",
+          "resource_id": "project_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 409,
+            "code": "publication_exists"
+          }
+        }
+      ],
+      "record_patches": [
+        {
+          "entity": "Listing",
+          "id": "listing_a",
+          "state": "published"
+        }
+      ],
+      "actor_patch": {}
+    },
+    {
+      "name": "delete replays and hides child records",
+      "requests": [
+        {
+          "operation": "project.delete",
+          "resource_id": "project_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 204,
+            "code": "ok"
+          }
+        },
+        {
+          "operation": "project.delete",
+          "resource_id": "project_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 204,
+            "code": "ok"
+          }
+        },
+        {
+          "operation": "run.start",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {},
+          "expected": {
+            "status": 404,
+            "code": "resource_not_found"
+          }
+        }
+      ],
+      "record_patches": [],
+      "actor_patch": {}
+    },
+    {
+      "name": "cannot inject state into command",
+      "requests": [
+        {
+          "operation": "run.start",
+          "resource_id": "run_a",
+          "tenant_id": "tenant_a",
+          "if_match": "\"r1\"",
+          "idempotency_key": "example-key",
+          "body": {
+            "state": "succeeded"
+          },
+          "expected": {
+            "status": 422,
+            "code": "unexpected_command_fields"
+          }
+        }
+      ],
+      "record_patches": [],
+      "actor_patch": {}
+    }
+  ]
+}
