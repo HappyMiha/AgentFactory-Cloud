@@ -1,0 +1,149 @@
+{
+  "contract_version": "1.0.0",
+  "synthetic": true,
+  "engines": [
+    {
+      "id": "godot-example",
+      "version": "1.0.0",
+      "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "operations": [
+        "probe",
+        "create",
+        "import",
+        "validate",
+        "test",
+        "build",
+        "run",
+        "collect_crash",
+        "export_source"
+      ],
+      "targets": [
+        "web",
+        "windows"
+      ],
+      "qualification": "synthetic-only"
+    },
+    {
+      "id": "dummy-example",
+      "version": "1.0.0",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "operations": [
+        "probe",
+        "create",
+        "import",
+        "validate",
+        "test",
+        "build",
+        "run",
+        "collect_crash",
+        "export_source"
+      ],
+      "targets": [
+        "web",
+        "windows"
+      ],
+      "qualification": "synthetic-only"
+    }
+  ],
+  "manifest": {
+    "contract_version": "1.0.0",
+    "id": "fixture-gamepack",
+    "version": "1.0.0",
+    "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "engine_id": "godot-example",
+    "engine_version": "1.0.0",
+    "target_id": "web",
+    "target_version": "1.0.0",
+    "language": "gdscript-example",
+    "operations": [
+      "probe",
+      "create",
+      "import",
+      "validate",
+      "test",
+      "build",
+      "run",
+      "collect_crash",
+      "export_source"
+    ],
+    "rights_ref": "synthetic:rights"
+  },
+  "request": {
+    "contract_version": "1.0.0",
+    "mode": "simulation",
+    "binding": {
+      "tenant_id": "tenant-fixture",
+      "project_id": "project-fixture",
+      "run_id": "run-fixture",
+      "run_attempt": 1,
+      "operation_id": "operation-fixture",
+      "operation": "probe",
+      "source_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "engine_id": "godot-example",
+      "engine_version": "1.0.0",
+      "engine_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "target_id": "web",
+      "target_version": "1.0.0",
+      "pack_id": "fixture-gamepack",
+      "pack_version": "1.0.0",
+      "pack_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "toolchain_id": "fixture-toolchain",
+      "toolchain_version": "1.0.0",
+      "toolchain_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "build_id": "fixture-build",
+      "artifact_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    "limits": {
+      "timeout_seconds": 30,
+      "output_bytes": 4096,
+      "budget_minor": 0
+    },
+    "permissions": [
+      "workspace_read",
+      "workspace_write"
+    ],
+    "cancelled": false,
+    "gates": []
+  },
+  "payloads": {
+    "probe": {
+      "tools": [
+        "synthetic-tool"
+      ],
+      "workspace_ready": true
+    },
+    "create": {
+      "source_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    "import": {
+      "source_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "provenance_ref": "synthetic:provenance_ref"
+    },
+    "validate": {
+      "report_ref": "synthetic:report_ref",
+      "errors": 0
+    },
+    "test": {
+      "report_ref": "synthetic:report_ref",
+      "executed": 1,
+      "failed": 0
+    },
+    "build": {
+      "artifact_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "artifact_ref": "synthetic:artifact_ref"
+    },
+    "run": {
+      "session_ref": "synthetic:session_ref",
+      "artifact_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+    },
+    "collect_crash": {
+      "report_ref": "synthetic:report_ref",
+      "redacted": true
+    },
+    "export_source": {
+      "archive_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "archive_ref": "synthetic:archive_ref",
+      "notices_ref": "synthetic:notices_ref"
+    }
+  }
+}
