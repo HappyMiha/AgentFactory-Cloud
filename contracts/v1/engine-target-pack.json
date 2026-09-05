@@ -1,0 +1,132 @@
+{
+  "contract_version": "1.0.0",
+  "status": "consumer-proposal-synthetic-only",
+  "canonical_implementation_owner": "Core",
+  "scheduler_policy": "dispatch_by_operation_and_capabilities_only",
+  "operations": {
+    "probe": {
+      "tools": "string_list",
+      "workspace_ready": "boolean"
+    },
+    "create": {
+      "source_sha256": "sha256"
+    },
+    "import": {
+      "source_sha256": "sha256",
+      "provenance_ref": "string"
+    },
+    "validate": {
+      "report_ref": "string",
+      "errors": "nonnegative_integer"
+    },
+    "test": {
+      "report_ref": "string",
+      "executed": "positive_integer",
+      "failed": "nonnegative_integer"
+    },
+    "build": {
+      "artifact_sha256": "sha256",
+      "artifact_ref": "string"
+    },
+    "run": {
+      "session_ref": "string",
+      "artifact_sha256": "sha256"
+    },
+    "collect_crash": {
+      "report_ref": "string",
+      "redacted": "boolean"
+    },
+    "export_source": {
+      "archive_sha256": "sha256",
+      "archive_ref": "string",
+      "notices_ref": "string"
+    }
+  },
+  "result_statuses": [
+    "succeeded",
+    "blocked",
+    "failed",
+    "cancelled"
+  ],
+  "targets": {
+    "web": [],
+    "windows": [],
+    "android": [
+      "android_toolchain"
+    ],
+    "ios": [
+      "apple_toolchain",
+      "signing_authority"
+    ],
+    "store_package": [
+      "store_account",
+      "signing_authority"
+    ],
+    "console_partner": [
+      "partner_approval",
+      "licensed_toolchain",
+      "signing_authority"
+    ]
+  },
+  "request_binding": [
+    "tenant_id",
+    "project_id",
+    "run_id",
+    "run_attempt",
+    "operation_id",
+    "operation",
+    "source_sha256",
+    "engine_id",
+    "engine_version",
+    "engine_sha256",
+    "target_id",
+    "target_version",
+    "pack_id",
+    "pack_version",
+    "pack_sha256",
+    "toolchain_id",
+    "toolchain_version",
+    "toolchain_sha256",
+    "build_id",
+    "artifact_sha256"
+  ],
+  "request_limits": [
+    "timeout_seconds",
+    "output_bytes",
+    "budget_minor"
+  ],
+  "result_fields": [
+    "contract_version",
+    "binding",
+    "status",
+    "mode",
+    "payload",
+    "reason",
+    "next_action",
+    "evidence_ref"
+  ],
+  "manifest_fields": [
+    "contract_version",
+    "id",
+    "version",
+    "sha256",
+    "engine_id",
+    "engine_version",
+    "target_id",
+    "target_version",
+    "language",
+    "operations",
+    "rights_ref"
+  ],
+  "permission_by_operation": {
+    "probe": "workspace_read",
+    "create": "workspace_write",
+    "import": "workspace_write",
+    "validate": "workspace_read",
+    "test": "workspace_read",
+    "build": "workspace_write",
+    "run": "workspace_write",
+    "collect_crash": "workspace_read",
+    "export_source": "workspace_read"
+  }
+}
