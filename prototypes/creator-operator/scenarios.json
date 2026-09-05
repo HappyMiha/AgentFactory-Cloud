@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "mode": "synthetic-design-preview",
+  "roles": {"creator": ["my-games", "create", "play", "change", "publish"], "operator": ["my-games", "create", "play", "change", "publish", "operator"]},
+  "scenarios": {
+    "first-use": {"label": "First visit", "status": "Your idea starts here", "detail": "Describe a small first game. You can change the plan before any work starts.", "action": "Create a game", "destination": "create"},
+    "failure": {"label": "Build interrupted", "status": "We couldn't finish this version", "detail": "Your idea and last saved version are safe. Review what happened before trying again.", "action": "Review recovery", "destination": "change"},
+    "resume": {"label": "Return to a draft", "status": "Your draft is waiting", "detail": "Pick up your idea where you left it. Nothing starts while you're away.", "action": "Continue your draft", "destination": "create"},
+    "cancellation": {"label": "Work cancelled", "status": "Work has stopped", "detail": "Your saved game and draft are kept. Starting again will need a new plan and cost approval.", "action": "Review next step", "destination": "change"}
+  },
+  "operator_example": {"approval": "Waiting for an authorized owner", "evidence": "No accepted playable proof for this version", "workers": "No live worker in this design preview", "audit": "Synthetic event: draft saved", "diagnostics": "No external service is connected"},
+  "minor_pilot": {"status": "blocked", "provider_account_review": "pending", "guardian_process": "pending", "privacy_review": "pending", "spending_authority": "adult-authorized-only", "collects_child_data": false},
+  "private_default": true,
+  "product_acceptance": "not-accepted"
+}

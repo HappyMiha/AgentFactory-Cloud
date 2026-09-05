@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Agent Factory · Creator flows</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="preview"><strong>Design preview</strong><span>Sample data only · No game builds, payments or accounts</span><details><summary>Preview settings</summary><div class="settings"><label>Scenario<select id="scenario"></select></label><label>Preview role<select id="role"><option value="creator">Creator</option><option value="operator">Operator</option></select></label><label>Age-path example<select id="age"><option value="adult">18 or older</option><option value="teen">12–17</option><option value="child">Under 12</option></select></label><button id="background" class="quiet">Refresh sample status</button></div></details></div>
+<header class="masthead"><a href="#my-games" class="brand"><span class="mark">a.</span>Agent Factory</a><span class="profile"><span class="avatar">M</span>Sample creator</span></header>
+<div class="layout"><aside><p class="eyebrow">Your creative space</p><nav aria-label="Creator navigation" id="navigation"><a href="#my-games">My Games</a><a href="#create">Create</a><a href="#play">Play</a><a href="#change">Change</a><a href="#publish">Publish</a><a href="#operator" id="operator-link" hidden>Operator</a></nav><div class="aside-note"><span class="lock" aria-hidden="true">◈</span><strong>Private by default</strong><p>Your ideas stay yours to review. Sharing is a separate decision.</p></div></aside>
+<main id="main" tabindex="-1"><div class="section-head"><div><p class="eyebrow">Small steps. Your next game.</p><h1 id="title">My Games</h1></div><span class="pill" id="privacy">Private draft</span></div>
+<div id="announcement" role="status" aria-live="polite"></div>
+<section id="screen"></section>
+<footer><span id="saved">Drafts stay in this browser.</span><button class="text-button" id="delete">Delete local draft</button></footer>
+</main></div>
+<dialog id="confirm"><form method="dialog"><p class="eyebrow">Your decision</p><h2 id="confirm-title"></h2><p id="confirm-copy"></p><div class="dialog-actions"><button value="cancel" class="quiet">Go back</button><button value="confirm" id="confirm-action">Confirm</button></div></form></dialog>
+<script src="app.js"></script></body></html>
