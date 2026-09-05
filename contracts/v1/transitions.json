@@ -1,0 +1,215 @@
+{
+  "contract_version": "1.0.0",
+  "operations": {
+    "run.qualify": {
+      "entity": "Run",
+      "scope": "runs:write",
+      "from": [
+        "draft",
+        "blocked"
+      ],
+      "to": "ready",
+      "guards": [
+        "readiness"
+      ]
+    },
+    "run.start": {
+      "entity": "Run",
+      "scope": "runs:execute",
+      "from": [
+        "ready"
+      ],
+      "to": "running",
+      "guards": [
+        "readiness"
+      ]
+    },
+    "run.block": {
+      "entity": "Run",
+      "scope": "runs:write",
+      "from": [
+        "draft",
+        "ready",
+        "running"
+      ],
+      "to": "blocked",
+      "guards": []
+    },
+    "run.fail": {
+      "entity": "Run",
+      "scope": "runs:write",
+      "from": [
+        "running"
+      ],
+      "to": "failed",
+      "guards": []
+    },
+    "run.cancel": {
+      "entity": "Run",
+      "scope": "runs:cancel",
+      "from": [
+        "draft",
+        "ready",
+        "running",
+        "blocked"
+      ],
+      "to": "cancelled",
+      "guards": []
+    },
+    "run.succeed": {
+      "entity": "Run",
+      "scope": "runs:write",
+      "from": [
+        "running"
+      ],
+      "to": "succeeded",
+      "guards": [
+        "execution"
+      ]
+    },
+    "run.retry": {
+      "entity": "Run",
+      "scope": "runs:execute",
+      "from": [
+        "failed",
+        "blocked",
+        "cancelled"
+      ],
+      "to": "draft",
+      "guards": [],
+      "invalidate_checks": true
+    },
+    "build.qualify": {
+      "entity": "Build",
+      "scope": "builds:qualify",
+      "from": [
+        "pending",
+        "blocked"
+      ],
+      "to": "ready",
+      "guards": [
+        "build_evidence",
+        "rights"
+      ]
+    },
+    "build.fail": {
+      "entity": "Build",
+      "scope": "builds:write",
+      "from": [
+        "pending"
+      ],
+      "to": "failed",
+      "guards": []
+    },
+    "build.block": {
+      "entity": "Build",
+      "scope": "builds:write",
+      "from": [
+        "pending",
+        "ready"
+      ],
+      "to": "blocked",
+      "guards": []
+    },
+    "build.cancel": {
+      "entity": "Build",
+      "scope": "builds:write",
+      "from": [
+        "pending",
+        "blocked"
+      ],
+      "to": "cancelled",
+      "guards": []
+    },
+    "release.approve": {
+      "entity": "Release",
+      "scope": "releases:approve",
+      "from": [
+        "candidate",
+        "blocked"
+      ],
+      "to": "approved",
+      "guards": [
+        "release_evidence",
+        "approval",
+        "rights"
+      ]
+    },
+    "release.block": {
+      "entity": "Release",
+      "scope": "releases:write",
+      "from": [
+        "candidate",
+        "approved"
+      ],
+      "to": "blocked",
+      "guards": []
+    },
+    "release.withdraw": {
+      "entity": "Release",
+      "scope": "releases:write",
+      "from": [
+        "approved",
+        "blocked"
+      ],
+      "to": "withdrawn",
+      "guards": []
+    },
+    "listing.publish": {
+      "entity": "Listing",
+      "scope": "listings:publish",
+      "from": [
+        "draft",
+        "blocked"
+      ],
+      "to": "published",
+      "guards": [
+        "release_approved",
+        "moderation",
+        "rights"
+      ]
+    },
+    "listing.withdraw": {
+      "entity": "Listing",
+      "scope": "listings:write",
+      "from": [
+        "published",
+        "blocked"
+      ],
+      "to": "withdrawn",
+      "guards": []
+    },
+    "project.delete": {
+      "entity": "Project",
+      "scope": "projects:delete",
+      "from": [
+        "draft",
+        "active",
+        "archived"
+      ],
+      "to": "deleted",
+      "guards": [
+        "no_public_listing"
+      ],
+      "delete": true
+    }
+  },
+  "required_checks": {
+    "readiness": [
+      "tools",
+      "services",
+      "model",
+      "workspace"
+    ],
+    "execution": [
+      "execution"
+    ],
+    "build_evidence": [
+      "export",
+      "smoke",
+      "playable"
+    ]
+  },
+  "unsupported_transitions": "409 invalid_transition; missing evidence is never a positive result",
+  "recovery": "Retry creates a new run attempt and clears readiness checks. A rebuilt artifact gets a new Build ID. Cancelled runs do not resume in place."
+}
