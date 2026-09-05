@@ -29,7 +29,7 @@ def immutable_version(value):
         return False
     if re.fullmatch(r'sha256:[0-9a-f]{64}', value):
         return True
-    if not re.fullmatch(r'[0-9]+(?:\.[0-9]+){2}(?:[a-z][0-9]+)?(?:[-+.][A-Za-z0-9]+(?:[.-][A-Za-z0-9]+)*)?', value):
+    if not re.fullmatch(r'[0-9]+(?:\.[0-9]+){2}(?:[a-z][0-9]+)?(?:[-.][A-Za-z0-9]+(?:[.-][A-Za-z0-9]+)*)?(?:\+[A-Za-z0-9]+(?:[.-][A-Za-z0-9]+)*)?', value):
         return False
     floating = {'latest', 'main', 'master', 'head', 'nightly', 'current', 'default', 'tip', 'next', 'x'}
     return not floating.intersection(re.split(r'[-+.]', value.lower()))

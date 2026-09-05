@@ -67,7 +67,7 @@ class EvidenceGateTests(unittest.TestCase):
 
     def test_exact_release_forms_and_digest_pins_are_structurally_supported(self):
         for value in ('1.2.3', '4.5.1.stable', '6000.0.40f1', '2.1.0-rc.1',
-                      '2.1.0+build.123', 'sha256:' + 'f' * 64):
+                      '2.1.0+build.123', '2.1.0-rc.1+build.123', 'sha256:' + 'f' * 64):
             with self.subTest(value=value):
                 self.setUp()
                 for key in self.policy['immutable_version_fields']:
