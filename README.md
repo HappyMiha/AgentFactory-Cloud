@@ -17,7 +17,7 @@ A creator will describe a game, agree on a small first version, let an AI team b
 - **Core:** the existing Apache-2.0, provider-neutral orchestration engine. It remains usable without Cloud.
 - **Cloud:** the commercial creator experience, hosted execution, game delivery, publishing and later commerce.
 
-Games and Marketplace are modules within Cloud. They are not additional repositories. Core owns shared engine-neutral contracts and optional open-source game, engine and target packs outside its neutral runtime. Cloud's Games module uses those packs for the creator experience, project settings, play feedback and release policies; it does not build a second set of adapters.
+Games, Community and Marketplace are modules within Cloud. They are not additional repositories. Core owns shared engine-neutral contracts and optional open-source game, engine and target packs outside its neutral runtime. Cloud's Games module uses those packs for the creator experience, project settings, play feedback and release policies; it does not build a second set of adapters.
 
 The intended audience includes creators aged 12+ and adults. Actual access, public sharing and commerce depend on a qualified age/guardian, privacy and provider-permission model. The first internal pilot can use adults until those requirements are met.
 
@@ -29,6 +29,8 @@ The intended audience includes creators aged 12+ and adults. Actual access, publ
 4. [Machine-readable backlog](examples/agentfactory-cloud-backlog.json) — seven epics and 67 stable AF-CLD tasks, schema v2.
 
 The plan is based on the owner's supplied Cloud planning package. It extends the 42 AF-GC tasks in Core and preserves their upstream role. All new work remains **proposed**. A task entry or valid JSON file is not evidence of implementation and does not authorize coding.
+
+The [Core/Cloud responsibility contract](docs/core-cloud-boundary.md) adds the AF-CLD-001 ownership map, rights records and design walkthroughs. It remains subject to integration and owner review.
 
 ## Scope and evidence
 

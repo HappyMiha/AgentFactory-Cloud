@@ -29,7 +29,7 @@ The first goal is a reliable small Godot game. More complex games, other engines
 
 The existing Core repository uses Apache-2.0. It must remain useful without a Cloud account, game engine or Cloud billing system. Changes to its public contract should follow an explicit design and migration decision.
 
-**Games** and **Marketplace** are logical modules in Cloud. They do not require extra repositories now.
+**Games**, **Community** and **Marketplace** are logical modules in Cloud. They do not require extra repositories now. The [Core/Cloud responsibility contract](core-cloud-boundary.md) defines the shared vocabulary, sole decision owners, required rights/provenance fields, and game/non-game walkthroughs for AF-CLD-001.
 
 - Games owns the creator's Game Brief experience, product settings, play feedback and asset/release policies. It configures and uses the optional Core packs and adapters instead of duplicating them.
 - Marketplace later adds listings, purchases, license products, buyer access and seller payouts.
