@@ -1,0 +1,3062 @@
+{
+  "schema_version": 1,
+  "purpose": "planning-only",
+  "baseline": {
+    "core": {
+      "repository": "HappyMiha/AgentFactory",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "manifest": "examples/game-creator-backlog.json"
+    },
+    "cloud": {
+      "repository": "HappyMiha/AgentFactory-Cloud",
+      "commit": "99b7c9c5942b28165d53ca1ff7240f1cbeff6e5b",
+      "manifest": "examples/agentfactory-cloud-backlog.json"
+    },
+    "interface_version": "unqualified-at-pin",
+    "pack_versions": {
+      "Godot": null,
+      "Unity": null,
+      "Unreal": null
+    },
+    "version_rule": "Every row consumes the pinned Core commit. Null pack version or unqualified interface blocks a supported-version claim; define and independently qualify actual versions at the relevant integration milestone."
+  },
+  "evidence_catalog": [
+    {
+      "id": "ownership",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "docs/core-cloud-backlog.md",
+        "docs/core-cloud-boundaries.md"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "audit",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "docs/product-audit-2026-09-05.md",
+        "examples/game-creator-backlog.json"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "api",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "src/agent_factory/api_contract.py",
+        "docs/api-contract.md"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "storage",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "src/agent_factory/tenant_storage.py",
+        "tests/test_tenant_storage.py"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "dialog",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "src/agent_factory/static/app.js",
+        "tests/test_dialog_confirmation.py"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "intake",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "src/agent_factory/mission_intake.py",
+        "tests/test_mission_intake.py"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "environment",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "src/agent_factory/environment_bootstrap.py",
+        "tests/test_environment.py"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "packs",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "src/agent_factory/packs.py",
+        "tests/test_packs.py",
+        "src/agent_factory/validators.py"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "versions",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "src/agent_factory/worktrees.py",
+        "src/agent_factory/candidate_changes.py",
+        "tests/test_worktrees.py"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "model",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "src/agent_factory/application.py",
+        "tests/test_model_binding.py",
+        "tests/test_reviewer_routing.py"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "runtime",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "src/agent_factory/worker_runtime.py",
+        "src/agent_factory/coding_delivery.py",
+        "docs/coding-delivery-loop.md"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "sandbox",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "src/agent_factory/sandbox.py",
+        "tests/test_sandbox.py"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "control",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "src/agent_factory/autonomous_authorization.py",
+        "src/agent_factory/execution_telemetry.py",
+        "tests/test_execution_controls.py"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "credentials",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "src/agent_factory/credentials.py",
+        "tests/test_credentials.py"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "durable",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "src/agent_factory/orchestration/temporal/workflows.py",
+        "tests/test_temporal_workflows.py"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "recovery",
+      "kind": "source-inventory",
+      "repository": "core",
+      "commit": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "paths": [
+        "src/agent_factory/chaos_recovery.py",
+        "tests/test_chaos_recovery.py"
+      ],
+      "limit": "Pinned source and test definitions only; this map does not execute these tests or establish hosted, engine or consumer qualification."
+    },
+    {
+      "id": "ci-merged",
+      "kind": "merged-engineering-review",
+      "repository": "core",
+      "commit": "b1b477916c479e59fbf579259526350910efec1d",
+      "url": "https://github.com/HappyMiha/AgentFactory/pull/3",
+      "limit": "Merged engineering evidence at this version; no Cloud integration or end-to-end game acceptance. CI matrix became manual-only in later PR5.",
+      "upstream_ids": [
+        "AF-GC-001"
+      ]
+    },
+    {
+      "id": "dialog-merged",
+      "kind": "merged-engineering-review",
+      "repository": "core",
+      "commit": "f1a78c154d4e127620143a059f3dbb6d3033ef07",
+      "url": "https://github.com/HappyMiha/AgentFactory/pull/2#issuecomment-5554477771",
+      "limit": "Merged engineering evidence at this version; no Cloud integration or end-to-end game acceptance. CI matrix became manual-only in later PR5.",
+      "upstream_ids": [
+        "AF-GC-003"
+      ]
+    },
+    {
+      "id": "model-merged",
+      "kind": "merged-engineering-review",
+      "repository": "core",
+      "commit": "4a50bcc3ca4ea3c72027d1a163f4eb0a7142835e",
+      "url": "https://github.com/HappyMiha/AgentFactory/pull/4#issuecomment-5554417635",
+      "limit": "Merged engineering evidence at this version; no Cloud integration or end-to-end game acceptance. CI matrix became manual-only in later PR5.",
+      "upstream_ids": [
+        "AF-GC-006"
+      ]
+    }
+  ],
+  "upstream_tasks": [
+    {
+      "id": "AF-GC-001",
+      "title": "Відновити відтворюваний CI на трьох ОС",
+      "implementation_owner": "Core",
+      "engineering_status": "merged",
+      "qualification": "partial",
+      "evidence": [
+        "ci-merged"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-067"
+      ],
+      "dependencies": [],
+      "limit": "Reviewed engineering change is merged; consumer/release qualification remains separate."
+    },
+    {
+      "id": "AF-GC-002",
+      "title": "Показувати готовність лише після реальних перевірок",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-006",
+        "AF-CLD-011",
+        "AF-CLD-024"
+      ],
+      "dependencies": [],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-003",
+      "title": "Закриття діалогу ніколи не підтверджує дію",
+      "implementation_owner": "Core",
+      "engineering_status": "merged",
+      "qualification": "partial",
+      "evidence": [
+        "dialog-merged"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-004",
+        "AF-CLD-030",
+        "AF-CLD-035"
+      ],
+      "dependencies": [],
+      "limit": "Reviewed engineering change is merged; consumer/release qualification remains separate."
+    },
+    {
+      "id": "AF-GC-004",
+      "title": "Зберігати чернетки та фокус під час автооновлення",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-004",
+        "AF-CLD-030"
+      ],
+      "dependencies": [],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-005",
+      "title": "Не втрачати зміст звичайного опису гри",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-007"
+      ],
+      "dependencies": [],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-006",
+      "title": "Прив’язати вибрану модель до фактичного запуску",
+      "implementation_owner": "Core",
+      "engineering_status": "merged",
+      "qualification": "partial",
+      "evidence": [
+        "model-merged"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-009",
+        "AF-CLD-029",
+        "AF-CLD-061",
+        "AF-CLD-063"
+      ],
+      "dependencies": [],
+      "limit": "Reviewed engineering change is merged; consumer/release qualification remains separate."
+    },
+    {
+      "id": "AF-GC-007",
+      "title": "Додати головний екран «Мої ігри» і покроковий старт",
+      "implementation_owner": "Cloud.Games",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-004",
+        "AF-CLD-030",
+        "AF-CLD-036"
+      ],
+      "dependencies": [
+        "AF-GC-003",
+        "AF-GC-004"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-008",
+      "title": "Перетворити ідею на зрозумілий план першої гри",
+      "implementation_owner": "Cloud.Games",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-007",
+        "AF-CLD-008"
+      ],
+      "dependencies": [
+        "AF-GC-005",
+        "AF-GC-007"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-009",
+      "title": "Підключати хмарний AI через зрозумілий майстер",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-027"
+      ],
+      "dependencies": [
+        "AF-GC-006",
+        "AF-GC-007",
+        "AF-GC-010",
+        "AF-GC-025"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-010",
+      "title": "Зберігати й відкликати доступ до AI без витоку ключів",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-027",
+        "AF-CLD-028",
+        "AF-CLD-056",
+        "AF-CLD-059"
+      ],
+      "dependencies": [
+        "AF-GC-039"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-011",
+      "title": "Перевіряти можливості ПК до вибору моделі та рушія",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-024",
+        "AF-CLD-065"
+      ],
+      "dependencies": [
+        "AF-GC-007"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-012",
+      "title": "Рекомендувати реалістичний рушій і конфігурацію AI",
+      "implementation_owner": "Core.Packs",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-008",
+        "AF-CLD-063"
+      ],
+      "dependencies": [
+        "AF-GC-008",
+        "AF-GC-011"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-013",
+      "title": "Показувати точний план встановлення з перевірених джерел",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-011",
+        "AF-CLD-024",
+        "AF-CLD-055",
+        "AF-CLD-056",
+        "AF-CLD-059"
+      ],
+      "dependencies": [
+        "AF-GC-002",
+        "AF-GC-012"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-014",
+      "title": "Виконувати та відновлювати встановлення програм",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-011",
+        "AF-CLD-024",
+        "AF-CLD-055",
+        "AF-CLD-056",
+        "AF-CLD-059"
+      ],
+      "dependencies": [
+        "AF-GC-013"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-015",
+      "title": "Запускати локальну інфраструктуру однією дією",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-024",
+        "AF-CLD-065"
+      ],
+      "dependencies": [
+        "AF-GC-014"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-016",
+      "title": "Створити Godot pack для першої 2D гри",
+      "implementation_owner": "Core.Packs",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-005",
+        "AF-CLD-010",
+        "AF-CLD-052"
+      ],
+      "dependencies": [
+        "AF-GC-008",
+        "AF-GC-014"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-017",
+      "title": "Перевіряти Godot-проєкт і створювати реальний build",
+      "implementation_owner": "Core.Packs",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-005",
+        "AF-CLD-011",
+        "AF-CLD-014",
+        "AF-CLD-015",
+        "AF-CLD-016",
+        "AF-CLD-052"
+      ],
+      "dependencies": [
+        "AF-GC-016"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-018",
+      "title": "Дозволяти обмежену cloud-сесію з прозорим бюджетом",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-019",
+        "AF-CLD-029"
+      ],
+      "dependencies": [
+        "AF-GC-009",
+        "AF-GC-010",
+        "AF-GC-025"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-019",
+      "title": "Підключити справжню розробку до ігрового плану",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-013",
+        "AF-CLD-025",
+        "AF-CLD-026"
+      ],
+      "dependencies": [
+        "AF-GC-006",
+        "AF-GC-017",
+        "AF-GC-018",
+        "AF-GC-041",
+        "AF-GC-042"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-020",
+      "title": "Зберігати останню перевірену ігрову версію",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-002",
+        "AF-CLD-006",
+        "AF-CLD-012",
+        "AF-CLD-018",
+        "AF-CLD-023",
+        "AF-CLD-040"
+      ],
+      "dependencies": [
+        "AF-GC-019"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-021",
+      "title": "Запускати «Грати» для конкретної робочої версії",
+      "implementation_owner": "Cloud.Games",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-015",
+        "AF-CLD-031",
+        "AF-CLD-037"
+      ],
+      "dependencies": [
+        "AF-GC-007",
+        "AF-GC-020"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-022",
+      "title": "Перетворювати відгук після гри на наступну версію",
+      "implementation_owner": "Cloud.Games",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-017",
+        "AF-CLD-018"
+      ],
+      "dependencies": [
+        "AF-GC-008",
+        "AF-GC-021"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-023",
+      "title": "Пояснювати прогрес і надійно зупиняти роботу",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-002",
+        "AF-CLD-019",
+        "AF-CLD-025",
+        "AF-CLD-029",
+        "AF-CLD-033"
+      ],
+      "dependencies": [
+        "AF-GC-019",
+        "AF-GC-020"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-024",
+      "title": "Зробити основний шлях доступним українською та англійською",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-004",
+        "AF-CLD-030",
+        "AF-CLD-037"
+      ],
+      "dependencies": [
+        "AF-GC-007",
+        "AF-GC-021",
+        "AF-GC-022",
+        "AF-GC-023"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-025",
+      "title": "Визначити доступний шлях для 12+ та участь дорослого",
+      "implementation_owner": "Cloud.Games",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-004",
+        "AF-CLD-021",
+        "AF-CLD-030",
+        "AF-CLD-042",
+        "AF-CLD-045",
+        "AF-CLD-051"
+      ],
+      "dependencies": [
+        "AF-GC-007"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-026",
+      "title": "Прийняти повний Godot-шлях на чистому ПК",
+      "implementation_owner": "Cloud.Games",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-003",
+        "AF-CLD-020",
+        "AF-CLD-034"
+      ],
+      "dependencies": [
+        "AF-GC-001",
+        "AF-GC-002",
+        "AF-GC-003",
+        "AF-GC-004",
+        "AF-GC-005",
+        "AF-GC-006",
+        "AF-GC-009",
+        "AF-GC-015",
+        "AF-GC-022",
+        "AF-GC-023",
+        "AF-GC-024",
+        "AF-GC-025",
+        "AF-GC-039",
+        "AF-GC-040"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-027",
+      "title": "Встановлювати та перевіряти локальні моделі",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-027",
+        "AF-CLD-063",
+        "AF-CLD-065"
+      ],
+      "dependencies": [
+        "AF-GC-006",
+        "AF-GC-011",
+        "AF-GC-013",
+        "AF-GC-014"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-028",
+      "title": "Дати локальному AI кваліфікований інструмент розробки",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-027",
+        "AF-CLD-063",
+        "AF-CLD-065"
+      ],
+      "dependencies": [
+        "AF-GC-017",
+        "AF-GC-027",
+        "AF-GC-041",
+        "AF-GC-042"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-029",
+      "title": "Ділити ресурси ПК між AI, рушієм та грою",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-024",
+        "AF-CLD-026",
+        "AF-CLD-063",
+        "AF-CLD-065"
+      ],
+      "dependencies": [
+        "AF-GC-011",
+        "AF-GC-021",
+        "AF-GC-027"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-030",
+      "title": "Маршрутизувати cloud/local за явними правилами",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-029",
+        "AF-CLD-063",
+        "AF-CLD-065"
+      ],
+      "dependencies": [
+        "AF-GC-018",
+        "AF-GC-028",
+        "AF-GC-029"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-031",
+      "title": "Кваліфікувати local-only та hybrid створення гри",
+      "implementation_owner": "Cloud.Games",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-003",
+        "AF-CLD-063",
+        "AF-CLD-065",
+        "AF-CLD-067"
+      ],
+      "dependencies": [
+        "AF-GC-026",
+        "AF-GC-028",
+        "AF-GC-029",
+        "AF-GC-030"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-032",
+      "title": "Підключати Unity Hub, Editor і потрібні модулі",
+      "implementation_owner": "Core.Packs",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-053"
+      ],
+      "dependencies": [
+        "AF-GC-013",
+        "AF-GC-014",
+        "AF-GC-025",
+        "AF-GC-026"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-033",
+      "title": "Додати Unity pack, тести та build adapter",
+      "implementation_owner": "Core.Packs",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-005",
+        "AF-CLD-052",
+        "AF-CLD-053"
+      ],
+      "dependencies": [
+        "AF-GC-017",
+        "AF-GC-019",
+        "AF-GC-032"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-034",
+      "title": "Прийняти повний Unity-шлях для новачка",
+      "implementation_owner": "Cloud.Games",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-003",
+        "AF-CLD-053",
+        "AF-CLD-060"
+      ],
+      "dependencies": [
+        "AF-GC-022",
+        "AF-GC-023",
+        "AF-GC-024",
+        "AF-GC-033"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-035",
+      "title": "Керувати походженням та імпортом ігрових ресурсів",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-018",
+        "AF-CLD-023",
+        "AF-CLD-032",
+        "AF-CLD-040",
+        "AF-CLD-042",
+        "AF-CLD-043",
+        "AF-CLD-046",
+        "AF-CLD-051",
+        "AF-CLD-055",
+        "AF-CLD-056",
+        "AF-CLD-057",
+        "AF-CLD-062"
+      ],
+      "dependencies": [
+        "AF-GC-016",
+        "AF-GC-020",
+        "AF-GC-026"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-036",
+      "title": "Розширювати складність через вимірювані зразки ігор",
+      "implementation_owner": "Cloud.Games",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-060"
+      ],
+      "dependencies": [
+        "AF-GC-031",
+        "AF-GC-034",
+        "AF-GC-035"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-037",
+      "title": "Експортувати гру та ділитися нею окремою дією",
+      "implementation_owner": "Cloud.Games",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-003",
+        "AF-CLD-016",
+        "AF-CLD-032",
+        "AF-CLD-035",
+        "AF-CLD-039",
+        "AF-CLD-040",
+        "AF-CLD-044",
+        "AF-CLD-046",
+        "AF-CLD-055",
+        "AF-CLD-056",
+        "AF-CLD-057",
+        "AF-CLD-058"
+      ],
+      "dependencies": [
+        "AF-GC-020",
+        "AF-GC-025",
+        "AF-GC-035"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-038",
+      "title": "Оновлювати застосунок і збирати зрозумілу діагностику",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-033",
+        "AF-CLD-065",
+        "AF-CLD-067"
+      ],
+      "dependencies": [
+        "AF-GC-015",
+        "AF-GC-023",
+        "AF-GC-026"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-039",
+      "title": "Узгодити авторизацію локального API з обіцяною політикою",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-002",
+        "AF-CLD-021",
+        "AF-CLD-031",
+        "AF-CLD-034",
+        "AF-CLD-064"
+      ],
+      "dependencies": [],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-040",
+      "title": "Перевірити зрозумілість із користувачами 12–15 років",
+      "implementation_owner": "Cloud.Games",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-004",
+        "AF-CLD-020",
+        "AF-CLD-030",
+        "AF-CLD-044"
+      ],
+      "dependencies": [
+        "AF-GC-009",
+        "AF-GC-015",
+        "AF-GC-022",
+        "AF-GC-023",
+        "AF-GC-024",
+        "AF-GC-025"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-041",
+      "title": "Зберігати ролі та незалежність reviewer у live mission",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-009",
+        "AF-CLD-013",
+        "AF-CLD-061",
+        "AF-CLD-063",
+        "AF-CLD-067"
+      ],
+      "dependencies": [
+        "AF-GC-006"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    },
+    {
+      "id": "AF-GC-042",
+      "title": "Кваліфікувати ролі planning та bootstrap для провайдерів",
+      "implementation_owner": "Core",
+      "engineering_status": "planned",
+      "qualification": "missing",
+      "evidence": [
+        "audit"
+      ],
+      "cloud_consumers": [
+        "AF-CLD-009",
+        "AF-CLD-013",
+        "AF-CLD-027",
+        "AF-CLD-061",
+        "AF-CLD-063",
+        "AF-CLD-067"
+      ],
+      "dependencies": [
+        "AF-GC-006"
+      ],
+      "limit": "Proposed requirement has no accepted completion evidence in this pinned audit. Existing partial foundations may be referenced separately."
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "AF-CLD-001",
+      "capability": "Agree on the Core and Cloud product boundaries",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [],
+      "evidence": [
+        "ownership"
+      ],
+      "milestone": "M0",
+      "dependencies": [],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Review one Godot and one non-game contract: each operation has one repository owner, and export has no platform runtime dependency."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-002",
+      "capability": "Define the shared data model and API contracts",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-020",
+        "AF-GC-023",
+        "AF-GC-039"
+      ],
+      "evidence": [
+        "api",
+        "storage"
+      ],
+      "milestone": "M0",
+      "dependencies": [
+        "AF-CLD-001"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Reject foreign-tenant access, repeated mutation with changed body and stale ETag; require exact source/build identity for promotion."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-003",
+      "capability": "Map Cloud work to the existing Core backlog",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-026",
+        "AF-GC-031",
+        "AF-GC-034",
+        "AF-GC-037"
+      ],
+      "evidence": [
+        "ownership",
+        "audit"
+      ],
+      "milestone": "M0",
+      "dependencies": [
+        "AF-CLD-001"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Check exhaustive task coverage, pinned evidence and owner uniqueness; reject circular gates and Unity as a Godot prerequisite."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-004",
+      "capability": "Design separate Creator and Operator views",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "migrate",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-003",
+        "AF-GC-004",
+        "AF-GC-007",
+        "AF-GC-024",
+        "AF-GC-025",
+        "AF-GC-040"
+      ],
+      "evidence": [
+        "dialog",
+        "ownership"
+      ],
+      "milestone": "M0",
+      "dependencies": [
+        "AF-CLD-002",
+        "AF-CLD-003"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Exercise keyboard-only Creator and Operator views: closing confirmation does nothing, drafts survive refresh and unauthorized diagnostics remain hidden."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-005",
+      "capability": "Define engine, build target, and game pack interfaces",
+      "implementation_owner": "Core.Packs",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-016",
+        "AF-GC-017",
+        "AF-GC-033"
+      ],
+      "evidence": [
+        "packs"
+      ],
+      "milestone": "M0",
+      "dependencies": [
+        "AF-CLD-002"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Run identical probe/create/import/test/build/run/export contract fixtures for two fake engines; keep engine branches out of the neutral scheduler."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-006",
+      "capability": "Define evidence levels and release gates",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-002",
+        "AF-GC-020"
+      ],
+      "evidence": [
+        "versions"
+      ],
+      "milestone": "M0",
+      "dependencies": [
+        "AF-CLD-002"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Try missing, skipped, stale and foreign-build evidence: none promotes Ready, Playable, Exportable, Publishable or Sellable."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-007",
+      "capability": "Turn a plain-language idea into a Game Brief",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-005",
+        "AF-GC-008"
+      ],
+      "evidence": [
+        "intake"
+      ],
+      "milestone": "M1",
+      "dependencies": [
+        "AF-CLD-002",
+        "AF-CLD-004"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Submit Ukrainian and English paragraphs; preserve original bytes, separate assumptions and keep the agreed game loop through clarification."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-008",
+      "capability": "Keep the first playable version small",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-008",
+        "AF-GC-012"
+      ],
+      "evidence": [
+        "intake",
+        "environment"
+      ],
+      "milestone": "M1",
+      "dependencies": [
+        "AF-CLD-007"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Request multiplayer/open-world scope: obtain an editable vertical slice and deferred roadmap with budget approval before any paid run."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-009",
+      "capability": "Assemble a visible AI game team",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-006",
+        "AF-GC-041",
+        "AF-GC-042"
+      ],
+      "evidence": [
+        "model",
+        "runtime"
+      ],
+      "milestone": "M1",
+      "dependencies": [
+        "AF-CLD-005",
+        "AF-CLD-008"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Start a game team, force fallback/retry and reject effective producer self-review; show actual identities and stop the team within its approved budget."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-010",
+      "capability": "Prepare a small Godot 2D starter pack",
+      "implementation_owner": "Core.Packs",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-016"
+      ],
+      "evidence": [
+        "packs"
+      ],
+      "milestone": "M1",
+      "dependencies": [
+        "AF-CLD-005",
+        "AF-CLD-008"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Create and visibly modify a licensed pinned Godot starter, then verify scenes, inputs, tests and export presets; unchanged template replay fails acceptance."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-011",
+      "capability": "Connect a real Godot engine adapter",
+      "implementation_owner": "Core.Packs",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-002",
+        "AF-GC-013",
+        "AF-GC-014",
+        "AF-GC-017"
+      ],
+      "evidence": [
+        "environment",
+        "packs"
+      ],
+      "milestone": "M1",
+      "dependencies": [
+        "AF-CLD-005",
+        "AF-CLD-010"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Run healthy and deliberately broken Godot projects: distinguish missing engine/templates, parse/test/export errors and graphical crash with bounded logs."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-012",
+      "capability": "Keep source versions and working game checkpoints",
+      "implementation_owner": "Core",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-020"
+      ],
+      "evidence": [
+        "versions"
+      ],
+      "milestone": "M1",
+      "dependencies": [
+        "AF-CLD-002",
+        "AF-CLD-006"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Race repeated latest-working promotions and fail a build: pointer advances once only for accepted evidence; restore adds history without overwriting active work."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-013",
+      "capability": "Connect live coding workers to game tasks",
+      "implementation_owner": "Core",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-019",
+        "AF-GC-041",
+        "AF-GC-042"
+      ],
+      "evidence": [
+        "runtime",
+        "model"
+      ],
+      "milestone": "M1",
+      "dependencies": [
+        "AF-CLD-009",
+        "AF-CLD-011",
+        "AF-CLD-012"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Run qualified live coding and independent review to an integrated game commit; crash after mutation or unknown paid outcome and reconcile before retry."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-014",
+      "capability": "Check the rules of the generated game",
+      "implementation_owner": "Core.Packs",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-017"
+      ],
+      "evidence": [
+        "packs",
+        "versions"
+      ],
+      "milestone": "M1",
+      "dependencies": [
+        "AF-CLD-010",
+        "AF-CLD-011"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Break input actions, required scenes and win/lose behavior; each failed validator blocks or starts bounded repair, with graphical play checked separately."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-015",
+      "capability": "Build a Web version and add Play",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-017",
+        "AF-GC-021"
+      ],
+      "evidence": [
+        "versions",
+        "sandbox"
+      ],
+      "milestone": "M1",
+      "dependencies": [
+        "AF-CLD-011",
+        "AF-CLD-012",
+        "AF-CLD-014"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Play the pinned Godot Web build at its exact digest on a separate origin; crash v2 while v1 stays playable and prove no platform cookies reach game code."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-016",
+      "capability": "Export a Windows game and the full source",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-017",
+        "AF-GC-037"
+      ],
+      "evidence": [
+        "versions"
+      ],
+      "milestone": "M1",
+      "dependencies": [
+        "AF-CLD-011",
+        "AF-CLD-012",
+        "AF-CLD-014"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Run the exported Windows package on a clean supported PC and reopen its source in pinned Godot; unclear rights, secrets or absolute host paths fail export."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-017",
+      "capability": "Turn play feedback into a change plan",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-022"
+      ],
+      "evidence": [
+        "intake",
+        "versions"
+      ],
+      "milestone": "M1",
+      "dependencies": [
+        "AF-CLD-007",
+        "AF-CLD-015"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Attach feedback to played v1 while v2 exists: resolve the stale target and approve changed scope/budget before creating another version."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-018",
+      "capability": "Create version 2, restore version 1, and try a private remix",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-020",
+        "AF-GC-022",
+        "AF-GC-035"
+      ],
+      "evidence": [
+        "versions"
+      ],
+      "milestone": "M1",
+      "dependencies": [
+        "AF-CLD-013",
+        "AF-CLD-014",
+        "AF-CLD-017"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Privately fork an owned/licensed sample, make a visible change and play v2; failed v2 preserves v1, restore retains both versions and attribution."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-019",
+      "capability": "Show progress and enforce budget and stop controls",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-018",
+        "AF-GC-023"
+      ],
+      "evidence": [
+        "control"
+      ],
+      "milestone": "M1",
+      "dependencies": [
+        "AF-CLD-009",
+        "AF-CLD-013"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Race paid work against a hard cap and Stop across scheduler/provider/build processes; preserve accepted results and reserve unknown charges until reconciliation."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-020",
+      "capability": "Accept three real reference games",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-026",
+        "AF-GC-040"
+      ],
+      "evidence": [
+        "audit"
+      ],
+      "milestone": "M1",
+      "dependencies": [
+        "AF-CLD-015",
+        "AF-CLD-016",
+        "AF-CLD-018",
+        "AF-CLD-019"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Accept platformer, collector and puzzle through real Web play, clean Windows run, feedback/v2/restore/private remix and independent owner review; minors require the separate access gate."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-021",
+      "capability": "Add account boundaries, roles, and the 12+ access gate",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-025",
+        "AF-GC-039"
+      ],
+      "evidence": [
+        "api",
+        "storage"
+      ],
+      "milestone": "M2",
+      "dependencies": [
+        "AF-CLD-002",
+        "AF-CLD-006"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Use negative cross-tenant tests for every resource and support role; block unsupported age/provider/consent/spending paths before admitting a 12+ participant."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-022",
+      "capability": "Use PostgreSQL for hosted state",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [],
+      "evidence": [
+        "storage"
+      ],
+      "milestone": "M2",
+      "dependencies": [
+        "AF-CLD-002",
+        "AF-CLD-021"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Migrate hosted PostgreSQL and replay its outbox, then restore into a fresh database and compare immutable source/build identities and tenant boundaries."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-023",
+      "capability": "Store source, builds, and assets as protected objects",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-020",
+        "AF-GC-035"
+      ],
+      "evidence": [
+        "storage"
+      ],
+      "milestone": "M2",
+      "dependencies": [
+        "AF-CLD-021",
+        "AF-CLD-022"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Reject foreign object keys, traversal archives and quota overflow; retain referenced artifacts and verify authorized export/deletion evidence."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-024",
+      "capability": "Qualify server resources and register remote workers",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-002",
+        "AF-GC-011",
+        "AF-GC-013",
+        "AF-GC-014",
+        "AF-GC-015",
+        "AF-GC-029"
+      ],
+      "evidence": [
+        "environment",
+        "runtime"
+      ],
+      "milestone": "M2",
+      "dependencies": [
+        "AF-CLD-021",
+        "AF-CLD-022"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Inventory a real authorized server, qualify capacity/toolchains, then drain and replace a worker; a stale attempt must not complete its successor."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-025",
+      "capability": "Make hosted workflows survive restarts",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-019",
+        "AF-GC-023"
+      ],
+      "evidence": [
+        "durable"
+      ],
+      "milestone": "M2",
+      "dependencies": [
+        "AF-CLD-022",
+        "AF-CLD-024"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Restart real hosted workflows around commit, build promotion and charge settlement; reconcile unknown outcomes without duplicate accepted effects."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-026",
+      "capability": "Isolate agent and build jobs",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-019",
+        "AF-GC-029"
+      ],
+      "evidence": [
+        "sandbox"
+      ],
+      "milestone": "M2",
+      "dependencies": [
+        "AF-CLD-024",
+        "AF-CLD-025"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Run malicious build fixtures against CPU/RAM/disk/time/process/egress limits and tenant boundaries; prove builds never receive provider or control-plane credentials."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-027",
+      "capability": "Guide creators through AI connections",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-009",
+        "AF-GC-010",
+        "AF-GC-027",
+        "AF-GC-028",
+        "AF-GC-042"
+      ],
+      "evidence": [
+        "credentials",
+        "model"
+      ],
+      "milestone": "M2",
+      "dependencies": [
+        "AF-CLD-004",
+        "AF-CLD-021"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Run bounded actual-model coding and independent-review canaries; distinguish auth/quota/access/network failures and require explicit local endpoint/capacity qualification."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-028",
+      "capability": "Keep Cloud credentials outside game work",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-010"
+      ],
+      "evidence": [
+        "credentials"
+      ],
+      "milestone": "M2",
+      "dependencies": [
+        "AF-CLD-021",
+        "AF-CLD-027"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Rotate and revoke tenant-scoped credentials; a synthetic canary must be absent from logs, model context, build processes, exports and support bundles."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-029",
+      "capability": "Enforce Cloud quotas and track usage",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-006",
+        "AF-GC-018",
+        "AF-GC-023",
+        "AF-GC-030"
+      ],
+      "evidence": [
+        "control",
+        "model"
+      ],
+      "milestone": "M2",
+      "dependencies": [
+        "AF-CLD-022",
+        "AF-CLD-025",
+        "AF-CLD-027"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Race concurrent usage reservations and replay settlement; insufficient balance blocks new work and unknown costs stay pending without double charging."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-030",
+      "capability": "Provide the hosted Creator Portal",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "migrate",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-003",
+        "AF-GC-004",
+        "AF-GC-007",
+        "AF-GC-024",
+        "AF-GC-025",
+        "AF-GC-040"
+      ],
+      "evidence": [
+        "dialog",
+        "ownership"
+      ],
+      "milestone": "M2",
+      "dependencies": [
+        "AF-CLD-004",
+        "AF-CLD-021",
+        "AF-CLD-025",
+        "AF-CLD-029"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Resume from another device while polling preserves drafts; exercise Ukrainian/English keyboard/mobile flows and role-gated diagnostics before an authorized 12+ pilot."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-031",
+      "capability": "Serve protected playable builds",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-021",
+        "AF-GC-039"
+      ],
+      "evidence": [
+        "storage",
+        "sandbox"
+      ],
+      "milestone": "M2",
+      "dependencies": [
+        "AF-CLD-023",
+        "AF-CLD-026",
+        "AF-CLD-030"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Attempt guessed, expired and revoked build URLs and cross-origin cookie access; signed authorization binds exact builds and does not promise recall of downloaded bytes."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-032",
+      "capability": "Export a portable ownership package",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-035",
+        "AF-GC-037"
+      ],
+      "evidence": [
+        "versions",
+        "storage"
+      ],
+      "milestone": "M2",
+      "dependencies": [
+        "AF-CLD-023",
+        "AF-CLD-030"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Export and reopen a digest-pinned source/build archive on a clean machine; missing rights, secrets, internal tenant IDs and local paths cause exclusion with report or a block."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-033",
+      "capability": "Add operations visibility and recovery drills",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-023",
+        "AF-GC-038"
+      ],
+      "evidence": [
+        "recovery"
+      ],
+      "milestone": "M2",
+      "dependencies": [
+        "AF-CLD-022",
+        "AF-CLD-023",
+        "AF-CLD-025",
+        "AF-CLD-026"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Restore fresh database/object storage after worker loss; compare artifact hashes/audit continuity, measure RPO/RTO and verify consented support redaction."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-034",
+      "capability": "Accept the private Cloud alpha",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-026",
+        "AF-GC-039"
+      ],
+      "evidence": [
+        "audit"
+      ],
+      "milestone": "M2",
+      "dependencies": [
+        "AF-CLD-020",
+        "AF-CLD-021",
+        "AF-CLD-022",
+        "AF-CLD-023",
+        "AF-CLD-024",
+        "AF-CLD-025",
+        "AF-CLD-026",
+        "AF-CLD-027",
+        "AF-CLD-028",
+        "AF-CLD-029",
+        "AF-CLD-030",
+        "AF-CLD-031",
+        "AF-CLD-032",
+        "AF-CLD-033"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Three isolated tenants complete the invited Godot journey with real games, fault recovery, budgets and private artifacts; owner reviews measured time/cost and unresolved issues."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-035",
+      "capability": "Add releases and visibility controls",
+      "implementation_owner": "Cloud.Community",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-003",
+        "AF-GC-037"
+      ],
+      "evidence": [
+        "dialog",
+        "versions"
+      ],
+      "milestone": "M3",
+      "dependencies": [
+        "AF-CLD-034"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Preview exact release/permissions then cancel: no publication; explicit publish/revoke changes only platform-controlled state and preserves audit."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-036",
+      "capability": "Add creator profiles and libraries",
+      "implementation_owner": "Cloud.Community",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-007"
+      ],
+      "evidence": [
+        "ownership"
+      ],
+      "milestone": "M3",
+      "dependencies": [
+        "AF-CLD-021",
+        "AF-CLD-035"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Browse owned/remixed/purchased libraries across tenants and delete/ban an account; preserve contracted purchase/remix history without leaking private workspace data."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-037",
+      "capability": "Add game pages with browser Play",
+      "implementation_owner": "Cloud.Community",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-021",
+        "AF-GC-024"
+      ],
+      "evidence": [
+        "versions"
+      ],
+      "milestone": "M3",
+      "dependencies": [
+        "AF-CLD-031",
+        "AF-CLD-035"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Change latest-working after publishing: game page still plays the release digest, exposes attribution/reporting and respects age/telemetry consent."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-038",
+      "capability": "Add Discover, search and tags",
+      "implementation_owner": "Cloud.Community",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [],
+      "evidence": [
+        "ownership"
+      ],
+      "milestone": "M3",
+      "dependencies": [
+        "AF-CLD-035",
+        "AF-CLD-037"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Index a large public fixture catalogue, revoke a release and attempt private discovery and play-count spam; filtering and ranking must resist both."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-039",
+      "capability": "Add share links and embed controls",
+      "implementation_owner": "Cloud.Community",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-037"
+      ],
+      "evidence": [
+        "versions",
+        "sandbox"
+      ],
+      "milestone": "M3",
+      "dependencies": [
+        "AF-CLD-035",
+        "AF-CLD-037"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Share/embed a release with expiry and revocation; private internal URLs remain private and iframe capabilities never inherit build permissions."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-040",
+      "capability": "Add Remix and Fork with source history",
+      "implementation_owner": "Cloud.Community",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-020",
+        "AF-GC-035",
+        "AF-GC-037"
+      ],
+      "evidence": [
+        "versions"
+      ],
+      "milestone": "M3",
+      "dependencies": [
+        "AF-CLD-032",
+        "AF-CLD-035",
+        "AF-CLD-036"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Deny missing/no-remix source or asset permission; authorized fork creates a new tenant workspace with immutable parent/attribution and no private context."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-041",
+      "capability": "Add likes, bookmarks and basic play statistics",
+      "implementation_owner": "Cloud.Community",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [],
+      "evidence": [
+        "ownership"
+      ],
+      "milestone": "M3",
+      "dependencies": [
+        "AF-CLD-037",
+        "AF-CLD-038"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Replay load/start/play/crash events and abuse likes; count once per event/release, rate-limit abuse and expose aggregates without player identities."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-042",
+      "capability": "Add age-aware moderation and reporting",
+      "implementation_owner": "Cloud.Community",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-025",
+        "AF-GC-035"
+      ],
+      "evidence": [
+        "ownership",
+        "sandbox"
+      ],
+      "milestone": "M3",
+      "dependencies": [
+        "AF-CLD-026",
+        "AF-CLD-035",
+        "AF-CLD-037"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Exercise metadata/asset/executable moderation, report/appeal and emergency unpublish with separated roles; passing checks never publishes automatically."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-043",
+      "capability": "Check asset origin and licences before release",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-035"
+      ],
+      "evidence": [
+        "versions"
+      ],
+      "milestone": "M3",
+      "dependencies": [
+        "AF-CLD-023",
+        "AF-CLD-035",
+        "AF-CLD-040"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Apply one shared rights policy to export, remix, Publish and Sell; unknown/incompatible source or asset license blocks the affected use and produces an attribution report."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-044",
+      "capability": "Approve a limited public creator beta",
+      "implementation_owner": "Cloud.Community",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-037",
+        "AF-GC-040"
+      ],
+      "evidence": [
+        "audit"
+      ],
+      "milestone": "M3",
+      "dependencies": [
+        "AF-CLD-035",
+        "AF-CLD-036",
+        "AF-CLD-037",
+        "AF-CLD-038",
+        "AF-CLD-039",
+        "AF-CLD-040",
+        "AF-CLD-042",
+        "AF-CLD-043",
+        "AF-CLD-041"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Run public/unlisted/revoke/report/allowed-and-denied-remix browser journeys plus load, malicious upload, lineage and analytics campaigns before owner-approved beta."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-045",
+      "capability": "Add seller setup and adult or guardian approval",
+      "implementation_owner": "Cloud.Marketplace",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-025"
+      ],
+      "evidence": [
+        "ownership"
+      ],
+      "milestone": "M4",
+      "dependencies": [
+        "AF-CLD-036",
+        "AF-CLD-044"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Reject unsupported child/country/seller eligibility and recover failed provider-hosted identity setup without storing unnecessary identity documents."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-046",
+      "capability": "Add sale listings, prices and licence choices",
+      "implementation_owner": "Cloud.Marketplace",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-035",
+        "AF-GC-037"
+      ],
+      "evidence": [
+        "ownership",
+        "versions"
+      ],
+      "milestone": "M4",
+      "dependencies": [
+        "AF-CLD-035",
+        "AF-CLD-043",
+        "AF-CLD-045"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Revise exact release/price/license listing after purchase: old terms remain pinned; unresolved rights prevent Sell through UI and API."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-047",
+      "capability": "Add checkout through a payment provider",
+      "implementation_owner": "Cloud.Marketplace",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [],
+      "evidence": [
+        "api"
+      ],
+      "milestone": "M4",
+      "dependencies": [
+        "AF-CLD-021",
+        "AF-CLD-046"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Replay success/decline/cancel and duplicate payment webhooks through an outage; reconcile one order/entitlement without card data entering platform services."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-048",
+      "capability": "Add purchase access and the buyer library",
+      "implementation_owner": "Cloud.Marketplace",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [],
+      "evidence": [
+        "storage"
+      ],
+      "milestone": "M4",
+      "dependencies": [
+        "AF-CLD-046",
+        "AF-CLD-047"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Download through an expiring entitlement-bound link, then revoke under the agreed policy; never grant buyer access to creator workspace or private context."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-049",
+      "capability": "Add the revenue ledger, fees and payouts",
+      "implementation_owner": "Cloud.Marketplace",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [],
+      "evidence": [
+        "ownership"
+      ],
+      "milestone": "M4",
+      "dependencies": [
+        "AF-CLD-045",
+        "AF-CLD-047",
+        "AF-CLD-048"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Replay payment/payout/refund events and reconcile balanced double-entry accounts, reserves and negative balances against an approved pricing policy."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-050",
+      "capability": "Add refunds, disputes and fraud review",
+      "implementation_owner": "Cloud.Marketplace",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [],
+      "evidence": [
+        "ownership"
+      ],
+      "milestone": "M4",
+      "dependencies": [
+        "AF-CLD-047",
+        "AF-CLD-048",
+        "AF-CLD-049"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Apply refund/dispute twice: order, entitlement and ledger change once; holds and appeals require authorized roles and immutable audit."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-051",
+      "capability": "Approve the marketplace release",
+      "implementation_owner": "Cloud.Marketplace",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-025",
+        "AF-GC-035"
+      ],
+      "evidence": [
+        "audit"
+      ],
+      "milestone": "M4",
+      "dependencies": [
+        "AF-CLD-045",
+        "AF-CLD-046",
+        "AF-CLD-047",
+        "AF-CLD-048",
+        "AF-CLD-049",
+        "AF-CLD-050"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Reconcile end-to-end orders, entitlements and payouts under success/failure; finance/security owners accept evidence with no age/rights/API gate bypass."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-052",
+      "capability": "Publish an EngineAdapter SDK and compatibility tests",
+      "implementation_owner": "Core.Packs",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-016",
+        "AF-GC-017",
+        "AF-GC-033"
+      ],
+      "evidence": [
+        "packs"
+      ],
+      "milestone": "M5",
+      "dependencies": [
+        "AF-CLD-005",
+        "AF-CLD-034"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Install, upgrade and roll back approved versioned EngineAdapter SDK packs; reject incompatible/unsigned/unqualified packs and preserve existing Godot projects."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-053",
+      "capability": "Qualify the Unity adapter",
+      "implementation_owner": "Core.Packs",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-032",
+        "AF-GC-033",
+        "AF-GC-034"
+      ],
+      "evidence": [
+        "packs"
+      ],
+      "milestone": "M5",
+      "dependencies": [
+        "AF-CLD-052"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Qualify actual Unity setup/licensing, compile, EditMode/PlayMode, build, graphical run, v2 and rollback; unsupported targets stay unavailable and Godot remains intact."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-054",
+      "capability": "Prove Unreal feasibility and qualify its adapter",
+      "implementation_owner": "Core.Packs",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [],
+      "evidence": [
+        "packs"
+      ],
+      "milestone": "M5",
+      "dependencies": [
+        "AF-CLD-052"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "First record Unreal hardware/toolchain feasibility; qualify import/compile/test/package/graphical run on a real small project before advertising any target."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-055",
+      "capability": "Add Android builds and Google Play preparation",
+      "implementation_owner": "Core.Packs",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-013",
+        "AF-GC-014",
+        "AF-GC-035",
+        "AF-GC-037"
+      ],
+      "evidence": [
+        "packs",
+        "credentials"
+      ],
+      "milestone": "M5",
+      "dependencies": [
+        "AF-CLD-052",
+        "AF-CLD-043"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Build/install/run the pinned Android target on supported devices; protect creator keystores and require separate human preview/approval for store submission."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-056",
+      "capability": "Add Apple builds and App Store preparation",
+      "implementation_owner": "Core.Packs",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-010",
+        "AF-GC-013",
+        "AF-GC-014",
+        "AF-GC-035",
+        "AF-GC-037"
+      ],
+      "evidence": [
+        "packs",
+        "credentials"
+      ],
+      "milestone": "M5",
+      "dependencies": [
+        "AF-CLD-052",
+        "AF-CLD-028",
+        "AF-CLD-043"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Use qualified Apple nodes for signing/notarization and store preparation; separately approve external changes and prove certificates never enter exports/logs."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-057",
+      "capability": "Add Steam release preparation",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-035",
+        "AF-GC-037"
+      ],
+      "evidence": [
+        "versions",
+        "credentials"
+      ],
+      "milestone": "M5",
+      "dependencies": [
+        "AF-CLD-032",
+        "AF-CLD-043",
+        "AF-CLD-046"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Dry-run pinned Steam packages with creator-owned access, then require separate approvals for upload and publication; preserve rejection/recovery evidence."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-058",
+      "capability": "Add a shared PC store packaging contract",
+      "implementation_owner": "Core.Packs",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-037"
+      ],
+      "evidence": [
+        "packs"
+      ],
+      "milestone": "M5",
+      "dependencies": [
+        "AF-CLD-052",
+        "AF-CLD-032"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Map one release manifest to each qualified PC channel, distinguish upload/publication approvals and report unsupported live capabilities without simulated success."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-059",
+      "capability": "Plan optional console support behind partner approval",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "blocked",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-010",
+        "AF-GC-013",
+        "AF-GC-014"
+      ],
+      "evidence": [
+        "credentials"
+      ],
+      "milestone": "M5",
+      "dependencies": [
+        "AF-CLD-052",
+        "AF-CLD-028"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Without verified partner tenant and isolated approved node, keep console activation blocked; protected SDK material must never enter public artifacts or prompts."
+      },
+      "gap": "Partner access and an approved isolated console worker are unverified; no shipping claim."
+    },
+    {
+      "id": "AF-CLD-060",
+      "capability": "Approve the multi-engine and multi-target release",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-034",
+        "AF-GC-036"
+      ],
+      "evidence": [
+        "audit"
+      ],
+      "milestone": "M5",
+      "dependencies": [
+        "AF-CLD-052",
+        "AF-CLD-053",
+        "AF-CLD-054",
+        "AF-CLD-055",
+        "AF-CLD-056",
+        "AF-CLD-057",
+        "AF-CLD-058"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Run the declared engine/target matrix including qualified PC packaging through upgrades, rollback and concurrent soak; optional consoles remain excluded without evidence."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-061",
+      "capability": "Package reusable Agent Teams and Factory templates",
+      "implementation_owner": "Core",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-006",
+        "AF-GC-041",
+        "AF-GC-042"
+      ],
+      "evidence": [
+        "packs",
+        "model"
+      ],
+      "milestone": "M6",
+      "dependencies": [
+        "AF-CLD-009",
+        "AF-CLD-052"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Preview/install a signed secret-free Factory manifest, fork it and upgrade/rollback while preserving active runs, source history and effective role identities."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-062",
+      "capability": "Add an optional marketplace for Factories and packs",
+      "implementation_owner": "Cloud.Marketplace",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-035"
+      ],
+      "evidence": [
+        "packs"
+      ],
+      "milestone": "M6",
+      "dependencies": [
+        "AF-CLD-051",
+        "AF-CLD-061"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Buy/fork an exact qualified Factory version, reject malicious tools and revoke affected releases without seller secrets; require separate optional-track approval."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-063",
+      "capability": "Let creators choose qualified models and team budgets",
+      "implementation_owner": "Cloud.Games",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-006",
+        "AF-GC-012",
+        "AF-GC-027",
+        "AF-GC-028",
+        "AF-GC-029",
+        "AF-GC-030",
+        "AF-GC-031",
+        "AF-GC-041",
+        "AF-GC-042"
+      ],
+      "evidence": [
+        "model",
+        "control"
+      ],
+      "milestone": "M6",
+      "dependencies": [
+        "AF-CLD-029",
+        "AF-CLD-061"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Exercise Cloud-first/Local-first and qualified presets; reject unapproved substitutions or paid fallback, preserve independent review and enforce hard budgets."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-064",
+      "capability": "Publish an API, SDK and signed webhooks",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-039"
+      ],
+      "evidence": [
+        "api"
+      ],
+      "milestone": "M6",
+      "dependencies": [
+        "AF-CLD-021",
+        "AF-CLD-025",
+        "AF-CLD-029",
+        "AF-CLD-061"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Run external SDK/webhook replay, stale ETag and cross-tenant tests; tokens/rate limits must not bypass provider, Publish or Sell approval."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-065",
+      "capability": "Qualify self-hosted and hybrid deployment",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "extend",
+      "qualification": "partial",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-011",
+        "AF-GC-015",
+        "AF-GC-027",
+        "AF-GC-028",
+        "AF-GC-029",
+        "AF-GC-030",
+        "AF-GC-031",
+        "AF-GC-038"
+      ],
+      "evidence": [
+        "environment",
+        "durable",
+        "recovery"
+      ],
+      "milestone": "M6",
+      "dependencies": [
+        "AF-CLD-024",
+        "AF-CLD-025",
+        "AF-CLD-026",
+        "AF-CLD-033"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Qualify single-node/hybrid/cluster upgrade and restore; prove zero cloud egress for local-only and move verified artifacts without identity collisions."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. Core foundation requires the listed extension and separate consumer qualification."
+    },
+    {
+      "id": "AF-CLD-066",
+      "capability": "Explore a later non-game executable pack",
+      "implementation_owner": "Core.Packs",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [],
+      "evidence": [
+        "packs"
+      ],
+      "milestone": "M6",
+      "dependencies": [
+        "AF-CLD-052",
+        "AF-CLD-061",
+        "AF-CLD-064"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Qualify a separately approved non-game pack from idea through artifact preview/feedback/export without game assumptions in Core or dependency on game GA."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    },
+    {
+      "id": "AF-CLD-067",
+      "capability": "Approve the defined general-availability scope",
+      "implementation_owner": "Cloud.Platform",
+      "consumer_owner": "Cloud",
+      "decision": "build",
+      "qualification": "missing",
+      "core_version": "d097ac0b04445183c647012a0c92a9d6348135b6",
+      "upstream_ids": [
+        "AF-GC-001",
+        "AF-GC-031",
+        "AF-GC-038",
+        "AF-GC-041",
+        "AF-GC-042"
+      ],
+      "evidence": [
+        "audit"
+      ],
+      "milestone": "M6",
+      "dependencies": [
+        "AF-CLD-034",
+        "AF-CLD-044",
+        "AF-CLD-061",
+        "AF-CLD-063",
+        "AF-CLD-064",
+        "AF-CLD-065"
+      ],
+      "integration_test": {
+        "status": "not-accepted",
+        "scenario": "Accept the signed advertised service scope through 72-hour soak, recovery, security and real multi-provider artifacts; enforce only enabled optional-feature gates."
+      },
+      "gap": "No accepted Cloud integration result for this exact version/profile. This capability remains planned; referenced foundations do not implement this outcome."
+    }
+  ],
+  "journey_links": [
+    {
+      "upstream_id": "AF-GC-026",
+      "cloud_ids": [
+        "AF-CLD-020",
+        "AF-CLD-034"
+      ],
+      "journey": "Godot",
+      "relation": "acceptance-reference",
+      "scheduling_dependency": false
+    },
+    {
+      "upstream_id": "AF-GC-031",
+      "cloud_ids": [
+        "AF-CLD-063",
+        "AF-CLD-065"
+      ],
+      "journey": "local/hybrid",
+      "relation": "acceptance-reference",
+      "scheduling_dependency": false
+    },
+    {
+      "upstream_id": "AF-GC-034",
+      "cloud_ids": [
+        "AF-CLD-053",
+        "AF-CLD-060"
+      ],
+      "journey": "Unity",
+      "relation": "acceptance-reference",
+      "scheduling_dependency": false
+    },
+    {
+      "upstream_id": "AF-GC-037",
+      "cloud_ids": [
+        "AF-CLD-016",
+        "AF-CLD-032",
+        "AF-CLD-039"
+      ],
+      "journey": "export/share",
+      "relation": "acceptance-reference",
+      "scheduling_dependency": false
+    }
+  ],
+  "unresolved_integrations": [
+    {
+      "id": "version-contract",
+      "owner": "Cloud.Platform",
+      "cloud_tasks": [
+        "AF-CLD-002",
+        "AF-CLD-005",
+        "AF-CLD-006"
+      ],
+      "resolution": "Agree versioned API/engine/target/evidence contracts, select actual pack versions and pin accepted integration results; this map cannot grant readiness."
+    },
+    {
+      "id": "godot-delivery",
+      "owner": "Cloud.Games",
+      "cloud_tasks": [
+        "AF-CLD-010",
+        "AF-CLD-011",
+        "AF-CLD-013",
+        "AF-CLD-020"
+      ],
+      "resolution": "Complete Core-owned packs/delivery with their own evidence, then accept real Godot consumer games. Do not wait for Unity or require the same journey twice."
+    },
+    {
+      "id": "hosted-isolation",
+      "owner": "Cloud.Platform",
+      "cloud_tasks": [
+        "AF-CLD-021",
+        "AF-CLD-022",
+        "AF-CLD-024",
+        "AF-CLD-026",
+        "AF-CLD-034"
+      ],
+      "resolution": "Qualify real server resources, PostgreSQL, tenant/account/age boundaries, secret protection and hostile workloads; local SQLite contracts and server availability do not qualify hosting."
+    },
+    {
+      "id": "rights-policy",
+      "owner": "Cloud.Platform",
+      "cloud_tasks": [
+        "AF-CLD-032",
+        "AF-CLD-040",
+        "AF-CLD-043",
+        "AF-CLD-046"
+      ],
+      "resolution": "Use one Cloud rights decision service with source/asset provenance. Core owns neutral digest/lineage mechanics, not legal rights. Check remix inputs without adding 040 -> 043 and creating a cycle."
+    },
+    {
+      "id": "optional-targets",
+      "owner": "Core.Packs",
+      "cloud_tasks": [
+        "AF-CLD-053",
+        "AF-CLD-054",
+        "AF-CLD-055",
+        "AF-CLD-056",
+        "AF-CLD-058",
+        "AF-CLD-059",
+        "AF-CLD-065"
+      ],
+      "resolution": "Obtain actual engine/toolchain/hardware/partner evidence only for supported profiles. Local-only requires no-egress proof; Unity and console remain outside the first Godot gate."
+    },
+    {
+      "id": "commercial-and-ga",
+      "owner": "Cloud.Platform",
+      "cloud_tasks": [
+        "AF-CLD-051",
+        "AF-CLD-062",
+        "AF-CLD-066",
+        "AF-CLD-067"
+      ],
+      "resolution": "Independently approve commercial policy and the signed GA scope with enabled-feature gates. Mapping, simulated payment events and non-game examples cannot approve a release."
+    }
+  ]
+}
