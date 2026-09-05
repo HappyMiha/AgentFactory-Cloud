@@ -3,6 +3,8 @@
   "policy_version": "1.0.0",
   "domain_contract": "1.0.0",
   "purpose": "synthetic-conformance-only",
+  "immutable_version_fields": ["engine_adapter_version", "engine_version", "toolchain_version", "target_profile_version", "pack_version"],
+  "version_form": "Exact three-part numeric release with optional fixed suffix, or sha256:<64 lowercase hex>; no floating aliases, ranges or wildcards. A trusted producer must verify immutable resolution.",
   "binding_fields": ["tenant_id", "project_id", "run_id", "run_attempt", "source_version_id", "source_sha256", "build_id", "artifact_sha256", "engine_adapter_id", "engine_adapter_version", "engine_version", "toolchain_id", "toolchain_version", "toolchain_sha256", "target_id", "target_profile_version", "pack_id", "pack_version", "pack_sha256"],
   "levels": {
     "simulation": "A rehearsal. It cannot qualify a live action.",

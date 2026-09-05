@@ -67,8 +67,21 @@ Every build evidence envelope records:
 `binding_fields` in the policy is the exact required field set. No floating `main`,
 unqualified “latest works”, or source-path-only proof can qualify a release.
 Producers must resolve immutable actual identities before submitting evidence.
-The structural evaluator checks presence, types, digests and equality; it cannot
-prove that a reported version string identifies a real installed engine.
+The five `immutable_version_fields` accept an exact three-part numeric release
+with an optional fixed suffix (for example `1.2.3`, `4.5.1.stable`,
+`6000.0.40f1` or `2.1.0-rc.1+build.123`), or `sha256:` followed by 64 lowercase
+hex digits for a content-addressed profile. Partial versions, whitespace, ranges,
+wildcards and floating aliases such as `latest`, `main`, `HEAD` and `nightly`
+are rejected even when every proof repeats the same value. Floating suffixes such
+as `1.0.0-latest` are also rejected. An unusual vendor version must use the digest
+form and keep its exact vendor label in protected producer evidence.
+
+This is a structural precondition, not discovery of an installed engine. The
+trusted producer must resolve the actual binary/profile and prove that a release
+identifier is immutable; a plausible numeric label alone cannot establish that.
+The structural evaluator checks presence, accepted forms, digests and equality.
+Invalid subject input raises a validation error and supplies no positive gate.
+The synthetic release numbers in the examples do not describe installed software.
 
 Every check has `check`, `status`, `mode`, `level`, `binding`, `checked_at`,
 `expires_at`, `issuer_id` and a protected `evidence_ref`. Evidence must be passed,

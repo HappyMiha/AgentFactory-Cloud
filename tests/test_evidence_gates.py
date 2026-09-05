@@ -48,7 +48,33 @@ class EvidenceGateTests(unittest.TestCase):
             with self.subTest(key=key):
                 self.bundle['subject'] = deepcopy(original)
                 self.bundle['subject'][key] = 2 if key == 'run_attempt' else 'f' * 64 if key.endswith('_sha256') else 'changed-version'
+                if key in self.policy['immutable_version_fields']:
+                    self.bundle['subject'][key] = '9.9.9'
                 self.assertFalse(self.evaluate()['Playable']['allowed'])
+
+    def test_floating_versions_never_qualify_even_with_matching_proof_bindings(self):
+        for key in self.policy['immutable_version_fields']:
+            for value in ('latest', 'main', 'HEAD', 'stable', 'nightly', '1', '1.0', '1.0.x',
+                          '>=1.0.0', '^1.0.0', '~1.0.0', '1.*', '1.0.0-latest', '1.0.0-MAIN',
+                          '1.0.0-next', '1.0.0+nightly', ' 1.0.0', '1.0.0 ', 'sha256:abc'):
+                with self.subTest(field=key, value=value):
+                    self.setUp()
+                    self.bundle['subject'][key] = value
+                    for record in self.bundle['evidence']:
+                        record['binding'][key] = value
+                    with self.assertRaisesRegex(ValueError, key):
+                        self.evaluate()
+
+    def test_exact_release_forms_and_digest_pins_are_structurally_supported(self):
+        for value in ('1.2.3', '4.5.1.stable', '6000.0.40f1', '2.1.0-rc.1',
+                      '2.1.0+build.123', 'sha256:' + 'f' * 64):
+            with self.subTest(value=value):
+                self.setUp()
+                for key in self.policy['immutable_version_fields']:
+                    self.bundle['subject'][key] = value
+                    for record in self.bundle['evidence']:
+                        record['binding'][key] = value
+                self.assertTrue(all(g['allowed'] for g in self.evaluate().values()))
 
     def test_ready_does_not_require_a_build_or_commercial_context(self):
         self.bundle['subject'].update(build_id=None, artifact_sha256=None)

@@ -23,6 +23,18 @@ def load():
                  for name in ('evidence-policy.json', 'evidence-scenarios.json'))
 
 
+def immutable_version(value):
+    """Structural pinning only; trusted producers verify actual immutable releases."""
+    if not isinstance(value, str) or len(value) > 128:
+        return False
+    if re.fullmatch(r'sha256:[0-9a-f]{64}', value):
+        return True
+    if not re.fullmatch(r'[0-9]+(?:\.[0-9]+){2}(?:[a-z][0-9]+)?(?:[-+.][A-Za-z0-9]+(?:[.-][A-Za-z0-9]+)*)?', value):
+        return False
+    floating = {'latest', 'main', 'master', 'head', 'nightly', 'current', 'default', 'tip', 'next', 'x'}
+    return not floating.intersection(re.split(r'[-+.]', value.lower()))
+
+
 def validate_subject(subject, policy):
     if not isinstance(subject, dict) or set(subject) != set(policy['binding_fields']):
         raise ValueError('Exact complete subject binding required')
@@ -33,6 +45,8 @@ def validate_subject(subject, policy):
             valid = type(value) is int and value > 0
         elif key.endswith('_sha256'):
             valid = isinstance(value, str) and re.fullmatch('[0-9a-f]{64}', value)
+        elif key in policy['immutable_version_fields']:
+            valid = immutable_version(value)
         else:
             valid = isinstance(value, str) and bool(value.strip())
         if not valid:
