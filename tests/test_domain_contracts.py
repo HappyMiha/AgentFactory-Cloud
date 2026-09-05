@@ -158,13 +158,47 @@ class DomainContractsTest(unittest.TestCase):
 
     def test_replay_rechecks_authority(self):
         self.model.execute(self.request(), self.actor)
-        self.actor["scopes"] = []
+        self.actor["tenant_grants"]["tenant_a"] = []
         self.assert_denied(self.request(), "permission_denied", 403)
 
     def test_other_actor_cannot_replay_receipt(self):
         self.model.execute(self.request(), self.actor)
         self.actor["id"] = "another-authenticated-user"
         self.assert_denied(self.request(), "revision_conflict", 412)
+
+    def add_second_tenant(self):
+        records = deepcopy(self.fixtures["records"])
+        for entity in ("Tenant", "User", "Project"):
+            record = deepcopy(next(r for r in records if r["entity"] == entity))
+            record["id"] = record["id"].replace("_a", "_b")
+            record["tenant_id"] = "tenant_b"
+            if entity == "Project":
+                record["owner_user_id"] = "user_b"
+            records.append(record)
+        self.model = contract.ReferenceModel(self.domain, self.transitions, records, self.fixtures["now"])
+        self.actor["tenant_grants"]["tenant_b"] = ["projects:read"]
+
+    def test_admin_in_one_tenant_is_only_reader_in_another(self):
+        self.add_second_tenant()
+        self.assert_denied(self.request("project.delete", "project_b", tenant_id="tenant_b"),
+                           "permission_denied", 403)
+        self.assertEqual(self.model.execute(self.request("project.delete", "project_a"), self.actor)["status"], 204)
+
+    def test_replay_rechecks_only_the_target_tenant_grant(self):
+        self.add_second_tenant()
+        request = self.request("project.delete", "project_a")
+        self.assertEqual(self.model.execute(request, self.actor)["status"], 204)
+        self.actor["tenant_grants"]["tenant_b"] = ["projects:delete"]
+        self.actor["tenant_grants"]["tenant_a"] = ["projects:read"]
+        self.assert_denied(request, "permission_denied", 403)
+        del self.actor["tenant_grants"]["tenant_a"]
+        self.assert_denied(request, "resource_not_found", 404)
+
+    def test_flat_unbound_scope_context_is_not_accepted(self):
+        self.actor["tenant_ids"] = ["tenant_a"]
+        self.actor["scopes"] = ["runs:execute"]
+        del self.actor["tenant_grants"]
+        self.assert_denied(self.request(), "resource_not_found", 404)
 
     def test_deleted_project_hides_child_but_delete_replays(self):
         request = self.request("project.delete", "project_a")

@@ -268,7 +268,8 @@ class ReferenceModel:
             if not actor or not actor.get("authenticated") or instant(actor["expires_at"]) <= self.now:
                 raise Denied(401, "authentication_required")
             tenant = request["tenant_id"]
-            if tenant not in actor.get("tenant_ids", []):
+            grants = actor.get("tenant_grants", {})
+            if tenant not in grants:
                 raise Denied(404, "resource_not_found")
             account = self.get("Tenant", tenant, tenant)
             if account["state"] != "active":
@@ -276,7 +277,7 @@ class ReferenceModel:
             operation = self.transitions["operations"].get(request["operation"])
             if not operation:
                 raise Denied(400, "unknown_operation")
-            if operation["scope"] not in actor.get("scopes", []):
+            if operation["scope"] not in grants[tenant]:
                 raise Denied(403, "permission_denied")
             key = request.get("idempotency_key")
             if not isinstance(key, str) or not key.strip() or len(key) > 128:

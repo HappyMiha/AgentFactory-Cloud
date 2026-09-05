@@ -5,21 +5,20 @@
     "id": "user_a",
     "authenticated": true,
     "expires_at": "2026-09-06T12:00:00Z",
-    "tenant_ids": [
-      "tenant_a"
-    ],
-    "scopes": [
-      "builds:qualify",
-      "builds:write",
-      "listings:publish",
-      "listings:write",
-      "projects:delete",
-      "releases:approve",
-      "releases:write",
-      "runs:cancel",
-      "runs:execute",
-      "runs:write"
-    ]
+    "tenant_grants": {
+      "tenant_a": [
+        "builds:qualify",
+        "builds:write",
+        "listings:publish",
+        "listings:write",
+        "projects:delete",
+        "releases:approve",
+        "releases:write",
+        "runs:cancel",
+        "runs:execute",
+        "runs:write"
+      ]
+    }
   },
   "records": [
     {
@@ -618,7 +617,9 @@
       ],
       "record_patches": [],
       "actor_patch": {
-        "scopes": []
+        "tenant_grants": {
+          "tenant_a": []
+        }
       }
     },
     {

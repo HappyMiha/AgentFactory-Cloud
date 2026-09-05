@@ -12,6 +12,13 @@ Use the same 404 for a missing resource and a resource outside that tenant.
 Authentication context is trusted server input, never request JSON. Scope grants
 are tenant-specific; a role in one team gives no rights in another team.
 
+The reference model represents this explicitly as trusted server context:
+`tenant_grants: {"tenant_a": ["projects:delete"], "tenant_b": ["projects:read"]}`.
+An actor in both teams can delete in A but cannot delete in B. Replaying a receipt
+rechecks the grant for the receipt's tenant. A flat scopes list plus a membership
+list is not an accepted context. This map is injected by a verifier in the design;
+it is never accepted from client JSON.
+
 Collections are `users`, `projects`, `game-briefs`, `factory-blueprints`,
 `agent-teams`, `runs`, `source-versions`, `builds`, `play-sessions`, `feedback`,
 `releases`, `listings`, `purchases` and `entitlements`. Tenant account operations
