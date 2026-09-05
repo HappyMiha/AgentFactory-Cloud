@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "policy_version": "1.0.0",
+  "domain_contract": "1.0.0",
+  "purpose": "synthetic-conformance-only",
+  "binding_fields": ["tenant_id", "project_id", "run_id", "run_attempt", "source_version_id", "source_sha256", "build_id", "artifact_sha256", "engine_adapter_id", "engine_adapter_version", "engine_version", "toolchain_id", "toolchain_version", "toolchain_sha256", "target_id", "target_profile_version", "pack_id", "pack_version", "pack_sha256"],
+  "levels": {
+    "simulation": "A rehearsal. It cannot qualify a live action.",
+    "code_check": "Static or unit checks. They do not prove an engine build or play session.",
+    "environment_probe": "Actual selected tools, services, model and workspace probes.",
+    "engine_build": "The named engine/toolchain produced this exact artifact.",
+    "runtime_test": "An actual runtime executed this exact artifact.",
+    "export_check": "The exported package was independently opened or run without Cloud credentials.",
+    "policy_review": "An authorized policy service reviewed this exact requested use.",
+    "independent_review": "A qualified reviewer approved this exact candidate independently of its producers.",
+    "owner_acceptance": "The authorized product owner explicitly accepted this exact candidate."
+  },
+  "checks": {
+    "environment": {"level": "environment_probe", "issuer_role": "environment-verifier"},
+    "code": {"level": "code_check", "issuer_role": "code-verifier"},
+    "engine_build": {"level": "engine_build", "issuer_role": "build-verifier"},
+    "smoke": {"level": "runtime_test", "issuer_role": "runtime-verifier"},
+    "playtest": {"level": "runtime_test", "issuer_role": "playtest-verifier"},
+    "portable_package": {"level": "export_check", "issuer_role": "export-verifier"},
+    "notices": {"level": "policy_review", "issuer_role": "rights-verifier"},
+    "export_rights": {"level": "policy_review", "issuer_role": "rights-verifier", "use": "export"},
+    "publish_rights": {"level": "policy_review", "issuer_role": "rights-verifier", "use": "publish"},
+    "sell_rights": {"level": "policy_review", "issuer_role": "rights-verifier", "use": "sell"},
+    "moderation": {"level": "policy_review", "issuer_role": "moderation-verifier"},
+    "reviewer_approval": {"level": "independent_review", "issuer_role": "release-reviewer", "independent": true},
+    "owner_acceptance": {"level": "owner_acceptance", "issuer_role": "product-owner", "human": true},
+    "seller_eligibility": {"level": "policy_review", "issuer_role": "seller-verifier"},
+    "sale_terms": {"level": "policy_review", "issuer_role": "commerce-verifier"}
+  },
+  "gates": {
+    "Ready": {"depends_on": [], "checks": ["environment"], "positive_copy": "Ready to start this selected path", "action": "Start"},
+    "Playable": {"depends_on": [], "checks": ["code", "engine_build", "smoke", "playtest"], "positive_copy": "This version can be played", "action": "Play"},
+    "Exportable": {"depends_on": ["Playable"], "checks": ["portable_package", "notices", "export_rights"], "positive_copy": "This version can be exported", "action": "Export"},
+    "Publishable": {"depends_on": ["Playable"], "checks": ["moderation", "publish_rights", "reviewer_approval", "owner_acceptance"], "positive_copy": "This version is approved for publication", "action": "Publish"},
+    "Sellable": {"depends_on": ["Publishable"], "checks": ["sell_rights", "seller_eligibility", "sale_terms"], "positive_copy": "This offer is approved for sale", "action": "List for sale"}
+  },
+  "review_fields": ["release_id", "release_revision", "audience", "visibility", "rights_revision", "moderation_policy_version"],
+  "sale_fields": ["listing_id", "listing_revision", "price_minor", "currency", "license_version", "seller_eligibility_revision"],
+  "failure_actions": {
+    "missing": "Run the missing check",
+    "duplicate": "Resolve conflicting evidence records",
+    "not_passed": "Fix the failed or skipped check and run it again",
+    "simulation": "Run a real check for this version",
+    "wrong_level": "Collect the required kind of evidence",
+    "wrong_binding": "Check the current source and build again",
+    "stale": "Refresh the expired evidence",
+    "untrusted_issuer": "Ask an authorized verifier to check this version",
+    "wrong_use": "Resolve rights for this requested use",
+    "review_conflict": "Choose an independent reviewer",
+    "human_required": "Ask the authorized product owner to review",
+    "wrong_decision_context": "Review the current release or offer again"
+  }
+}
