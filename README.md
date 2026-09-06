@@ -1,10 +1,16 @@
 # AgentFactory Cloud
 
-**Planning only. No Cloud application or deployment has been built as part of this work.**
+**Early development.** A local game-idea editor is available. Hosted game creation,
+engine execution and publishing are still planned; there is no verified deployed
+Cloud game pipeline.
+
+**Try the local editor:** [setup, features and evaluation](docs/game-brief-intake.md).
+Save your original idea, edit a short game brief and revisit earlier versions.
+Optional local AI helps organize your original sentences; review its choices.
 
 **Three-computer development:** [team workflow](docs/team-workflow.md) · [live shared task register](https://github.com/HappyMiha/AgentFactory/blob/team-state/team-state.json). Each worker claims a task and uses an owned branch with checks before push and a pull request into `main`.
 
-AgentFactory Cloud is a planned game creation platform powered by [AgentFactory Core](https://github.com/HappyMiha/AgentFactory).
+AgentFactory Cloud is a game creation platform under development, powered by [AgentFactory Core](https://github.com/HappyMiha/AgentFactory).
 
 A creator will describe a game, agree on a small first version, let an AI team build and test it, play the result and ask for changes. The creator should receive the source project and supported builds to use outside AgentFactory.
 
@@ -28,7 +34,7 @@ The intended audience includes creators aged 12+ and adults. Actual access, publ
 3. [Backlog](docs/backlog.md) — readable tasks and acceptance criteria.
 4. [Machine-readable backlog](examples/agentfactory-cloud-backlog.json) — seven epics and 67 stable AF-CLD tasks, schema v2.
 
-The plan is based on the owner's supplied Cloud planning package. It extends the 42 AF-GC tasks in Core and preserves their upstream role. All new work remains **proposed**. A task entry or valid JSON file is not evidence of implementation and does not authorize coding.
+The plan is based on the owner's supplied Cloud planning package. It extends the 42 AF-GC tasks in Core and preserves their upstream role. The live shared task register records current engineering progress; backlog descriptions preserve the original acceptance requirements. A task entry, valid JSON file or merged component is not evidence of a playable game.
 
 The [Core/Cloud responsibility contract](docs/core-cloud-boundary.md) adds the AF-CLD-001 ownership map, rights records and design walkthroughs. It remains subject to integration and owner review.
 
