@@ -67,6 +67,7 @@ class IdentityAPITests(unittest.TestCase):
             self.assertEqual(response.status_code,400);self.assertNotIn('do-not-echo',response.text)
             self.assertEqual(response.headers['cache-control'],'no-store')
         self.assertEqual(self.client.post('/identity/sessions',content='x'*4097).status_code,400)
+        self.assertEqual(self.client.post('/identity/sessions',content='['*1500+'0'+']'*1500).status_code,400)
         self.assertEqual(self.client.post('/identity/sessions',content='{"secret":"one","secret":"two","account_id":"a"}').status_code,400)
 
     def test_expiry_and_bad_explicit_auth_reject(self):

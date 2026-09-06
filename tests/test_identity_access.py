@@ -178,7 +178,6 @@ class IdentityTests(unittest.TestCase):
         self.assertEqual(self.store.db.execute('SELECT COUNT(*) FROM identity_sessions WHERE account_id=?',(self.a['account_id'],)).fetchone()[0],8)
 
 
-if __name__=='__main__':unittest.main()
 
     def test_mismatched_principal_cannot_mutate_account_or_session(self):
         from dataclasses import replace
@@ -189,3 +188,5 @@ if __name__=='__main__':unittest.main()
             self.service.request_deletion(wrong, self.a['login_secret'], client_key='test-peer')
         self.assertEqual(self.service.authenticate(self.token), self.principal)
         self.assertTrue(self.service.authorize(self.principal, 'read', self.resource()))
+
+if __name__=='__main__':unittest.main()
