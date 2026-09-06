@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0",
+  "status": "integration-required-no-hosted-or-minor-acceptance",
+  "roles": ["Creator", "Player", "Moderator", "Support", "Admin"],
+  "tenant_grants": "resolved from current server membership for target tenant on every action",
+  "private_default": true,
+  "age_paths": {"unknown": "blocked", "under12": "blocked", "teen": "blocked", "adult": "requires current operator-approved jurisdiction/provider-route policy"},
+  "minor_pilot": "blocked: no approved jurisdiction/provider/guardian/spending records",
+  "credential_type": "32-byte random opaque secret from trusted provisioning; not a human password",
+  "session_ttl_seconds": 900,
+  "rate_window_seconds": 300,
+  "account_attempt_limit": 8,
+  "peer_attempt_limit": 40,
+  "account_deletion": "revokes immediately; resource erasure remains durable pending until trusted idempotent worker explicitly confirms completion",
+  "hosted_brief_access": "blocked until accepted principal-to-tenant resource binding integration"
+}
