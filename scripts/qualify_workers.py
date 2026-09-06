@@ -8,20 +8,21 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
 
-from agentfactory_cloud.server_inventory import inventory
+from agentfactory_cloud.server_inventory import inventory, LocalWorkspaceRequired
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('action', choices=['inventory'])
-    parser.add_argument('--workspace', required=True, type=Path,
+    parser.add_argument('--workspace', required=True,
                         help='Configured local development workspace volume')
     parser.add_argument('--output', required=True, type=Path,
                         help='New private local evidence file; existing files are never replaced')
     args = parser.parse_args()
-    if not args.workspace.is_dir():
-        parser.error('Select an existing local workspace directory.')
-    document = inventory(args.workspace)
+    try:
+        document = inventory(args.workspace)
+    except LocalWorkspaceRequired as exc:
+        parser.error(str(exc))
     payload = json.dumps(document, ensure_ascii=True, indent=2) + '\n'
     # The operator selects the local destination. Exclusive create also rejects
     # an existing symlink. Keep node details out of Git and the message bus.

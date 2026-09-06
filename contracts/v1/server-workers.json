@@ -9,6 +9,7 @@
   "cloud_responsibility": "Tenant admission and host-profile evidence",
   "qualified_capabilities": [],
   "execution_eligible": false,
+  "workspace_policy": "Before collection: lexical rejection, known local drive/mount classification, then parent-by-parent no-link metadata; unknowns fail closed",
   "reported_server": "Unknown target/access; not inventoried or qualified",
   "required_before_dispatch": [
     "Authenticated worker identity and trusted tenant binding",
