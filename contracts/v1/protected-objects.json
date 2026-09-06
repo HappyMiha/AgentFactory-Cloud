@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "task": "AF-CLD-023",
+  "status": "implemented component pending exact-head review",
+  "authority": {
+    "cloud": "tenant byte delivery, quota, retention, references and product access evidence",
+    "core": "external source/build identity, content digest, provenance and execution authority",
+    "caller": "current authenticated tenant/action permission and validated external origin/reference ownership"
+  },
+  "manifest_fields": ["path", "media_type", "sha256", "size", "origin", "retain_until"],
+  "envelope_fields": ["id", "tenant_id", "state", "manifest"],
+  "states": ["pending", "ready", "deleting", "deleted"],
+  "upload": "tenant/actor command replay; reserve quota before conditional S3 PUT; verify complete content before ready",
+  "deletion": "retention and references checked before deleting tombstone; confirm S3 absence before releasing quota",
+  "cleanup": "bounded managed-manifest scan with reference recheck; never delete unmanaged bucket keys",
+  "export": "verify actual digest, then commit tenant audit before returning bytes; no presigned capabilities",
+  "limits": {
+    "object_bytes": 8388608,
+    "zip_entries": 256,
+    "zip_expanded_bytes": 33554432,
+    "zip_entry_bytes": 8388608,
+    "zip_expansion_ratio": 100,
+    "inspection_seconds": 5,
+    "scanner_timeout_seconds": 10,
+    "scanner_signature_age_days": 7,
+    "cleanup_batch": 100,
+    "evidence_page": 100
+  },
+  "blocked_profiles": ["missing or stale malware scanner", "nested or unsupported archives", "unsafe paths", "quota exhaustion", "public bucket", "versioned bucket", "external lifecycle rules", "multipart or oversized upload"],
+  "runtime_acceptance": "requires actual isolated S3/PostgreSQL/ClamAV, separate tenants, server access logs and exact-version independent review",
+  "release_limits": "No public API mounting, hosted identity switch, game execution, provenance approval, production key custody or production deployment acceptance. Metadata retention remains an operational gate."
+}
