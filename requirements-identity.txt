@@ -1,0 +1,3 @@
+# Independently tested identity-router dependencies. Host app owns its package/lock.
+fastapi==0.141.1
+pydantic==2.13.5
