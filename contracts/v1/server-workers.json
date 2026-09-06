@@ -1,9 +1,9 @@
 {
   "contract_version": 1,
   "task": "AF-CLD-024",
-  "status": "inventory_component_only",
-  "profile": "development-node-inventory-v1",
-  "core_dependency": "60e7895940359fdcf7ea32e4d38f7d6d5e3e97ed",
+  "status": "inventory_and_local_admission_components_only",
+  "profile": "development-node-admission-lab-v1",
+  "core_dependency": "765bea67f0164a71b24a8e5d042cd4d90c3e7101",
   "inventory_owner": "Core hardware_inventory.collect_inventory",
   "job_authority": "Core scheduler and worker runtime",
   "cloud_responsibility": "Tenant admission and host-profile evidence",
@@ -24,5 +24,21 @@
     "Sandbox qualification",
     "Provider/model execution qualification",
     "Hosted production readiness"
-  ]
+  ],
+  "admission_transport": {
+    "installation": "Explicit optional router; absent from default creator application",
+    "allowed_peer": "Loopback only; deny browser origins and proxy headers",
+    "authentication": "Host-provisioned hashed expiring bearer credential bound to Core worker/tenant/version",
+    "claim_input": [
+      "request_id"
+    ],
+    "renew_input": [
+      "request_id",
+      "fencing_token"
+    ],
+    "request_authority": "Immutable host allowlist of exact Core AdmissionRequest records",
+    "scheduler": "Core WorkerAdmissionService and SQLiteStorage, no Cloud lease database",
+    "worker_stop_or_result_authority": false,
+    "execution_eligible": false
+  }
 }
