@@ -36,15 +36,27 @@ class ScopeBrowserTests(brief_browser_fixture.GameBriefBrowserTests):
         self.assertIn('/first-playable',other.url)
 
     def test_plan_layout_and_estimate_are_visible_on_mobile(self):
-        self.open_scope()
-        self.assertEqual(self.page.locator('#tasks > li').count(),6)
-        self.assertIn('31,200',self.page.locator('#budget').inner_text())
-        for width,height,name in [(1280,1000,'desktop'),(390,844,'mobile')]:
-            self.page.set_viewport_size({'width':width,'height':height})
-            self.assertTrue(self.page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
-            if os.getenv('SCOPE_SCREENSHOT_DIR'):
-                folder=Path(os.environ['SCOPE_SCREENSHOT_DIR']);folder.mkdir(parents=True,exist_ok=True)
-                self.page.screenshot(path=str(folder/f'scope-{name}.png'),full_page=True)
+        for locale,estimate,allowance in [
+            ('en-US','15,600–31,200','40,000'),
+            ('de-DE','15.600–31.200','40.000'),
+        ]:
+            with self.subTest(locale=locale):
+                self.context.close()
+                self.context = self.browser.new_context(locale=locale,viewport={'width':1280,'height':1000})
+                self.page = self.context.new_page()
+                self.page.on('pageerror',lambda error:self.errors.append(str(error)))
+                self.page.goto(self.url); self.page.locator('#workspace').wait_for(state='visible')
+                self.open_scope()
+                self.assertEqual(self.page.locator('#tasks > li').count(),6)
+                budget = self.page.locator('#budget').inner_text()
+                self.assertIn(f'{estimate} tokens',budget)
+                self.assertIn(f'Your planned allowance: {allowance}',budget)
+                for width,height,name in [(1280,1000,'desktop'),(390,844,'mobile')]:
+                    self.page.set_viewport_size({'width':width,'height':height})
+                    self.assertTrue(self.page.evaluate('document.documentElement.scrollWidth <= innerWidth'))
+                    if os.getenv('SCOPE_SCREENSHOT_DIR'):
+                        folder=Path(os.environ['SCOPE_SCREENSHOT_DIR']);folder.mkdir(parents=True,exist_ok=True)
+                        self.page.screenshot(path=str(folder/f'scope-{name}-{locale}.png'),full_page=True)
 
 
 if __name__ == '__main__':
