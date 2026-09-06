@@ -106,7 +106,7 @@ Delivery areas:
 - **Operations:** AF-CLD-033 — redacted support information, observability, backup and tested restore.
 - **Acceptance:** AF-CLD-034.
 
-The owner-supplied architecture proposes PostgreSQL, object storage and Temporal. Select a versioned hosted profile and validate it; their names alone do not prove readiness. The [Temporal commercial-use review](https://github.com/HappyMiha/AgentFactory/blob/main/docs/architecture/temporal-commercial-decision.md) recommends retaining the existing integration, qualifying operations under AF-CLD-031/033, and keeping the first gameplay runtime independent.
+The owner-supplied architecture proposes PostgreSQL, object storage and Temporal. Select a versioned hosted profile and validate it; their names alone do not prove readiness. The [Temporal commercial-use review](https://github.com/HappyMiha/AgentFactory/blob/main/docs/architecture/temporal-commercial-decision.md) recommends retaining the existing integration, qualifying operations under AF-CLD-025/033, and keeping the first gameplay runtime independent.
 
 Cloud controls must include tenant checks on source, jobs, previews and artifacts; a separate untrusted game origin; bounded upload/compute/network use; and quarantine before atomic artifact promotion. API/provider keys never enter games or downloadable output.
 
