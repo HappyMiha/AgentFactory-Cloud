@@ -29,6 +29,8 @@ function show(plan){
  $('history').replaceChildren();for(let version=highest;version>=Math.max(1,highest-99);version--){const option=node('option','Version '+version);option.value=version;$('history').append(option);}$('history').value=plan.revision;buttons();
 }
 async function load(){brief=await api(base);config=await api(base+'/scope');$('source').textContent=brief.original_text;$('brief-version').textContent='Based on saved idea version '+brief.revision;$('workspace').hidden=false;for(const [id,values]of [['engine',config.engines],['target',config.targets]]){$(id).replaceChildren();for(const [key,label]of Object.entries(values)){const option=node('option',label);option.value=key;$(id).append(option);}}if(config.plan){highest=config.plan.revision;show(config.plan);}else{current=null;$('plan').hidden=true;}dirty=false;status('Your saved idea is unchanged.');}
+$('team-link').href='/game-team#'+encodeURIComponent(briefId);
+$('team-link').onclick=event=>{event.preventDefault();if(busy)return;leave(()=>{if(!busy)location.href=$('team-link').href;});};
 $('back').onclick=()=>leave(()=>{location.href='/#'+encodeURIComponent(briefId);});
 $('reload').onclick=()=>leave(()=>run(load));
 $('create').onclick=()=>leave(()=>confirm('Create a new first-playable draft?','This creates a separate template proposal from the current saved idea. Existing plans and the original source stay available.',()=>run(async()=>{brief=await api(base);$('brief-version').textContent='Based on saved idea version '+brief.revision;show(await api(base+'/scope',{command_id:command(),expected_brief_revision:brief.revision}));status('Draft created. Review the suggested scope and future roadmap.');})));

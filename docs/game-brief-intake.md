@@ -26,7 +26,7 @@ be lost when the browser is closed or refreshed.
 
 Use Python 3.11 or newer and Git. From this repository, install into a virtual
 environment with `python -m pip install -e .`. The package pins the accepted
-Core commit `765bea67f0164a71b24a8e5d042cd4d90c3e7101`, including its web extra.
+Core commit `7ec9ff33f1c4e7f2980e4b121d05f3c366acedd1`, including its web extra.
 Installation requires network access to obtain dependencies. It does not
 install Unreal, Godot, Ollama, or any model.
 
