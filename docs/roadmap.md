@@ -1,8 +1,8 @@
 # Roadmap
 
-**Date:** 2026-09-05
+**Date:** 2026-09-06
 
-**Status:** Proposed. Documentation only; implementation has not been authorized by this planning package.
+**Status:** Product roadmap. The live shared task register records current engineering work; release gates below require their own acceptance evidence.
 
 This roadmap keeps the owner-supplied seven milestones, seven epics and 67 stable AF-CLD task IDs. It extends the 42-task AF-GC plan in Core. It does not mark that upstream work complete.
 
@@ -106,7 +106,7 @@ Delivery areas:
 - **Operations:** AF-CLD-033 — redacted support information, observability, backup and tested restore.
 - **Acceptance:** AF-CLD-034.
 
-The owner-supplied architecture proposes PostgreSQL, object storage and Temporal. Select a versioned hosted profile and validate it; their names alone do not prove readiness.
+The owner-supplied architecture proposes PostgreSQL, object storage and Temporal. Select a versioned hosted profile and validate it; their names alone do not prove readiness. The [Temporal commercial-use review](https://github.com/HappyMiha/AgentFactory/blob/main/docs/architecture/temporal-commercial-decision.md) recommends retaining the existing integration, qualifying operations under AF-CLD-025/033, and keeping the first gameplay runtime independent.
 
 Cloud controls must include tenant checks on source, jobs, previews and artifacts; a separate untrusted game origin; bounded upload/compute/network use; and quarantine before atomic artifact promotion. API/provider keys never enter games or downloadable output.
 
@@ -193,6 +193,10 @@ Do not infer a royalty obligation from Remix lineage. Creator shares for derivat
 - AF-CLD-057–058: Steam and generic PC-store packaging.
 - AF-CLD-059: partner-gated console research and qualification.
 - AF-CLD-060: multi-engine/multi-target acceptance.
+
+The [Unreal and Gameplay AI delivery map](unreal-gameplay-plan.md#delivery-slices-for-the-full-use-case) separates setup and contracts, editor automation, Windows packaging, gameplay runtime, NPC memory/world rules, inference operations and creator acceptance. Editor and gameplay work can proceed independently after their shared contracts are accepted. Existing AF-CLD-052 remains the prerequisite for AF-CLD-054; this design does not move Unreal ahead of the Godot release.
+
+The full-use-case gate is one level, three NPCs and one objective, a Windows package tested without Unreal Editor, save/load, an AI outage, and a second accepted package after feedback. A working editor adapter alone cannot pass that gate. Gameplay-AI claims remain conditional on that extra evidence; they are not implied by basic engine support.
 
 Every supported matrix row needs a pinned engine/toolchain version, worker OS, target, reference project, license/account prerequisites, build evidence and real run evidence. Mobile signing credentials need a scoped path. Store upload remains separate from store approval.
 

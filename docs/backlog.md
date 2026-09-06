@@ -1,6 +1,6 @@
 # Product backlog
 
-Planning revision: **2026-09-05**. All **67 tasks and 7 epics are proposed**. This document authorizes no implementation, deployment, payment, or task execution.
+Planning revision: **2026-09-06**. The **67 stable tasks and 7 epics** retain their product requirements. Proposed labels below describe the planning baseline; use the [live shared task register](https://github.com/HappyMiha/AgentFactory/blob/team-state/team-state.json) for current ownership and engineering completion. Release and deployment acceptance remain separate.
 
 The [JSON backlog](../examples/agentfactory-cloud-backlog.json) is the source of truth for IDs, dependencies, roles, sizes, and acceptance criteria. This document is its readable view. The [product description](product-description.md) explains the goal; the [roadmap](roadmap.md) explains the order; [planning notes](planning-notes.md) record changes from the supplied package.
 
@@ -1428,14 +1428,18 @@ Depends on: AF-CLD-052.
 - The feasibility study will publish supported project size, toolchain, operating system, GPU, storage, build-time limits and cost profile.
 - The adapter will pass import, compile, test, package and graphical run on a small reference project before Unreal support is advertised.
 - Unsupported plugins and targets will be rejected before an expensive build starts.
+- The qualified editor path will create, save and reopen the project and level, author C++/Blueprint behavior, detect and repair an injected compile error, then produce separate Development and Shipping evidence through a pinned MCP backend.
+- A full Unreal plus Gameplay AI claim additionally requires one level, three NPCs and one objective in a Windows package played without Unreal Editor, save/load, an AI outage and a second accepted package after feedback with the first build retained. Basic editor support does not satisfy this conditional claim.
 
-**How to check:** Repeat the small reference-project journey on clean qualified workers and measure storage, duration and cost. Test unsupported plugin and target rejection before resource allocation, and review whether the results justify the proposed support boundary.
+**How to check:** Repeat the small reference-project journey on clean qualified workers and measure storage, duration and cost. Test unsupported plugin and target rejection before resource allocation, and review whether the results justify the proposed support boundary. For the full gameplay-AI profile, execute the independent player checklist, delayed/invalid action and save-epoch checks, bounded inference outage and novice-creator trial defined in docs/unreal-gameplay-plan.md; retain actual artifact hashes, manual interventions and failed attempts.
 
 **Components:** Planned Unreal feasibility probes and adapter; Planned plugin and target eligibility checks with build-cost evidence
 
 **Test environment:** Qualified Unreal toolchain and licensed workers with measured GPU, memory and storage capacity
 
 **Expected output:** Unreal feasibility report and explicit go/no-go decision; If qualified, an adapter package, support matrix and real build/run evidence
+
+**Delivery plan:** [Architecture, separate editor/gameplay slices and acceptance](unreal-gameplay-plan.md). Split editor and gameplay delivery into narrow upstream contract and implementation claims using the plan; do not reserve all Unreal or UI files in one claim. Keep the existing AF-CLD-052 prerequisite and Godot gates.
 
 ### AF-CLD-055
 

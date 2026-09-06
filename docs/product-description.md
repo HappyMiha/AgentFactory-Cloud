@@ -1,8 +1,8 @@
 # Product description
 
-**Date:** 2026-09-05
+**Date:** 2026-09-06
 
-**Status:** Proposed direction. This repository contains planning documents, not a working Cloud product.
+**Status:** Product direction with early local editor and planning components. Hosted game creation and the Unreal path still need qualification. The live shared task register records engineering progress; this description states the intended product and its acceptance boundaries.
 
 ## 1. What we want to build
 
@@ -19,6 +19,12 @@ The wider creation loop is:
 Remix means making a new project from a specific source version that permits this use. It does not mean copying any game found online.
 
 The first goal is a reliable small Godot game. More complex games, other engines, a marketplace and an open factory ecosystem come later. “Almost any complexity” is a long-term direction, not a first-release guarantee.
+
+### Unreal creation and AI inside the game
+
+The planned Unreal path has three parts. Core coordinates the AI team, task ownership, models, budget and recovery. An optional Unreal adapter uses a qualified existing MCP backend to open the editor, write code, build levels, test and package the project. Gameplay AI gives the shipped game bounded NPC actions, memory and world behavior. These parts share explicit contracts and have separate tests.
+
+The first full proof is one level, three NPCs and one objective, packaged for Windows and played without Unreal Editor. It must preserve memory through save/load, remain playable when AI is disconnected, and produce a second accepted package after creator feedback while retaining the first build. The [Unreal and Gameplay AI plan](unreal-gameplay-plan.md) defines the architecture, parallel delivery slices and novice-creator trial. Temporal belongs to durable development/hosted jobs; the first game package does not require Temporal Server.
 
 ## 2. Two repositories
 
@@ -157,6 +163,8 @@ For external stores, use the creator's own eligible developer account. Prepare t
 ## 7. System design
 
 The supplied package proposes FastAPI-compatible resources, PostgreSQL, object storage and Temporal-based workflows. These are architecture candidates and integration targets, not a statement that a hosted Cloud stack has been deployed.
+
+Temporal is already integrated in Core. The [commercial-use review](https://github.com/HappyMiha/AgentFactory/blob/main/docs/architecture/temporal-commercial-decision.md) recommends retaining it for durable development and hosted jobs. Self-hosting and the paid managed service are separate operating choices; the first Unreal player package and its NPC loop do not require Temporal Server.
 
 ```mermaid
 flowchart TD
