@@ -91,6 +91,8 @@ class HostedStore:
         if not isinstance(context, TenantContext):
             raise ValueError('Trusted tenant context required')
         with psycopg.connect(**self.connection_info, connect_timeout=5, row_factory=dict_row) as db:
+            db.execute("SELECT set_config('statement_timeout','5000',true)")
+            db.execute("SELECT set_config('lock_timeout','5000',true)")
             role = db.execute('SELECT rolsuper,rolbypassrls,rolcreaterole,rolcreatedb FROM pg_roles WHERE rolname=current_user').fetchone()
             owned = db.execute("SELECT 1 FROM pg_class WHERE relname=ANY(%s) AND pg_has_role(current_user,relowner,'USAGE')", (list(TABLES),)).fetchone()
             if any(role.values()) or owned:
@@ -99,8 +101,6 @@ class HostedStore:
             if version != [{'version': VERSION, 'digest': SCHEMA_DIGEST}]:
                 raise StoreConflict('Storage schema not qualified for this adapter')
             db.execute("SELECT set_config('cloud.tenant_id',%s,true)", (context.tenant_id,))
-            db.execute("SELECT set_config('statement_timeout','5000',true)")
-            db.execute("SELECT set_config('lock_timeout','5000',true)")
             yield db
 
     @staticmethod

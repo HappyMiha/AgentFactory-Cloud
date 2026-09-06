@@ -182,5 +182,21 @@ class HostedStoreTests(unittest.TestCase):
         self.assertEqual(self.counts(),[1,1,1,1])
         with self.assertRaises(KeyError):self.store.get(self.a,'new-before-conflict')
 
+    def test_schema_metadata_lock_obeys_runtime_timeout(self):
+        import time
+        self.put()
+        blocker=self.pg.connect(**self.admin_info,dbname=self.database)
+        workers=ThreadPoolExecutor(max_workers=1)
+        try:
+            blocker.execute('LOCK TABLE cloud_schema IN ACCESS EXCLUSIVE MODE')
+            started=time.monotonic()
+            pending=workers.submit(self.store.get,self.a,'source-1')
+            with self.assertRaises((self.pg.errors.QueryCanceled,self.pg.errors.LockNotAvailable)):
+                pending.result(timeout=8)
+            self.assertLess(time.monotonic()-started,8)
+        finally:
+            blocker.rollback();blocker.close();workers.shutdown(wait=True)
+        self.assertEqual(self.store.get(self.a,'source-1')['revision'],1)
+
 
 if __name__=='__main__':unittest.main()
