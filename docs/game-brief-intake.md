@@ -166,6 +166,11 @@ python -m unittest discover -s tests -p 'test_game_brief*.py' -v
 
 Cloud008 owns the next planning/scope step. Cloud021 owns hosted identity and
 tenant policy; its reviewed principal must be wired in before this local
-editor can become a hosted feature. Engine execution, Unreal editor control,
+editor can become a hosted feature. This local intake document is not the
+tenant-bound `GameBrief` API record in `contracts/v1/domain.json`: that contract
+also requires a server-owned Project, tenant and lifecycle state. Downstream
+integration must resolve those records and map the reviewed requirements and
+version explicitly; it must not invent tenant or project authority from a local
+actor name. Engine execution, Unreal editor control,
 packaging a Windows game, and AI systems inside the shipped game remain
 separate downstream capabilities. This intake cannot certify any of them.
