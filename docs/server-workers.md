@@ -1,8 +1,9 @@
 # Server and worker qualification (AF-CLD-024)
 
-Work in progress. This task is not complete. The first implementation collects a
-read-only inventory of an explicitly selected development node. It reuses the
-merged Core hardware collector; it does not register a qualified worker yet.
+Work in progress. This task is not complete. The first component collects a
+read-only inventory of an explicitly selected development node. The next component
+provides an optional authenticated loopback admission API using the merged Core
+worker authority. Neither component qualifies remote execution.
 
 The separately reported server has no verified target, access or inventory in
 the current evidence. Do not infer that it is any development PC, scan possible
@@ -48,23 +49,21 @@ actual version/capability tests. Network isolation, sandbox behavior, workload
 capacity, worker admission and fault recovery require separate evidence. A report
 digest binds bytes; it does not authenticate the machine or prove freshness.
 
-The subsequent worker composition must retain Core as the sole scheduler and
+The worker composition retains Core as the sole scheduler and
 lease authority: `SQLiteStorage.record_worker_qualification`, worker lifecycle,
 `claim_runnable_task`, fenced attempts/renew/release, and `RuntimeBinding` already
-exist. Cloud owns tenant admission and the host-profile envelope. It must not add
-a second job table or copy Core fencing logic into PostgreSQL. Atomic qualification
-and lifecycle checks at dispatch, capacity across tenants and exact trusted
-tenant/run/task/worktree/attempt binding still need integration review before
-remote dispatch is enabled. No public worker endpoint is installed by this step.
+exist. Cloud owns authenticated access and the host-profile envelope. It must not
+add a second job table or copy Core fencing logic into PostgreSQL. Core's accepted
+AF-GC-043 now supplies atomic admission; the consumer is described below. Remote
+dispatch remains disabled and no worker endpoint is installed by default.
 
 Inspection on Core `60e7895` confirmed that its low-level trusted claim method
 can assign an unqualified quarantined synthetic worker. Identical worker-slot
 conflict domains in two projects do not reserve a global slot: Core normalizes
 those domains under each project. These are current primitive semantics, not a
 remote admission contract. A local isolated SQLite fixture reproduced both
-conditions without invoking any runtime. Do not implement a racy Cloud
-select-then-claim check or a second lease authority to hide this missing seam.
-The coordinator must review an upstream atomic admission boundary first.
+conditions without invoking any runtime. This historical finding led to the
+accepted Core AF-GC-043 boundary; it is not a claim about that newer implementation.
 
 Cloud's dependency is advanced from `29f67dc` to merged Core `60e7895` so the
 inventory collector is available. This dependency change requires explicit
@@ -81,3 +80,87 @@ clarification histories, original source identities/content and pre-existing
 table rows were preserved. The only changed old table was the migration ledger,
 which retained its old rows and added migrations 73 and 74. Four new Core tables
 were created. No model/provider was invoked and no new storage authority added.
+
+## Authenticated admission lab component
+
+The current dependency is accepted Core
+`765bea67f0164a71b24a8e5d042cd4d90c3e7101` (AF-GC-043). `WorkerGateway` delegates to
+`WorkerAdmissionService.admit` and `SQLiteStorage.renew_task_lease` in the same Core
+database used by the trusted host. Core owns qualification, worker/project/pool
+versions, lifecycle, global capacity, durable attempts, leases and fencing. Cloud
+has no new scheduler, lease table, qualification issuer or result store.
+
+Provisioning is a trusted host operation, not a remote registration API:
+
+1. The operator supplies the existing Core database and independently established
+   tenant ownership, worker registration, bounded pool capacity and qualification
+   evidence. Inventory alone does not supply any of those permissions.
+2. Construct immutable Core `AdmissionRequest` objects for explicitly approved
+   work. Preserve each request ID and every field across a host restart. A changed
+   scope needs a new request ID; the same ID with changed fields conflicts in Core.
+   Keep the allowlist bounded (at most 1024 requests) and private on the host.
+3. Generate each worker's random secret with `secrets.token_urlsafe(32)`. Deliver
+   it through the operator's authenticated private channel. Store only its SHA-256
+   digest in a `WorkerCredential` together with the exact Core worker ID, tenant
+   ID, worker-binding version and aware UTC issue/expiry times (at most one day).
+   The gateway accepts at most 64 credentials; raw secrets never enter Git, the
+   bus, URLs, receipts or the Core request/event record. Protect the host config
+   and database with OS access controls. The fixture tokens in tests are public
+   synthetic values and must never be reused.
+4. Construct `WorkerGateway(database, credentials=(...), requests=(...))`. To run
+   the explicit local lab, include `worker_gateway_router(gateway)` in a dedicated
+   FastAPI application, bind Uvicorn to `127.0.0.1`, disable proxy-header handling
+   and access logging, and apply bounded connection/time limits. This router is
+   absent from the default creator application and has no automatic startup CLI.
+
+The only HTTP operations are:
+
+| Operation | JSON body | Result |
+| --- | --- | --- |
+| `POST /worker/admissions` | `request_id` | New or replayed Core admission receipt |
+| `POST /worker/admissions/renew` | `request_id`, positive integer `fencing_token` | Renew the existing exact Core lease |
+
+Both require one `Authorization: Bearer ...` header. Worker-supplied tenant, task,
+provider, runtime, capability, TTL, worktree, result or stop fields are rejected.
+Bodies are limited to 1024 bytes with no extra or duplicate fields. Authentication
+precedes body reception and is checked again when applying the operation. Unknown
+and other-worker request IDs receive the same denial. Only loopback peers and
+loopback Host values are accepted; browser Origin and forwarding headers are
+rejected. Failures use fixed redacted codes and `no-store` responses.
+
+Credential revocation/rotation updates the Core worker binding using its expected
+version, then provisions a new secret bound to the new version. Disabling and
+re-enabling a binding does not revive an older credential or its admission.
+Credential expiry stops gateway access but does not prove a process stopped or
+release a Core slot. Plan rotation and stop reconciliation together; do not delete
+an occupancy record to restore access.
+
+A receipt includes tenant, worker, project, task, run, stage, attempt, assignment,
+lease, fence and expiry identifiers. A ready Core worktree ID is included only
+when its task, attempt, assignment, lease, fence and owner match; private paths are
+omitted. Its presence is still not launcher qualification. Every response has
+`execution_eligible=false` and `blocked_reason=remote_launcher_unqualified`.
+`active` describes Core lease authority at observation time, not remote execution
+permission. Expired/revoked replay can return an inactive historical receipt.
+
+Core allows an existing admission to renew during its first draining transition,
+while denying new admissions. Quarantine, stale qualification or authority
+versions deny renewal. Expired leases and disconnected workers retain occupied
+capacity. Only a trusted host's exact-fence `reconcile_stopped` call may free it
+after independently proving the launcher/process stopped. There is deliberately
+no worker HTTP stop, release, launch or result endpoint; a worker acknowledgement
+is not that proof. A stale renewal cannot revive the reconciled admission.
+
+The component tests use actual disposable SQLite databases and a real loopback
+HTTP server, including transport restart, replay, cross-tenant slot competition,
+revocation, drain/quarantine, lease loss and host reconciliation. Test worktree
+rows and qualification records are synthetic; no remote host, engine, provider
+or model is invoked. AF-CLD-024 still needs independently verified server access,
+an authenticated encrypted remote transport, sandbox/toolchain qualification,
+an exact-bound launcher/result path and actual process-loss/replacement drills.
+
+The `60e7895` → `765bea6` dependency upgrade also reopened an actual old Core/Cloud
+fixture with two briefs, six historical versions and two clarification histories.
+Every existing row, original source and current/historical brief was preserved;
+only the Core migration ledger gained migration 75 and four admission tables
+were added. This supplements the earlier `29f67dc` → `60e7895` preservation check.
