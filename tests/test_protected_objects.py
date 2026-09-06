@@ -85,6 +85,15 @@ class ProtectedObjectTests(unittest.TestCase):
         with self.objects.transaction(self.a) as db:
             return self.objects.row(db, self.a, ident)
 
+    def assert_erased(self, ident):
+        key = self.row(ident)['object_key']
+        value = self.client.get_object(Bucket=self.bucket, Key=key)
+        try:
+            self.assertEqual(value['Body'].read(), b'')
+            self.assertEqual(value['Metadata'], {'agentfactory-deleted': 'v1'})
+        finally:
+            value['Body'].close()
+
     def test_real_roundtrip_manifest_export_and_tenant_denial(self):
         from agentfactory_cloud.protected_objects import ObjectUnavailable
         item = self.upload(); ident = item['id']
@@ -133,7 +142,7 @@ class ProtectedObjectTests(unittest.TestCase):
         with self.assertRaises(StoreConflict): self.upload(data=b'changed')
         self.objects.delete(self.a, first['id'])
         self.assertEqual(self.upload()['state'], 'deleted')
-        self.assertEqual(self.client.list_objects_v2(Bucket=self.bucket).get('KeyCount', 0), 0)
+        self.assert_erased(first['id'])
 
     def test_concurrent_same_command_returns_one_stable_identity(self):
         with ThreadPoolExecutor(max_workers=2) as workers:
@@ -204,7 +213,81 @@ class ProtectedObjectTests(unittest.TestCase):
             self.assertEqual(row['state'], 'pending')
         self.assertEqual(self.objects.cleanup(self.a)[0]['state'], 'deleted')
         self.assertEqual(self.upload()['state'], 'deleted')
-        self.assertEqual(self.client.list_objects_v2(Bucket=self.bucket).get('KeyCount', 0), 0)
+        self.assert_erased(str(row['id']))
+
+    def test_late_put_after_backend_loss_and_cleanup_cannot_recreate_payload(self):
+        entered, release = threading.Event(), threading.Event()
+        errors, active_pid = [], []
+        original_transaction, original_put = self.objects.transaction, self.blobs.put
+        @contextmanager
+        def tracked(context):
+            with original_transaction(context) as db:
+                active_pid[:] = [db.execute('SELECT pg_backend_pid() AS pid').fetchone()['pid']]
+                yield db
+        self.objects.transaction = tracked
+        def delayed(*args):
+            entered.set()
+            if not release.wait(10):
+                raise TimeoutError('Test PUT release deadline')
+            original_put(*args)
+        self.blobs.put = delayed
+        def upload():
+            try:
+                self.upload()
+            except Exception as exc:
+                errors.append(type(exc).__name__)
+        thread = threading.Thread(target=upload); thread.start()
+        try:
+            self.assertTrue(entered.wait(5))
+            self.admin.execute('SELECT pg_terminate_backend(%s)', (active_pid[0],))
+            deleted = self.objects.cleanup(self.a)
+            self.assertEqual(deleted[0]['state'], 'deleted')
+            release.set(); thread.join(10)
+            self.assertFalse(thread.is_alive()); self.assertTrue(errors)
+            self.assert_erased(deleted[0]['id'])
+            self.assertEqual(self.objects.manifest(self.a, deleted[0]['id'])['state'], 'deleted')
+            self.assertEqual(sum(o['Size'] for o in self.client.list_objects_v2(Bucket=self.bucket)['Contents']), 0)
+            self.blobs.put = original_put
+            self.objects.configure_quota(self.a, 1)
+            self.assertEqual(self.upload(data=b'x', command_id='after-erasure')['state'], 'ready')
+        finally:
+            release.set(); thread.join(10)
+            self.blobs.put = original_put
+            self.objects.transaction = original_transaction
+
+    def test_conditional_erase_rechecks_when_pending_upload_wins_create_race(self):
+        from unittest.mock import patch
+        with patch.object(self.blobs, 'put', side_effect=OSError('Before actual PUT')):
+            with self.assertRaises(OSError): self.upload()
+        with self.objects.transaction(self.a) as db:
+            row = db.execute('SELECT * FROM cloud_objects').fetchone()
+        item, key = self.objects.public(row), row['object_key']
+        # The late upload wins immediately after the eraser observes absence.
+        # Its first create must conflict, then CAS erases the now-existing bytes.
+        original = self.blobs.client.put_object
+        raced = []
+        def put(**kwargs):
+            if kwargs['Body'] == b'' and kwargs.get('IfNoneMatch') == '*' and not raced:
+                raced.append(True)
+                self.client.put_object(Bucket=self.bucket, Key=key, Body=b'print("safe synthetic game")', IfNoneMatch='*')
+            return original(**kwargs)
+        self.blobs.client.put_object = put
+        try:
+            self.assertEqual(self.objects.delete(self.a, item['id'])['state'], 'deleted')
+            self.assertTrue(raced)
+            self.assert_erased(item['id'])
+        finally:
+            self.blobs.client.put_object = original
+
+    def test_retained_manifest_cap_includes_deleted_storage_fences(self):
+        from unittest.mock import patch
+        from agentfactory_cloud.hosted_store import StoreConflict
+        with patch('agentfactory_cloud.protected_objects.MAX_MANIFESTS', 1):
+            item = self.upload()
+            self.objects.delete(self.a, item['id'])
+            with self.assertRaises(StoreConflict): self.upload(command_id='second')
+            self.assertEqual(self.upload()['state'], 'deleted')
+            self.assert_erased(item['id'])
 
     def test_interrupted_delete_retains_quota_and_blocks_new_reference(self):
         from agentfactory_cloud.hosted_store import StoreConflict

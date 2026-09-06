@@ -70,6 +70,10 @@ Quota defaults to unavailable, includes pending/ready/deleting bytes, and is che
 under a same-tenant PostgreSQL advisory lock. Lowering a quota blocks additional
 uploads without deleting existing objects. This profile serializes same-tenant
 operations, including bounded S3 I/O; it makes no high-throughput claim.
+The profile also caps retained manifests at 10,000 per tenant, including deleted
+objects, so zero-byte storage fences cannot accumulate without a metadata limit.
+Payload quota can be reused after erasure; the durable manifest limit is not
+reset by deleting bytes. Larger retained histories require an explicit profile.
 
 `upload` requires a stable command ID, exact SHA-256, external origin kind/ID and
 provenance reference, path/media label and a timezone-aware retention timestamp.
@@ -101,9 +105,14 @@ in arbitrary external JSON. References may attach only to ready objects.
 
 `delete` first checks retained-until time and current references under the same
 tenant lock, then commits a deleting tombstone. New references are blocked. It
-deletes the S3 object and confirms absence before committing deleted state and
-releasing quota. A lost delete response leaves deleting state; retry safely
-confirms absence. Repeated deletion is idempotent. Cancellation of an abandoned
+replaces the payload with a permanent zero-byte S3 tombstone at the same key,
+using conditional create or ETag compare-and-swap, and confirms zero length and
+the marker metadata before committing deleted state and releasing payload quota.
+The key is never removed: a delayed `If-None-Match` upload cannot recreate bytes
+even after its PostgreSQL connection has died and released the database lock.
+If the late upload wins the first S3 create race, erasure retries against that
+object's ETag. A lost erasure response leaves deleting state; retry checks the
+same storage fence. Repeated deletion is idempotent. Cancellation of an abandoned
 pending upload uses this same method; an unexpired retention period still blocks
 physical erasure rather than bypassing policy.
 
@@ -115,7 +124,8 @@ background cleanup process is launched by this component.
 
 Append-only events retain actor, operation, object ID and digest evidence. The
 `evidence` API is tenant-bound and paged with a timestamp/UUID cursor. Manifests and
-events remain after byte deletion. Their metadata retention and privacy policy,
+events and zero-byte S3 fences remain after byte deletion. Fence removal is not
+supported by this profile; it would reopen late-upload races. Metadata retention and privacy policy,
 backup protection, key custody and production release need a separate reviewed
 operational configuration before real user data is stored.
 
@@ -153,12 +163,13 @@ Tests use separate synthetic tenants and real services for round trips, source/
 build/asset envelopes, anonymous/cross-tenant denial, actual redacted S3 access
 logs, quota/replay races, malicious archives and the harmless EICAR antivirus test
 string. Fault cases include lost PUT/DELETE responses, actual PostgreSQL backend
-termination after PUT, retained quota, idempotent recovery, corrupted stored bytes,
+termination after PUT and before a delayed PUT, retained quota, storage-fence
+create/CAS races, idempotent recovery, corrupted stored bytes,
 reference races and immutable SQL history. Source/build samples are synthetic
 storage payloads; these tests do not certify a generated game or deployed Cloud.
 Absent opt-in infrastructure causes explicit skips, not runtime qualification.
 Exact-commit results and independent review belong in the task PR.
 
-The adapter follows the official [S3 conditional PUT contract](https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html),
+The adapter follows the official [S3 conditional write contract](https://docs.aws.amazon.com/AmazonS3/latest/userguide/conditional-writes.html),
 [ClamD streaming protocol](https://docs.clamav.net/manual/Usage/ClamdProtocol.html)
 and [MinIO audit webhook format](https://github.com/minio/minio/blob/master/docs/logging/README.md).

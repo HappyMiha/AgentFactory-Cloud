@@ -16,6 +16,8 @@ from .hosted_store import HostedStore, StoreConflict, canonical, digest, identif
 from .object_migrations import DIGEST, TABLES, VERSION
 from .upload_inspection import MAX_BYTES, inspect_upload
 
+MAX_MANIFESTS = 10000
+
 
 class ObjectUnavailable(KeyError):
     pass
@@ -84,14 +86,36 @@ class S3Objects:
         self.read(key, len(data), manifest['sha256'])
 
     def delete(self, key):
-        self.client.delete_object(Bucket=self.bucket, Key=key)
-        try:
-            self.client.head_object(Bucket=self.bucket, Key=key)
-        except ClientError as exc:
-            if exc.response['ResponseMetadata']['HTTPStatusCode'] == 404:
+        """Erase payload but retain the key as a fence against late conditional PUTs.
+
+        A PostgreSQL connection can die while a remote request is still in flight.
+        Removing the key would let that request recreate unaccounted bytes after
+        cleanup. Every writer here is conditional; a zero-byte marker permanently
+        occupies the immutable key, including when the upload has not reached S3.
+        """
+        for _ in range(3):
+            try:
+                head = self.client.head_object(Bucket=self.bucket, Key=key)
+            except ClientError as exc:
+                if exc.response['ResponseMetadata']['HTTPStatusCode'] != 404:
+                    raise
+                condition = {'IfNoneMatch': '*'}
+            else:
+                if head['ContentLength'] == 0 and head.get('Metadata', {}).get('agentfactory-deleted') == 'v1':
+                    return
+                condition = {'IfMatch': head['ETag']}
+            try:
+                self.client.put_object(Bucket=self.bucket, Key=key, Body=b'',
+                                       ContentType='application/octet-stream',
+                                       Metadata={'agentfactory-deleted': 'v1'}, **condition)
+            except ClientError as exc:
+                if exc.response['ResponseMetadata']['HTTPStatusCode'] not in (409, 412):
+                    raise
+                continue
+            head = self.client.head_object(Bucket=self.bucket, Key=key)
+            if head['ContentLength'] == 0 and head.get('Metadata', {}).get('agentfactory-deleted') == 'v1':
                 return
-            raise
-        raise StoreConflict('Object deletion not yet confirmed')
+        raise StoreConflict('Payload erasure fence not yet confirmed')
 
 
 @dataclass
@@ -175,8 +199,8 @@ class ProtectedObjects:
                 ident = old['id']
             else:
                 quota = db.execute('SELECT bytes_limit FROM cloud_object_quotas WHERE tenant_id=%s', (context.tenant_id,)).fetchone()
-                used = db.execute("SELECT COALESCE(SUM(size),0) AS used FROM cloud_objects WHERE tenant_id=%s AND state<>'deleted'", (context.tenant_id,)).fetchone()['used']
-                if not quota or used + len(data) > quota['bytes_limit']:
+                usage = db.execute("SELECT COUNT(*) AS manifests, COALESCE(SUM(size) FILTER(WHERE state<>'deleted'),0) AS used FROM cloud_objects WHERE tenant_id=%s", (context.tenant_id,)).fetchone()
+                if not quota or usage['used'] + len(data) > quota['bytes_limit'] or usage['manifests'] >= MAX_MANIFESTS:
                     raise StoreConflict('Object quota unavailable or exhausted')
                 ident = uuid.uuid4()
                 key = 'objects/' + hashlib.sha256(context.tenant_id.encode()).hexdigest() + '/' + ident.hex
@@ -242,7 +266,7 @@ class ProtectedObjects:
             if row['state'] == 'deleting':
                 self.blobs.delete(row['object_key'])
                 db.execute("UPDATE cloud_objects SET state='deleted' WHERE tenant_id=%s AND id=%s", (context.tenant_id, row['id']))
-                self.event(db, context, row['id'], 'deletion_confirmed', {'sha256': row['manifest']['sha256']})
+                self.event(db, context, row['id'], 'deletion_confirmed', {'sha256': row['manifest']['sha256'], 'payload_bytes': 0, 'storage_fence': 'zero-byte-tombstone-v1'})
             return self.public(self.row(db, context, ident))
 
     def cleanup(self, context, *, limit=50):

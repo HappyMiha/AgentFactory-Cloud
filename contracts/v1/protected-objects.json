@@ -11,11 +11,12 @@
   "envelope_fields": ["id", "tenant_id", "state", "manifest"],
   "states": ["pending", "ready", "deleting", "deleted"],
   "upload": "tenant/actor command replay; reserve quota before conditional S3 PUT; verify complete content before ready",
-  "deletion": "retention and references checked before deleting tombstone; confirm S3 absence before releasing quota",
+  "deletion": "retention and references checked before deleting state; conditionally replace bytes with a permanent zero-byte S3 fence and verify it before releasing payload quota; late conditional uploads cannot recreate content",
   "cleanup": "bounded managed-manifest scan with reference recheck; never delete unmanaged bucket keys",
   "export": "verify actual digest, then commit tenant audit before returning bytes; no presigned capabilities",
   "limits": {
     "object_bytes": 8388608,
+    "retained_manifests_per_tenant": 10000,
     "zip_entries": 256,
     "zip_expanded_bytes": 33554432,
     "zip_entry_bytes": 8388608,
