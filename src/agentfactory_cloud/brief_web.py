@@ -13,6 +13,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 from agent_factory.http_auth import COOKIE, LocalAccess, LocalHTTPBoundary
 from .game_briefs import BriefConflict, BriefStore, FIELDS, LocalBriefModel
 from .scope_plans import ScopePlans, LABELS, ENGINES, TARGETS
+from .game_team_web import install_routes as install_team_routes
 
 
 class Command(BaseModel):
@@ -85,6 +86,7 @@ def create_app(folder: Path, *, model=None):
     app.add_middleware(LocalHTTPBoundary, access=access)
     static = Path(__file__).parent / 'static'
     app.mount('/static', StaticFiles(directory=static), name='static')
+    install_team_routes(app, store)
 
     def actor(request):
         return request.state.local_principal.actor

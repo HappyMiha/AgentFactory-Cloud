@@ -3058,5 +3058,16 @@
       ],
       "resolution": "Independently approve commercial policy and the signed GA scope with enabled-feature gates. Mapping, simulated payment events and non-game examples cannot approve a release."
     }
+  ],
+  "component_consumers": [
+    {
+      "task": "AF-CLD-009",
+      "core_commit": "7ec9ff33f1c4e7f2980e4b121d05f3c366acedd1",
+      "interface": "Core RoleRegistry and WorkforceComposer empty-candidate assessment",
+      "role_pack": "1.0.0",
+      "qualification": "proposal-only",
+      "live_execution": false,
+      "evidence": "docs/game-teams.md"
+    }
   ]
 }

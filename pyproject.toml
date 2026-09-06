@@ -7,7 +7,7 @@ name = "agentfactory-cloud"
 version = "0.1.0"
 description = "AgentFactory creator intake, local development profile"
 requires-python = ">=3.11"
-dependencies = ["agent-factory-orchestrator[web] @ git+https://github.com/HappyMiha/AgentFactory.git@765bea67f0164a71b24a8e5d042cd4d90c3e7101"]
+dependencies = ["agent-factory-orchestrator[web] @ git+https://github.com/HappyMiha/AgentFactory.git@7ec9ff33f1c4e7f2980e4b121d05f3c366acedd1"]
 
 [project.scripts]
 agentfactory-brief = "agentfactory_cloud.brief_web:main"

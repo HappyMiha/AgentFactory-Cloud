@@ -220,3 +220,7 @@ On Windows use `python`. The optional Git check uses only read commands against 
 When changing Core versions, first review the actual diff and retain the old evidence references. Pin the new Core commit, qualify the relevant interface/pack/toolchain/profile and record independently accepted consumer results. Missing, stale or incompatible evidence keeps the affected integration blocked; retain the previous qualified deployment instead of silently upgrading it. Update all affected rows, the evidence index and this table in one reviewed change. Changes to the allowed accepted-evidence model need explicit schema/validator review; this planning-only schema deliberately rejects unsupported `verified` claims.
 
 The current automatic coordination workflow runs its selected tooling modules. It does not automatically run this new map suite. The task's exact-commit local check must include `test_upstream_map`; its result and the pinned-object check belong in the PR evidence. This task does not modify the shared workflow owned by coordination tooling.
+
+## Game-team proposal consumer
+
+AF-CLD-009 role pack 1.0.0 consumes Core `7ec9ff33f1c4e7f2980e4b121d05f3c366acedd1` for RoleRegistry and WorkforceComposer gap assessments. The package dependency uses this newer source pin; the historical catalogue baseline above remains unchanged. This component has empty candidate pools and no execution authority. Current connection resolution, live independent review, work progress and stop integration remain unaccepted. See [game-team component evidence](game-teams.md).
