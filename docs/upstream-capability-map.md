@@ -224,3 +224,5 @@ The current automatic coordination workflow runs its selected tooling modules. I
 ## Game-team proposal consumer
 
 AF-CLD-009 role pack 1.0.0 consumes Core `7ec9ff33f1c4e7f2980e4b121d05f3c366acedd1` for RoleRegistry and WorkforceComposer gap assessments. The package dependency uses this newer source pin; the historical catalogue baseline above remains unchanged. This component has empty candidate pools and no execution authority. Current connection resolution, live independent review, work progress and stop integration remain unaccepted. See [game-team component evidence](game-teams.md).
+
+AF-CLD-027 consumes the same accepted Core pin for read-only provider catalogue and eligibility guidance. It supplies no connection/evaluator authority or live qualification; see [connection-guidance.md](connection-guidance.md).
