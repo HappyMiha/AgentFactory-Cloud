@@ -1,10 +1,12 @@
 import hashlib
+from datetime import datetime, timezone
 import io
 from pathlib import Path
 import socket
 import stat
 import sys
 import threading
+import time
 import unittest
 import zipfile
 
@@ -86,3 +88,48 @@ class UploadInspectionTests(unittest.TestCase):
                 ClamdScanner(port).scan(b'hello')
             thread.join(2)
         with self.assertRaises(InspectionBlocked): ClamdScanner(port, timeout=0.2).scan(b'hello')
+
+    def test_trickled_version_cannot_extend_whole_scan_deadline(self):
+        with socket.socket() as server:
+            server.bind(('127.0.0.1', 0)); server.listen(); server.settimeout(2)
+            version = ('ClamAV 1.4.6/123/'+datetime.now(timezone.utc).strftime('%a %b %d %H:%M:%S %Y')+'\0').encode()
+            def trickle():
+                try:
+                    with server.accept()[0] as connection:
+                        connection.recv(128)
+                        for byte in version:
+                            time.sleep(0.01)
+                            connection.sendall(bytes([byte]))
+                    with server.accept()[0] as connection:
+                        connection.recv(1024); connection.sendall(b'stream: OK\0')
+                except OSError:
+                    pass  # The deadline closes the scanner connection.
+            thread = threading.Thread(target=trickle); thread.start()
+            try:
+                start = time.monotonic()
+                with self.assertRaises(InspectionBlocked):
+                    ClamdScanner(server.getsockname()[1], timeout=0.08).scan(b'hello')
+                self.assertLess(time.monotonic()-start, 0.5)
+            finally:
+                thread.join(3)
+                self.assertFalse(thread.is_alive())
+
+    def test_version_and_instream_share_one_deadline(self):
+        with socket.socket() as server:
+            server.bind(('127.0.0.1', 0)); server.listen(); server.settimeout(2)
+            version = ('ClamAV 1.4.6/123/'+datetime.now(timezone.utc).strftime('%a %b %d %H:%M:%S %Y')+'\0').encode()
+            def delayed():
+                try:
+                    with server.accept()[0] as connection:
+                        connection.recv(128); time.sleep(0.15); connection.sendall(version)
+                    with server.accept()[0] as connection:
+                        connection.recv(1024); time.sleep(0.15); connection.sendall(b'stream: OK\0')
+                except OSError:
+                    pass
+            thread = threading.Thread(target=delayed); thread.start()
+            try:
+                with self.assertRaises(InspectionBlocked):
+                    ClamdScanner(server.getsockname()[1], timeout=0.25).scan(b'hello')
+            finally:
+                thread.join(3)
+                self.assertFalse(thread.is_alive())

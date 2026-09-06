@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone, timedelta
 import hashlib
 import io
+import math
 import re
 import socket
 import stat
@@ -82,13 +83,32 @@ class ClamdScanner:
     port: int
     timeout: float = 10
 
-    def _connect(self):
-        return socket.create_connection(('127.0.0.1', self.port), timeout=self.timeout)
+    def __post_init__(self):
+        if type(self.port) is not int or not 1 <= self.port <= 65535:
+            raise ValueError('Invalid scanner port')
+        if type(self.timeout) not in (int, float) or not math.isfinite(self.timeout) or not 0 < self.timeout <= 30:
+            raise ValueError('Scanner deadline must be positive and at most 30 seconds')
 
     @staticmethod
-    def _response(connection):
+    def _remaining(deadline):
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise InspectionBlocked('Malware inspection timed out')
+        return remaining
+
+    def _connect(self, deadline):
+        return socket.create_connection(('127.0.0.1', self.port), timeout=self._remaining(deadline))
+
+    @classmethod
+    def _send(cls, connection, data, deadline):
+        connection.settimeout(cls._remaining(deadline))
+        connection.sendall(data)
+
+    @classmethod
+    def _response(cls, connection, deadline):
         result = b''
         while b'\0' not in result and len(result) <= 4096:
+            connection.settimeout(cls._remaining(deadline))
             part = connection.recv(1024)
             if not part:
                 break
@@ -98,10 +118,12 @@ class ClamdScanner:
         return result[:-1].decode('ascii', errors='strict')
 
     def scan(self, data):
+        # VERSION and INSTREAM consume one shared budget, including every chunk.
+        deadline = time.monotonic() + self.timeout
         try:
-            with self._connect() as connection:
-                connection.sendall(b'zVERSION\0')
-                version = self._response(connection)
+            with self._connect(deadline) as connection:
+                self._send(connection, b'zVERSION\0', deadline)
+                version = self._response(connection, deadline)
             parts = version.split('/')
             if len(parts) != 3 or not parts[0].startswith('ClamAV ') or not parts[1].isdigit():
                 raise InspectionBlocked('Unqualified malware scanner version')
@@ -109,13 +131,14 @@ class ClamdScanner:
             age = datetime.now(timezone.utc) - signature_time
             if not timedelta(minutes=-5) <= age <= timedelta(days=7):
                 raise InspectionBlocked('Malware signatures are stale')
-            with self._connect() as connection:
-                connection.sendall(b'zINSTREAM\0')
+            with self._connect(deadline) as connection:
+                self._send(connection, b'zINSTREAM\0', deadline)
                 for offset in range(0, len(data), 65536):
                     chunk = data[offset:offset+65536]
-                    connection.sendall(struct.pack('!I', len(chunk)) + chunk)
-                connection.sendall(b'\0\0\0\0')
-                response = self._response(connection)
+                    self._send(connection, struct.pack('!I', len(chunk)) + chunk, deadline)
+                self._send(connection, b'\0\0\0\0', deadline)
+                response = self._response(connection, deadline)
+            self._remaining(deadline)
             if response != 'stream: OK':
                 raise InspectionBlocked('Malware policy blocked upload')
             return {'engine': parts[0], 'signature_version': parts[1],

@@ -41,6 +41,9 @@ The isolated daemon uses UTC; the receipt records engine and signature versions,
 signature time and content digest. A clear malware result is one inspection
 result, never a guarantee that executing generated code is safe. Code execution
 still needs the separately owned sandbox capability.
+VERSION and INSTREAM share one monotonic deadline (ten seconds by default),
+including both connections and every send/receive. Progress bytes cannot renew
+that budget. A configured deadline must be positive and at most thirty seconds.
 
 The initial object limit is 1 byte through 8 MiB, read into bounded memory before
 reservation. A future HTTP consumer must enforce the same ingress limit before
