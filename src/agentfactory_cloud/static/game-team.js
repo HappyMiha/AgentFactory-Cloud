@@ -1,7 +1,6 @@
 "use strict";
 (()=>{
- const byId=id=>document.getElementById(id),link=byId('team-link');
- if(link){link.href='/game-team'+location.hash;return;}
+ const byId=id=>document.getElementById(id);
  const ident=location.hash.slice(1),url='/api/briefs/'+encodeURIComponent(ident)+'/team';
  byId('scope-link').href='/first-playable'+location.hash;
  let current=null,generation=0,busy=false;

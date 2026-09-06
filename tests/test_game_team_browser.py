@@ -32,3 +32,32 @@ class GameTeamBrowserTests(unittest.TestCase):
     def test_scope_page_links_exact_idea(self):
         ident=self.team();self.page.goto(self.url+'first-playable#'+ident)
         self.assertEqual(self.page.locator('#team-link').get_attribute('href'),'/game-team#'+ident)
+
+    def test_team_navigation_preserves_unsaved_scope_until_confirmed(self):
+        ident=self.team();self.page.goto(self.url+'first-playable#'+ident)
+        self.page.locator('#scope-goal').fill('Keep my unsaved garden goal')
+        for cancel in ('escape','button'):
+            self.page.locator('#team-link').click();self.page.locator('#confirm').wait_for(state='visible')
+            if cancel=='escape':self.page.keyboard.press('Escape')
+            else:self.page.locator('#confirm button[value="cancel"]').click()
+            self.page.locator('#confirm').wait_for(state='hidden')
+            self.assertIn('/first-playable#'+ident,self.page.url)
+            self.assertEqual(self.page.locator('#scope-goal').input_value(),'Keep my unsaved garden goal')
+        self.page.locator('#team-link').click();self.page.locator('#confirm-action').click()
+        self.page.wait_for_url('**/game-team#'+ident);self.page.wait_for_selector('#roles article')
+        self.assertEqual(self.model.calls,0)
+    def test_team_navigation_waits_for_inflight_scope_save(self):
+        ident=self.team();self.page.goto(self.url+'first-playable#'+ident)
+        self.page.locator('#scope-goal').fill('Saved garden goal')
+        pending=[];self.page.route('**/edit',lambda route:pending.append(route))
+        try:
+            self.page.locator('#save').click()
+            self.page.wait_for_function("document.querySelector('#save').disabled")
+            self.page.locator('#team-link').click()
+            self.assertIn('/first-playable#'+ident,self.page.url)
+            self.assertFalse(self.page.locator('#confirm').is_visible())
+            self.assertTrue(pending)
+        finally:
+            for route in pending:route.continue_()
+        self.page.wait_for_function("document.querySelector('#status').textContent.startsWith('Scope saved')")
+        self.page.locator('#team-link').click();self.page.wait_for_url('**/game-team#'+ident)
