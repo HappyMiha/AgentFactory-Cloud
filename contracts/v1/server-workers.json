@@ -1,0 +1,27 @@
+{
+  "contract_version": 1,
+  "task": "AF-CLD-024",
+  "status": "inventory_component_only",
+  "profile": "development-node-inventory-v1",
+  "core_dependency": "60e7895940359fdcf7ea32e4d38f7d6d5e3e97ed",
+  "inventory_owner": "Core hardware_inventory.collect_inventory",
+  "job_authority": "Core scheduler and worker runtime",
+  "cloud_responsibility": "Tenant admission and host-profile evidence",
+  "qualified_capabilities": [],
+  "execution_eligible": false,
+  "reported_server": "Unknown target/access; not inventoried or qualified",
+  "required_before_dispatch": [
+    "Authenticated worker identity and trusted tenant binding",
+    "Atomic Core qualification, lifecycle and capacity admission",
+    "Exact tenant/run/task/worktree/attempt binding",
+    "Tested toolchain versions and bounded workload qualification",
+    "Lease expiry, stale completion, drain, quarantine, loss and replacement drills"
+  ],
+  "separate_acceptance_gates": [
+    "Reported server inventory and access",
+    "Worker registration and synthetic lab fault evidence",
+    "Sandbox qualification",
+    "Provider/model execution qualification",
+    "Hosted production readiness"
+  ]
+}
