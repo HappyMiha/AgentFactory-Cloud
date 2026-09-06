@@ -9,7 +9,7 @@
     },
     "cloud": {
       "repository": "HappyMiha/AgentFactory-Cloud",
-      "commit": "99b7c9c5942b28165d53ca1ff7240f1cbeff6e5b",
+      "commit": "720c79b3530cf2dddfd8b0351094a0763f757a63",
       "manifest": "examples/agentfactory-cloud-backlog.json"
     },
     "interface_version": "unqualified-at-pin",
