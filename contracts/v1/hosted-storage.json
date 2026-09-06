@@ -1,0 +1,42 @@
+{
+  "contract_version": "0.1.0",
+  "status": "implemented-component-awaiting-peer-review",
+  "owner": "Cloud product persistence",
+  "core_authority": "AutonomousMissionIntakeService and existing Core execution state",
+  "record_boundary": "explicit trusted tenant context; external immutable Core references",
+  "transaction_members": [
+    "record mutation",
+    "idempotency result",
+    "append-only audit",
+    "outbox event"
+  ],
+  "outbox_semantics": "at-least-once delivery with stable event identity and matching lease acknowledgement",
+  "not_authority_for": [
+    "mission execution",
+    "provider invocation",
+    "team task claims",
+    "payments",
+    "hosted launch"
+  ],
+  "qualification_required": [
+    "actual PostgreSQL restricted-role tenant tests",
+    "identity-preserving synthetic SQLite migration",
+    "transaction interruption",
+    "outbox retry",
+    "encrypted backup and fresh database restore"
+  ],
+  "profile": {
+    "database": "PostgreSQL 17.11",
+    "scope": "Cloud-owned storage envelopes, not Core mission tables or hosted APIs",
+    "local_profile": "existing SQLite retained",
+    "runtime_role": "unprivileged non-owner with row-level tenant policy",
+    "snapshot_limits": {
+      "records": 1000,
+      "canonical_bytes": 65536
+    },
+    "lease_seconds": {
+      "min": 1,
+      "max": 300
+    }
+  }
+}
