@@ -109,4 +109,27 @@ class IdentityAPITests(unittest.TestCase):
         self.assertEqual(self.client.post('/identity/sessions',json={'account_id':self.a['account_id'],'secret':self.a['login_secret']}).status_code,401)
 
 
+    def test_unpaired_surrogate_credentials_return_private_400_without_mutation(self):
+        import json
+        headers = self.login()
+        for secret in ('\ud800', '\udfff', 'valid-prefix' + '\ud800'):
+            for endpoint in ('sessions', 'recovery'):
+                for account in (self.a['account_id'], 'unknown-account'):
+                    response = self.client.post('/identity/' + endpoint,
+                        content=json.dumps({'account_id': account, 'secret': secret}))
+                    self.assertEqual(response.status_code, 400)
+                    self.assertEqual(response.headers['cache-control'], 'no-store')
+                    self.assertEqual(response.json(), {'detail': {'code': 'invalid_request'}})
+            response = self.client.post('/identity/account/deletion',
+                headers={**headers, 'X-Identity-Confirm': 'true'},
+                content=json.dumps({'login_secret': secret, 'confirmed': True}))
+            self.assertEqual(response.status_code, 400)
+            self.assertEqual(response.headers['cache-control'], 'no-store')
+            self.assertEqual(self.client.get('/identity/session', headers=headers).status_code, 200)
+        self.login()  # Original credential still works; invalid bodies did not consume login attempts.
+        recovered = self.client.post('/identity/recovery', json={
+            'account_id': self.a['account_id'], 'secret': self.a['recovery_secret']})
+        self.assertEqual(recovered.status_code, 200)
+
+
 if __name__=='__main__':unittest.main()

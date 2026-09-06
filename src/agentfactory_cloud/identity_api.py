@@ -34,7 +34,9 @@ def identity_router(service):
             for key in fields:
                 if key=='confirmed':
                     if type(value[key]) is not bool:raise ValueError()
-                elif not isinstance(value[key],str) or not 1<=len(value[key])<=256:raise ValueError()
+                else:
+                    if not isinstance(value[key],str) or not 1<=len(value[key])<=256:raise ValueError()
+                    value[key].encode('utf-8')  # Reject unpaired JSON surrogate escapes before authentication.
             return value
         except (ValueError,TypeError,UnicodeError,RecursionError):
             error(400,'invalid_request')  # Never echo supplied credentials or JSON.

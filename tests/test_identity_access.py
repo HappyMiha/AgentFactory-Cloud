@@ -189,4 +189,22 @@ class IdentityTests(unittest.TestCase):
         self.assertEqual(self.service.authenticate(self.token), self.principal)
         self.assertTrue(self.service.authorize(self.principal, 'read', self.resource()))
 
+    def test_unpaired_surrogate_credentials_fail_closed_without_revocation(self):
+        from agentfactory_cloud.identity import matches
+        for secret in ('\ud800', '\udfff', 'valid-prefix' + '\ud800'):
+            self.assertFalse(matches('a' * 64, secret))
+            with self.assertRaises(AccessDenied):
+                self.service.login(self.a['account_id'], secret, client_key='peer')
+            with self.assertRaises(AccessDenied):
+                self.service.recover(self.a['account_id'], secret, client_key='peer')
+            with self.assertRaises(AccessDenied):
+                self.service.request_deletion(self.principal, secret, client_key='peer')
+            with self.assertRaises(AccessDenied):
+                self.service.authenticate('x' * 24 + secret)
+        self.assertEqual(self.service.authenticate(self.token), self.principal)
+        renewed = self.service.login(self.a['account_id'], self.a['login_secret'], client_key='peer')
+        self.assertEqual(self.service.authenticate(renewed).account_id, self.a['account_id'])
+        self.assertIn('login_secret', self.service.recover(self.a['account_id'], self.a['recovery_secret'], client_key='peer'))
+
+
 if __name__=='__main__':unittest.main()

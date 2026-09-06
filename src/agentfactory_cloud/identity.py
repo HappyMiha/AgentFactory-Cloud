@@ -18,7 +18,12 @@ def valid_id(value):
 
 
 def matches(expected, candidate):
-    return bool(expected) and isinstance(candidate, str) and len(candidate) <= 256 and hmac.compare_digest(expected, hashed(candidate))
+    if not expected or not isinstance(candidate, str) or len(candidate) > 256:
+        return False
+    try:
+        return hmac.compare_digest(expected, hashed(candidate))
+    except UnicodeError:
+        return False
 
 
 @dataclass(frozen=True)
@@ -133,7 +138,10 @@ class IdentityService:
 
     def authenticate(self, token):
         if not isinstance(token,str) or not 20 <= len(token) <= 256:raise AccessDenied('authentication_required',401)
-        key=hashed(token)
+        try:
+            key=hashed(token)
+        except UnicodeError:
+            raise AccessDenied('authentication_required',401) from None
         with self.store.transaction() as db:
             row=self.current(db,key)
             return Principal(row['id'],key,row['generation'])
