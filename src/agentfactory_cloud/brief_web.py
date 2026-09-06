@@ -8,10 +8,11 @@ from typing import Annotated
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
 
 from agent_factory.http_auth import COOKIE, LocalAccess, LocalHTTPBoundary
 from .game_briefs import BriefConflict, BriefStore, FIELDS, LocalBriefModel
+from .scope_plans import ScopePlans, LABELS, ENGINES, TARGETS
 
 
 class Command(BaseModel):
@@ -35,6 +36,20 @@ class Edit(Revision):
 class Login(BaseModel):
     model_config = ConfigDict(extra='forbid')
     token: str = Field(max_length=4096)
+
+
+class ScopeDraft(Command):
+    expected_brief_revision: Annotated[StrictInt, Field(ge=1)]
+
+
+class ScopeEdit(ScopeDraft):
+    expected_plan_revision: Annotated[StrictInt, Field(ge=1)]
+    scope: dict
+
+
+class ScopeAgree(ScopeDraft):
+    expected_plan_revision: Annotated[StrictInt, Field(ge=1)]
+    confirmed: StrictBool
 
 
 class BodyLimit:
@@ -62,6 +77,7 @@ class BodyLimit:
 
 def create_app(folder: Path, *, model=None):
     store = BriefStore(folder)
+    plans = ScopePlans(store)
     access = LocalAccess()
     app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None)
     app.state.brief_store = store
@@ -88,6 +104,39 @@ def create_app(folder: Path, *, model=None):
     @app.get('/')
     def index():
         return FileResponse(static / 'brief.html')
+
+    @app.get('/first-playable')
+    def scope_page():
+        return FileResponse(static / 'scope.html')
+
+    @app.get('/api/briefs/{ident}/scope')
+    def scope_latest(ident: str, request: Request):
+        return {'plan': plans.latest(ident, actor(request)), 'labels': LABELS,
+                'engines': ENGINES, 'targets': TARGETS}
+
+    @app.post('/api/briefs/{ident}/scope')
+    def scope_create(ident: str, request: Request, body: ScopeDraft):
+        return plans.write(ident, actor(request), body.expected_brief_revision, body.command_id)
+
+    @app.get('/api/briefs/{ident}/scope/{plan_id}')
+    def scope_read(ident: str, plan_id: str, request: Request,
+                   revision: Annotated[int | None, Query(ge=1)] = None):
+        plan = plans.get(plan_id, actor(request), revision=revision)
+        if plan['brief_id'] != ident:
+            raise KeyError('Scope plan unavailable.')
+        return plan
+
+    @app.post('/api/briefs/{ident}/scope/{plan_id}/edit')
+    def scope_edit(ident: str, plan_id: str, request: Request, body: ScopeEdit):
+        return plans.write(ident, actor(request), body.expected_brief_revision, body.command_id,
+                           ident=plan_id, expected_plan=body.expected_plan_revision, scope=body.scope)
+
+    @app.post('/api/briefs/{ident}/scope/{plan_id}/agree')
+    def scope_agree(ident: str, plan_id: str, request: Request, body: ScopeAgree):
+        if body.confirmed is not True:
+            raise ValueError('Review and confirm the saved scope first.')
+        return plans.write(ident, actor(request), body.expected_brief_revision, body.command_id,
+                           ident=plan_id, expected_plan=body.expected_plan_revision, agree=True)
 
     @app.post('/auth/login')
     def login(request: Request, body: Login):
