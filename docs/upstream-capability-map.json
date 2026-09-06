@@ -3068,6 +3068,14 @@
       "qualification": "proposal-only",
       "live_execution": false,
       "evidence": "docs/game-teams.md"
+    },
+    {
+      "task": "AF-CLD-027",
+      "core_commit": "7ec9ff33f1c4e7f2980e4b121d05f3c366acedd1",
+      "interface": "Core provider connection catalogue and eligibility; read-only guidance",
+      "qualification": "guidance-only",
+      "live_execution": false,
+      "evidence": "docs/connection-guidance.md"
     }
   ]
 }
