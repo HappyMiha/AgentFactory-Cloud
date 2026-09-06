@@ -3107,11 +3107,14 @@
       "acceptance_criteria": [
         "The feasibility study will publish supported project size, toolchain, operating system, GPU, storage, build-time limits and cost profile.",
         "The adapter will pass import, compile, test, package and graphical run on a small reference project before Unreal support is advertised.",
-        "Unsupported plugins and targets will be rejected before an expensive build starts."
+        "Unsupported plugins and targets will be rejected before an expensive build starts.",
+        "The qualified editor path will create, save and reopen the project and level, author C++/Blueprint behavior, detect and repair an injected compile error, then produce separate Development and Shipping evidence through a pinned MCP backend.",
+        "A full Unreal plus Gameplay AI claim additionally requires one level, three NPCs and one objective in a Windows package played without Unreal Editor, save/load, an AI outage and a second accepted package after feedback with the first build retained. Basic editor support does not satisfy this conditional claim."
       ],
       "validation_method": [
         "Repeat the small reference-project journey on clean qualified workers and measure storage, duration and cost.",
-        "Test unsupported plugin and target rejection before resource allocation, and review whether the results justify the proposed support boundary."
+        "Test unsupported plugin and target rejection before resource allocation, and review whether the results justify the proposed support boundary.",
+        "For the full gameplay-AI profile, execute the independent player checklist, delayed/invalid action and save-epoch checks, bounded inference outage and novice-creator trial defined in docs/unreal-gameplay-plan.md; retain actual artifact hashes, manual interventions and failed attempts."
       ],
       "required_components": [
         "Planned Unreal feasibility probes and adapter",
@@ -3133,11 +3136,13 @@
         "docs/product-description.md",
         "docs/roadmap.md",
         "https://github.com/HappyMiha/AgentFactory/blob/main/docs/core-cloud-backlog.md",
-        "https://github.com/HappyMiha/AgentFactory/blob/main/docs/product-audit-2026-09-05.md"
+        "https://github.com/HappyMiha/AgentFactory/blob/main/docs/product-audit-2026-09-05.md",
+        "docs/unreal-gameplay-plan.md"
       ],
       "review_notes": [
         "Proposed only. Refine the size, implementation owner, needed infrastructure, and test scope before work starts. Keep the stable ID when splitting delivery into smaller changes.",
-        "Reusable roles, packs, or adapter work has one upstream implementation in Core. This Cloud item accepts its product integration and links the upstream evidence through AF-CLD-003."
+        "Reusable roles, packs, or adapter work has one upstream implementation in Core. This Cloud item accepts its product integration and links the upstream evidence through AF-CLD-003.",
+        "Split editor and gameplay delivery into narrow upstream contract and implementation claims using the plan; do not reserve all Unreal or UI files in one claim. Keep the existing AF-CLD-052 prerequisite and Godot gates."
       ],
       "labels": [
         "priority:p1",

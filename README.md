@@ -19,6 +19,14 @@ A creator will describe a game, agree on a small first version, let an AI team b
 
 **The first proof:** Godot 2D + GDScript → browser Play → Windows/source download → feedback → verified v2 → rollback.
 
+**The Unreal and Gameplay AI direction:** an AI team opens Unreal, writes code, builds levels, tests and packages a game whose NPCs can act and remember during play.
+
+- **Core:** the AI team, tasks, models, budget and recovery.
+- **Unreal adapter:** editor and build operations through a qualified existing MCP backend.
+- **Gameplay AI:** NPC memory, allowed actions and world behavior inside the game.
+
+The first Unreal proof is **one level, three NPCs, one objective → Windows package → play without Unreal Editor → save/load → AI outage → a revised package after creator feedback**. Read the [architecture, delivery sequence and acceptance plan](docs/unreal-gameplay-plan.md). This expansion has its own qualification and keeps the first Godot milestone intact.
+
 **The wider product loop:** Play → Remix → Create → Publish → Play.
 
 ## Two projects
@@ -44,7 +52,5 @@ The [Core/Cloud responsibility contract](docs/core-cloud-boundary.md) adds the A
 ## Scope and evidence
 
 Start with a small reliable Godot game. Add hosted multi-tenancy next, then public publishing and Remix, then qualified commerce. Other engines, stores, factory templates and hybrid profiles require separate evidence before they are called supported.
-
-The owner reports that a server is available. This plan does not claim a verified deployed game pipeline, customers, revenue or funding. The candidate domain `agentfactory.ai`, CHF 15/39/99 subscription examples and 10–30% marketplace fee remain hypotheses.
 
 Cloud is a separate public repository for a planned commercial product, made public at the owner's request. Public visibility does not select a software license. Cloud license terms remain an owner decision; Core keeps Apache-2.0.
