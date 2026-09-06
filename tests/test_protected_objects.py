@@ -340,10 +340,16 @@ class ProtectedObjectTests(unittest.TestCase):
         target = io.BytesIO()
         with zipfile.ZipFile(target, 'w', compression=zipfile.ZIP_DEFLATED) as z:
             z.writestr('bomb', b'x'*1024*1024)
+        infected_zip = io.BytesIO()
+        with zipfile.ZipFile(infected_zip, 'w') as z:
+            z.writestr('asset/eicar.txt', eicar)
         for data, changes in [(eicar, {}), (b'safe', {'path': '../escape'}),
-                              (target.getvalue(), {'path': 'data.zip', 'media_type': 'application/zip'})]:
-            with self.subTest(changes=changes), self.assertRaises(InspectionBlocked):
+                              (target.getvalue(), {'path': 'data.zip', 'media_type': 'application/zip'}),
+                              (infected_zip.getvalue(), {'path': 'asset.zip', 'media_type': 'application/zip'})]:
+            with self.subTest(changes=changes), self.assertRaises(InspectionBlocked) as rejected:
                 self.upload(data=data, **changes)
+            if data == eicar or data == infected_zip.getvalue():
+                self.assertIn('Malware policy blocked upload', str(rejected.exception))
         with self.objects.transaction(self.a) as db:
             self.assertEqual(db.execute('SELECT COUNT(*) AS n FROM cloud_objects').fetchone()['n'], 0)
         self.assertEqual(self.client.list_objects_v2(Bucket=self.bucket).get('KeyCount', 0), 0)

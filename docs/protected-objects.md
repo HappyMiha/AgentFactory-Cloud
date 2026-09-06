@@ -69,7 +69,14 @@ profile; they are not silently accepted by this one.
 Quota defaults to unavailable, includes pending/ready/deleting bytes, and is checked
 under a same-tenant PostgreSQL advisory lock. Lowering a quota blocks additional
 uploads without deleting existing objects. This profile serializes same-tenant
-operations, including bounded S3 I/O; it makes no high-throughput claim.
+operations, including S3 I/O. SDK connect/read timeouts bound inactivity, not
+total elapsed transfer time; `Body.read(size+1)` bounds bytes, not wall-clock time.
+A slow transfer can therefore hold the tenant transaction beyond those timeouts.
+The actual measured qualification is the isolated loopback profile. Before any
+remote/hosted readiness claim, worker cancellation and its interaction with
+storage fences must be separately qualified with a total request budget. Accepting
+an HTTPS endpoint as configuration is not that qualification. This component
+makes no high-throughput or overall S3 deadline claim.
 The profile also caps retained manifests at 10,000 per tenant, including deleted
 objects, so zero-byte storage fences cannot accumulate without a metadata limit.
 Payload quota can be reused after erasure; the durable manifest limit is not
