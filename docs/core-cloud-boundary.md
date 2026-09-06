@@ -68,6 +68,20 @@ Core may enforce generic access or human gates for its own local users. Cloud mu
 also authorize hosted actions at its boundary; Core acceptance does not imply a
 Cloud user is entitled to publish, spend, Remix or sell.
 
+## Unreal and gameplay AI responsibilities
+
+The [Unreal use-case plan](unreal-gameplay-plan.md) keeps three responsibilities separate:
+
+| Part | Owner | Boundary |
+| --- | --- | --- |
+| AI development team | Core | Task ownership, model routing, budget enforcement, recovery and evidence |
+| Unreal editor adapter | Optional Core engine pack | Reuse a qualified MCP backend; one owner mutates an editor session; produce source and build receipts |
+| Gameplay AI contract | Optional Core runtime contract, used by a game pack | Typed observations/actions, identity, session/save epochs, memory and bounded asynchronous inference |
+| Game-specific NPCs and world rules | Game pack | Validate every proposed action against game state; preserve save/load and deterministic fallback |
+| Creator acceptance and hosted gameplay service, if offered | Cloud | Qualified setup, player access, service budgets and the full build/play/change evidence |
+
+Development permissions do not grant a player session access to coding tools or provider master keys. Closing AgentFactory must not break the declared game profile. Temporal may recover development and hosted jobs; it does not own per-frame NPC behavior or become a required server inside the first Windows package.
+
 ## Required rights and provenance records
 
 These are required logical fields for the AF-CLD-002 schema design, not a claim of
