@@ -7,6 +7,9 @@ Cloud game pipeline.
 **Try the local editor:** [setup, features and evaluation](docs/game-brief-intake.md).
 Save your original idea, edit a short game brief and revisit earlier versions.
 Optional local AI helps organize your original sentences; review its choices.
+Then choose **Plan the first playable version** to review a small scope, its
+future roadmap, concrete tasks and a clearly labelled local AI estimate.
+See [first-playable planning](docs/first-playable-planning.md) for its limits.
 
 **Three-computer development:** [team workflow](docs/team-workflow.md) · [live shared task register](https://github.com/HappyMiha/AgentFactory/blob/team-state/team-state.json). Each worker claims a task and uses an owned branch with checks before push and a pull request into `main`.
 

@@ -62,3 +62,5 @@ $('view-version').onclick=()=>leaving(()=>run(async()=>{show(await api('/api/bri
 $('sign-in').onclick=()=>run(async()=>{await api('/auth/login',{token:$('token').value});$('token').value='';await list();if(location.hash)await load(location.hash.slice(1));status('Workspace unlocked.');});
 $('logout').onclick=()=>leaving(()=>run(async()=>{await api('/auth/logout',{});current=null;dirty=false;$('fields').replaceChildren();$('source').textContent='';$('ideas').replaceChildren();$('original').value='';lock();status('Workspace locked.');}));
 run(async()=>{await list();if(location.hash)await load(location.hash.slice(1));});
+
+$('plan-first').onclick=()=>leaving(()=>{location.href='/first-playable#'+encodeURIComponent(current.id);});
